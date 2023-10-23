@@ -1,0 +1,25 @@
+{
+  "name": "ruby-slim",
+  "displayName": "Ruby Slim",
+  "description": "Slim language support",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.83.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "contributes": {
+    "languages": [{
+      "id": "slim",
+      "aliases": ["Ruby Slim", "slim"],
+      "extensions": [".slim"],
+      "configuration": "./language-configuration.json"
+    }],
+    "grammars": [{
+      "language": "slim",
+      "scopeName": "source.slim",
+      "path": "./syntaxes/slim.tmLanguage.json"
+    }]
+  }
+}
