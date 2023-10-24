@@ -3,7 +3,7 @@
     "editorError.foreground": "#AF302975",
     "editorWarning.foreground": "#AD830120",
     "editorInfo.foreground": "#205EA650",
-    "activityBar.background": "#06342C",
+    "activityBar.background": "#06342C30",
     "titleBar.activeBackground": "#08493D",
     "titleBar.activeForeground": "#EFFDFB"
   }

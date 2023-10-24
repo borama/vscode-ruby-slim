@@ -3,8 +3,15 @@
   "displayName": "Ruby Slim",
   "description": "Slim language support",
   "version": "0.0.1",
+  "publisher": "borama",
+  "license": "MIT",
   "engines": {
     "vscode": "^1.83.0"
+  },
+  "bugs": "https://github.com/borama/vscode-ruby-slim/issues",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/borama/vscode-ruby-slim"
   },
   "categories": [
     "Programming Languages"
@@ -12,7 +19,7 @@
   "contributes": {
     "languages": [{
       "id": "slim",
-      "aliases": ["Ruby Slim", "slim"],
+      "aliases": ["Slim", "slim"],
       "extensions": [".slim"],
       "configuration": "./language-configuration.json"
     }],
