@@ -4,7 +4,7 @@ fileTypes:
 foldingStartMarker: '^\s*([-%#\:\.\w\=].*)\s$'
 foldingStopMarker: ^\s*$
 keyEquivalent: ^~S
-name: Ruby Slim
+name: Slim
 patterns:
   - begin: ^(\s*)(ruby):$
     beginCaptures:
@@ -189,19 +189,19 @@ repository:
     end: \)(?=( \w|$))
     name: source.ruby.embedded.slim
     patterns:
-      - include: source.ruby.rails
+      - include: source.ruby
   delimited-ruby-b:
     begin: =\[
     end: \](?=( \w|$))
     name: source.ruby.embedded.slim
     patterns:
-      - include: source.ruby.rails
+      - include: source.ruby
   delimited-ruby-c:
     begin: =\{
     end: \}(?=( \w|$))
     name: source.ruby.embedded.slim
     patterns:
-      - include: source.ruby.rails
+      - include: source.ruby
   embedded-ruby:
     begin: (?<!\\)#\{{1,2}
     beginCaptures:
@@ -213,7 +213,7 @@ repository:
         name: punctuation.section.embedded.ruby
     name: source.ruby.embedded.html
     patterns:
-      - include: source.ruby.rails
+      - include: source.ruby
   entities:
     patterns:
       - captures:
@@ -262,7 +262,7 @@ repository:
         match: '#.*$'
         name: comment.line.number-sign.ruby
       - include: '#continuation'
-      - include: source.ruby.rails
+      - include: source.ruby
   string-double-quoted:
     begin: (")(?=.*")
     beginCaptures:

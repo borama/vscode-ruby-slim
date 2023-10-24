@@ -342,7 +342,7 @@
       "name": "source.ruby.embedded.slim",
       "patterns": [
         {
-          "include": "source.ruby.rails"
+          "include": "source.ruby"
         }
       ]
     },
@@ -352,7 +352,7 @@
       "name": "source.ruby.embedded.slim",
       "patterns": [
         {
-          "include": "source.ruby.rails"
+          "include": "source.ruby"
         }
       ]
     },
@@ -362,7 +362,7 @@
       "name": "source.ruby.embedded.slim",
       "patterns": [
         {
-          "include": "source.ruby.rails"
+          "include": "source.ruby"
         }
       ]
     },
@@ -382,7 +382,7 @@
       "name": "source.ruby.embedded.html",
       "patterns": [
         {
-          "include": "source.ruby.rails"
+          "include": "source.ruby"
         }
       ]
     },
@@ -459,7 +459,7 @@
           "include": "#continuation"
         },
         {
-          "include": "source.ruby.rails"
+          "include": "source.ruby"
         }
       ]
     },
