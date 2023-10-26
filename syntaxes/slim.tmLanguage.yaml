@@ -14,6 +14,7 @@ patterns:
     name: text.ruby.filter.slim
     patterns:
       - include: source.ruby
+
   - begin: ^(\s*)(javascript):$
     beginCaptures:
       '2':
@@ -22,6 +23,7 @@ patterns:
     name: source.js.filter.slim
     patterns:
       - include: source.js
+
   - begin: ^(---)\s*\n
     beginCaptures:
       '1':
@@ -33,6 +35,7 @@ patterns:
     name: source.yaml.meta.slim
     patterns:
       - include: source.yaml
+
   - begin: ^(\s*)(coffee):$
     beginCaptures:
       '2':
@@ -41,6 +44,7 @@ patterns:
     name: text.coffeescript.filter.slim
     patterns:
       - include: source.coffee
+
   - begin: ^(\s*)(markdown):$
     beginCaptures:
       '2':
@@ -49,6 +53,7 @@ patterns:
     name: text.markdown.filter.slim
     patterns:
       - include: text.html.markdown
+
   - begin: ^(\s*)(css):$
     beginCaptures:
       '2':
@@ -57,6 +62,7 @@ patterns:
     name: text.css.filter.slim
     patterns:
       - include: source.css
+
   - begin: ^(\s*)(sass):$
     beginCaptures:
       '2':
@@ -65,6 +71,7 @@ patterns:
     name: text.sass.filter.slim
     patterns:
       - include: source.sass
+
   - begin: ^(\s*)(scss):$
     beginCaptures:
       '2':
@@ -73,6 +80,7 @@ patterns:
     name: text.scss.filter.slim
     patterns:
       - include: source.scss
+
   - begin: ^(\s*)(less):$
     beginCaptures:
       '2':
@@ -81,6 +89,7 @@ patterns:
     name: text.less.filter.slim
     patterns:
       - include: source.less
+
   - begin: ^(\s*)(erb):$
     beginCaptures:
       '2':
@@ -94,28 +103,33 @@ patterns:
         name: punctuation.definition.prolog.slim
     match: ^(! )($|\s.*)
     name: meta.prolog.slim
+
   - begin: ^(\s*)(/)\s*.*$
     beginCaptures:
       '2':
         name: comment.line.slash.slim
     end: ^(?!(\1\s)|\s*$)
     name: comment.block.slim
+
   - begin: ^\s*(?=-)
     end: $
     patterns:
       - include: '#rubyline'
+
   - begin: (?==+|~)
     end: $
     patterns:
       - include: '#rubyline'
   - include: '#tag-attribute'
   - include: '#embedded-ruby'
+
   - begin: ^(\s*)(\||')\s*
     end: ^(?!(\1\s)|\s*$)
     comment: Verbatim text (can include HTML tags and copied lines)
     patterns:
       - include: text.html.basic
       - include: '#embedded-ruby'
+
   - begin: ^\s*(\.|#|[-a-zA-Z0-9]+)([\w-]+)?
     end: $|(?!\.|#|:|-|~|/|\}|\]|\*|\s?[\*\{])
     name: meta.tag
@@ -168,16 +182,19 @@ patterns:
       '1':
         name: meta.escape.slim
     match: ^\s*(\\.)
+
   - begin: ^\s*(?=\||')
     end: $
     patterns:
       - include: '#embedded-ruby'
       - include: text.html.basic
+
   - begin: (?=<[\w\d\:]+)
     end: $|\/\>
     comment: Inline and root-level HTML tags
     patterns:
       - include: text.html.basic
+
 repository:
   continuation:
     captures:
