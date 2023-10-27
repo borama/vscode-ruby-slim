@@ -36,18 +36,15 @@
 /[ Verbatim Text Tests ]///////////////////////////////////////////////////////
 
 | Verbatim <b>#{text}</b> without processing.
-/ <- punctuation.section.verbatim.slim - text.html
-/^^^^^^^^^^^^^ text.html.embedded.slim - meta.interpolation
-/^^^^^^^^^^^^^ text.html.embedded.slim - source
-/          ^^^ meta.tag.inline
-/             ^^^^^^^ text.html.embedded.slim meta.interpolation.slim
-/             ^^ punctuation.section.interpolation.begin.slim
-/               ^^^^ source.ruby.rails.embedded.slim
-/                   ^ punctuation.section.interpolation.end.slim
-/                    ^^^^ meta.tag.inline
-/                    ^^^^^^^^^^^^^^^^^^^^^^^^ text.html.embedded.slim - meta.interpolation
-/                    ^^^^^^^^^^^^^^^^^^^^^^^^ text.html.embedded.slim - source
-/
+/ <- punctuation.section.verbatim.slim
+/ ^^^^^^^^^^^^ text.html.embedded.slim
+/          ^^^ meta.tag.inline.b.start.html
+/             ^^^^^^^ source.ruby.embedded.html
+/             ^^ punctuation.section.embedded.ruby
+/               ^^^^ source.ruby.embedded.html
+/                   ^ punctuation.section.embedded.ruby
+/                    ^^^^ meta.tag.inline.b.end.html
+/                    ^^^^^^^^^^^^^^^^^^^^^^^^ text.html.embedded.slim
 
 | Verbatim
   <b>#{text}</b> without processing.

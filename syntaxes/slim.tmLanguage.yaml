@@ -152,9 +152,13 @@ patterns:
   - include: '#tag-attribute'
   - include: '#embedded-ruby'
 
-  - begin: ^(\s*)(\||')\s*
+  - comment: Verbatim text (can include HTML tags and copied lines)
+    begin: ^(\s*)(\||')\s*
+    beginCaptures:
+      '2':
+        name: punctuation.section.verbatim.slim
     end: ^(?!(\1\s)|\s*$)
-    comment: Verbatim text (can include HTML tags and copied lines)
+    contentName: text.html.embedded.slim
     patterns:
       - include: text.html.basic
       - include: '#embedded-ruby'
