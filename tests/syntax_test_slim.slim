@@ -3,22 +3,22 @@
 /[ Comment Tests ]/////////////////////////////////////////////////////////////
 
 /Comment
-/ <- comment.block.code.slim punctuation.definition.comment.slim
-/^^^^^^^^ comment.block.code.slim - punctuation
+/ <- comment.block.slim comment.line.slash.slim punctuation.definition.comment.slim
+/^^^^^^^^ comment.block.slim comment.line.slash.slim - punctuation.definition.comment.slim
 
 / Space comment
-/ <- comment.block.code.slim punctuation.definition.comment.slim
-/^^^^^^^^^^^^^^^ comment.block.code.slim - punctuation
+/ <- comment.block.slim comment.line.slash.slim punctuation.definition.comment.slim
+/^^^^^^^^^^^^^^^ comment.block.slim comment.line.slash.slim - punctuation.definition.comment.slim
 
 / Nested Comment
   Comment
-/ <- comment.block.code.slim - punctuation
-/^^^^^^^^^ comment.block.code.slim - punctuation
+/ <- comment.block.slim - comment.line.slim
+/^^^^^^^^^ comment.block.slim - comment.line.slim
 
 // Comment
-/ <- comment.block.code.slim punctuation.definition.comment.slim
- / <- comment.block.code.slim punctuation.definition.comment.slim
-/ ^^^^^^^^^ comment.block.code.slim - punctuation
+/ <- comment.block.slim punctuation.definition.comment.slim
+ / <- comment.block.slim punctuation.definition.comment.slim
+/ ^^^^^^^^^ comment.block.slim - punctuation
 
 /! HTML comment
 / <- comment.block.html.slim punctuation.definition.comment.slim
@@ -26,9 +26,9 @@
 / ^^^^^^^^^^^^^^ comment.block.html.slim - punctuation
 
 /[...] IE comment
-/ <- comment.block.code.slim punctuation.definition.comment.slim
-/^^^^^ comment.block.code.slim meta.brackets.slim
-/     ^^^^^^^^^^^^ comment.block.code.slim - meta.brackets
+/ <- comment.block.slim punctuation.definition.comment.slim
+/^^^^^ comment.block.slim meta.brackets.slim
+/     ^^^^^^^^^^^^ comment.block.slim - meta.brackets
 /^ punctuation.section.brackets.begin.slim
 /    ^ punctuation.section.brackets.end.slim
 
