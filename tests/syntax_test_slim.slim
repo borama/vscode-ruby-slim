@@ -48,63 +48,48 @@
 
 | Verbatim
   <b>#{text}</b> without processing.
-/ <- text.html.embedded.slim
-/^^^^ text.html.embedded.slim - meta.interpolation
-/^^^^ text.html.embedded.slim - source
-/ ^^^ meta.tag.inline
-/    ^^^^^^^ text.html.embedded.slim meta.interpolation.slim
-/    ^^ punctuation.section.interpolation.begin.slim
-/      ^^^^ source.ruby.rails.embedded.slim
-/          ^ punctuation.section.interpolation.end.slim
-/           ^^^^ meta.tag.inline
-/           ^^^^^^^^^^^^^^^^^^^^^^^^ text.html.embedded.slim - meta.interpolation
-/           ^^^^^^^^^^^^^^^^^^^^^^^^ text.html.embedded.slim - source
+/ ^^^^^^^^^^^^^^^^^^^^^^^^ text.html.embedded.slim
+/ ^^^ meta.tag.inline.b.start.html
+/    ^^ punctuation.section.embedded.ruby
+/      ^^^^ source.ruby.embedded.html
+/          ^ punctuation.section.embedded.ruby
+/           ^^^^ meta.tag.inline.b.end.html
 
 p
   |
     Verbatim <p class="#{:class_name}">
-/  ^^^^^^^^^^ text.html.embedded.slim - meta.tag
-/  ^^^^^^^^^^ text.html.embedded.slim - meta.interpolation
-/            ^^^^^^^^^^ text.html.embedded.slim meta.tag - meta.interpolation
-/                      ^^^^^^^^^^^^^^ text.html.embedded.slim meta.tag meta.attribute-with-value meta.class-name meta.string.html meta.interpolation.slim
-/                                    ^^ text.html.embedded.slim meta.tag - meta.interpolation
+/  ^^^^^^^^^^^^^^^^^^^^^^^^ text.html.embedded.slim
+/            ^^^^^^^^^^ text.html.embedded.slim meta.tag.structure.p.start.html
+/                     ^^^^^^^^^^^^^^^^ text.html.embedded.slim meta.tag.structure.p.start.html meta.attribute.class.html
+/                                     ^ text.html.embedded.slim meta.tag.structure.p.start.html
 
 ' Verbatim <b>#{text}</b> without processing.
-/ <- punctuation.section.verbatim.slim - text.html
-/^^^^^^^^^^^^^ text.html.embedded.slim - meta.interpolation
-/^^^^^^^^^^^^^ text.html.embedded.slim - source
-/          ^^^ meta.tag.inline
-/             ^^^^^^^ text.html.embedded.slim meta.interpolation.slim
-/             ^^ punctuation.section.interpolation.begin.slim
-/               ^^^^ source.ruby.rails.embedded.slim
-/                   ^ punctuation.section.interpolation.end.slim
-/                    ^^^^ meta.tag.inline
-/                    ^^^^^^^^^^^^^^^^^^^^^^^^ text.html.embedded.slim - meta.interpolation
-/                    ^^^^^^^^^^^^^^^^^^^^^^^^ text.html.embedded.slim - source
-/
+/ <- punctuation.section.verbatim.slim
+/ ^^^^^^^^^^^^ text.html.embedded.slim
+/          ^^^ meta.tag.inline.b.start.html
+/             ^^^^^^^ source.ruby.embedded.html
+/             ^^ punctuation.section.embedded.ruby
+/               ^^^^ source.ruby.embedded.html
+/                   ^ punctuation.section.embedded.ruby
+/                    ^^^^ meta.tag.inline.b.end.html
+/                    ^^^^^^^^^^^^^^^^^^^^^^^^ text.html.embedded.slim
 
 ' Verbatim
   <b>#{text}</b> without processing.
-/ <- text.html.embedded.slim
-/^^^^ text.html.embedded.slim - meta.interpolation
-/^^^^ text.html.embedded.slim - source
-/ ^^^ meta.tag.inline
-/    ^^^^^^^ text.html.embedded.slim meta.interpolation.slim
-/    ^^ punctuation.section.interpolation.begin.slim
-/      ^^^^ source.ruby.rails.embedded.slim
-/          ^ punctuation.section.interpolation.end.slim
-/           ^^^^ meta.tag.inline
-/           ^^^^^^^^^^^^^^^^^^^^^^^^ text.html.embedded.slim - meta.interpolation
-/           ^^^^^^^^^^^^^^^^^^^^^^^^ text.html.embedded.slim - source
+/ ^^^^^^^^^^^^^^^^^^^^^^^^ text.html.embedded.slim
+/ ^^^ meta.tag.inline.b.start.html
+/    ^^ punctuation.section.embedded.ruby
+/      ^^^^ source.ruby.embedded.html
+/          ^ punctuation.section.embedded.ruby
+/           ^^^^ meta.tag.inline.b.end.html
 
 p
   '
     Verbatim <p class="#{:class_name}">
-/  ^^^^^^^^^^ text.html.embedded.slim - meta.tag
-/  ^^^^^^^^^^ text.html.embedded.slim - meta.interpolation
-/            ^^^^^^^^^^ text.html.embedded.slim meta.tag - meta.interpolation
-/                      ^^^^^^^^^^^^^^ text.html.embedded.slim meta.tag meta.attribute-with-value meta.class-name meta.string.html meta.interpolation.slim
-/                                    ^^ text.html.embedded.slim meta.tag - meta.interpolation
+/  ^^^^^^^^^^^^^^^^^^^^^^^^ text.html.embedded.slim
+/            ^^^^^^^^^^ text.html.embedded.slim meta.tag.structure.p.start.html
+/                     ^^^^^^^^^^^^^^^^ text.html.embedded.slim meta.tag.structure.p.start.html meta.attribute.class.html
+/                                     ^ text.html.embedded.slim meta.tag.structure.p.start.html
 
 |
   - if true
@@ -115,65 +100,56 @@ p
 - if true
   | console.log("foo");
 / ^ punctuation.section.verbatim.slim
-/  ^^^^^^^^^^^^^^^^^^^^^ text.html.embedded.slim
+/   ^^^^^^^^^^^^^^^^^^^^ text.html.embedded.slim
 - else
   | console.log("bar");
 / ^ punctuation.section.verbatim.slim
-/  ^^^^^^^^^^^^^^^^^^^^^ text.html.embedded.slim
+/   ^^^^^^^^^^^^^^^^^^^^ text.html.embedded.slim
 
 - array.each do
-  | veratim \#{a.name}
+  | verbatim \#{a.name}
 / ^ punctuation.section.verbatim.slim
-/  ^^^^^^^^^^^^^^^^^^^ text.html.embedded.slim - meta.interpolation
-/           ^^ constant.character.escape.slim
+/   ^^^^^^^^^^^^^^^^^^^ text.html.embedded.slim - source.ruby.embedded.html
 
 - articles.each do |a|
   | <tr><td>#{a.name}</td><td>#{a.description}</td></tr>
 / ^ punctuation.section.verbatim.slim
-/  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ text.html.embedded.slim
-/   ^^^^^^^^ meta.tag
-/           ^^^^^^^^^ meta.interpolation.slim
-/                    ^^^^^^^^^ meta.tag
-/                             ^^^^^^^^^^^^^^^^ meta.interpolation.slim
-/                                             ^^^^^^^^^^ meta.tag
+/   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ text.html.embedded.slim
+/   ^^^^ meta.tag.structure.tr.start.html
+/       ^^^^ meta.tag.structure.td.start.html
+/           ^^^^^^^^^ source.ruby.embedded.html
+/                    ^^^^^ meta.tag.structure.td.end.html
+/                         ^^^^ meta.tag.structure.td.start.html
+/                             ^^^^^^^^^^^^^^^^ source.ruby.embedded.html
+/                                             ^^^^^ meta.tag.structure.td.end.html
+/                                                  ^^^^^ meta.tag.structure.tr.end.html
 
 div
   'Verbatim text with space after
     a inline text that's "quoted"
     <a href="#">HTML</a>
-    / <- text.html.embedded.slim meta.tag.inline punctuation.definition.tag.begin.html
-    /^^^^^^^^^^^ text.html.embedded.slim meta.tag.inline
-    /               ^^^^ text.html.embedded.slim meta.tag.inline
+/   ^^^^^^^^^^^^ text.html.embedded.slim meta.tag.inline.a.start.html
     a href="slim" unhighlighted slim
-    /^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ text.html.embedded.slim - meta.tag
-    /^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ text.html.embedded.slim - string
+/   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ text.html.embedded.slim - meta.tag.inline.a.start.html
 
 div
   |
     div
-    / <- text.html.embedded.slim - meta.tag
+/   ^ text.html.embedded.slim - meta.tag
     if true
-    / <- text.html.embedded.slim - source
-    / <- text.html.embedded.slim - keyword
+/   ^ text.html.embedded.slim - source.ruby
 
 
-/! Incomplete HTML tags are terminated by "end of verbatim"
+/! Incomplete HTML tags
 
 | <incomplete
 / <- punctuation.section.verbatim.slim
-/^^^^^^^^^^^^^ text.html.embedded.slim
+/ ^^^^^^^^^^^^ text.html.embedded.slim
 
 | <incomplete
     attr = "value"
-/ <- text.html.embedded.slim meta.tag
-/^^^^^^^^^^^^^^^^^^ text.html.embedded.slim meta.tag
-
-| <incomplete
-    attr = "value"
-
-tag
-/ <- meta.tag.slim entity.name.tag.slim
-/^^ meta.tag.slim entity.name.tag.slim
+/ <- text.html.embedded.slim meta.tag.other.incomplete.html
+/^^^^^^^^^^^^^^^^^^ text.html.embedded.slim meta.tag.other.incomplete.html
 
 
 /[ HTML ]///////////////////////////////////////////////////////////////////////
