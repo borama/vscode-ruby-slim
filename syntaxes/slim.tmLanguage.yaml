@@ -104,7 +104,8 @@ patterns:
     match: ^(! )($|\s.*)
     name: meta.prolog.slim
 
-  - begin: ^(\s*)((/!)\s*.*)$
+  - comment: "HTML comment"
+    begin: ^(\s*)((/!)\s*.*)$
     beginCaptures:
       '2':
         name: comment.line.slash.slim
@@ -113,7 +114,24 @@ patterns:
     end: ^(?!(\1\s)|\s*$)
     name: comment.block.html.slim
 
-  - begin: ^(\s*)((/)\s*.*)$
+  - comment: "IE conditional comment"
+    begin: ^(\s*)((/)((\[).*(\])).*)$
+    beginCaptures:
+      '2':
+        name: comment.line.slash.slim
+      '3':
+        name: punctuation.definition.comment.slim
+      '4':
+        name: meta.brackets.slim
+      '5':
+        name: punctuation.section.brackets.begin.slim
+      '6':
+        name: punctuation.section.brackets.end.slim
+    end: ^(?!(\1\s)|\s*$)
+    name: comment.block.slim
+
+  - comment: "Slim comment"
+    begin: ^(\s*)((/)\s*.*)$
     beginCaptures:
       '2':
         name: comment.line.slash.slim
