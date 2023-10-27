@@ -104,10 +104,12 @@ patterns:
     match: ^(! )($|\s.*)
     name: meta.prolog.slim
 
-  - begin: ^(\s*)(/)\s*.*$
+  - begin: ^(\s*)((/)\s*.*)$
     beginCaptures:
       '2':
         name: comment.line.slash.slim
+      '3':
+        name: punctuation.definition.comment.slim
     end: ^(?!(\1\s)|\s*$)
     name: comment.block.slim
 
