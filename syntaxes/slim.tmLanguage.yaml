@@ -222,11 +222,13 @@ patterns:
       - include: '#embedded-ruby'
       - include: text.html.basic
 
-  - begin: (?=<[\w\d\:]+)
+  - comment: Inline and root-level HTML tags
+    begin: (?=</?[\w\d\:]+)
     end: $|\/\>
-    comment: Inline and root-level HTML tags
+    contentName: text.html.embedded.slim
     patterns:
       - include: text.html.basic
+      - include: '#embedded-ruby'
 
 repository:
   continuation:
@@ -234,24 +236,28 @@ repository:
       '1':
         name: punctuation.separator.continuation.slim
     match: '([\\,])\s*\n'
+
   delimited-ruby-a:
     begin: =\(
     end: \)(?=( \w|$))
     name: source.ruby.embedded.slim
     patterns:
       - include: source.ruby
+
   delimited-ruby-b:
     begin: =\[
     end: \](?=( \w|$))
     name: source.ruby.embedded.slim
     patterns:
       - include: source.ruby
+
   delimited-ruby-c:
     begin: =\{
     end: \}(?=( \w|$))
     name: source.ruby.embedded.slim
     patterns:
       - include: source.ruby
+
   embedded-ruby:
     begin: (?<!\\)#\{{1,2}
     beginCaptures:
@@ -264,6 +270,7 @@ repository:
     name: source.ruby.embedded.html
     patterns:
       - include: source.ruby
+
   entities:
     patterns:
       - captures:
@@ -294,8 +301,9 @@ repository:
       - include: '#tag-stuff'
       - include: '#string-double-quoted'
       - include: '#string-single-quoted'
+
   rubyline:
-    begin: (==|=)(<>|><|<'|'<|<|>)?|-
+    begin: (==|=)(<>|><|<'|'<|<|>)?|-\s*
     contentName: source.ruby.embedded.slim
     end: (do\s*\n$)|(?<!\\|,|,\n|\\\n)$
     comment: >-
@@ -303,6 +311,9 @@ repository:
       continues the next line (this can be muted with a / at the end of the
       line). For things like yields, do is unnecessary without an argument, so
       this hack will suffice
+    beginCaptures:
+      '0':
+        name: punctuation.section.embedded.slim
     endCaptures:
       '1':
         name: keyword.control.start-block.ruby
@@ -313,6 +324,7 @@ repository:
         name: comment.line.number-sign.ruby
       - include: '#continuation'
       - include: source.ruby
+
   string-double-quoted:
     begin: (")(?=.*")
     beginCaptures:
@@ -327,6 +339,7 @@ repository:
     patterns:
       - include: '#embedded-ruby'
       - include: '#entities'
+
   string-single-quoted:
     begin: (')(?=.*')
     beginCaptures:
@@ -341,6 +354,7 @@ repository:
     patterns:
       - include: '#embedded-ruby'
       - include: '#entities'
+
   root-class-id-tag:
     match: (\.|#)([\w\d\-]+)
     captures:
@@ -348,6 +362,7 @@ repository:
         name: punctuation.separator.key-value.html
       '2':
         name: entity.other.attribute-name.html
+
   tag-stuff:
     patterns:
       - include: '#tag-attribute'
@@ -357,5 +372,6 @@ repository:
       - include: '#delimited-ruby-c'
       - include: '#rubyline'
       - include: '#embedded-ruby'
+
 scopeName: source.slim
 uuid: 36302CC1-1E76-4910-B7B6-F1915EBBA0D3

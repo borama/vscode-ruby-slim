@@ -174,36 +174,31 @@ div
 <html>
   head
     title Example
-    / <- meta.tag.slim entity.name.tag.slim
-    /^^^^ meta.tag.slim entity.name.tag.slim
-    /     ^^^^^^^^ - meta.tag
+/   ^^^^^ meta.tag entity.name.tag.slim
+/         ^^^^^^^^ - meta.tag
   <body
     class = "foo">
-    / <- text.html.embedded.slim meta.tag meta.attribute-with-value entity.other.attribute-name
-    /^^^^^^^^^^^^^ text.html.embedded.slim meta.tag
+/   ^^^^^^^^^^^^^ text.html.embedded.slim meta.tag.structure.body.start.html meta.attribute.class.html
     - if articles.empty?
-    / <- meta.embedded.slim punctuation.section.embedded.slim
-    /^^^^^^^^^^^^^^^^^^^ meta.embedded.slim source.ruby.rails.embedded.slim
+/   ^ meta.line.ruby.slim punctuation.section.embedded.slim
+/     ^^^^^^^^^^^^^^^^^^^ source.ruby.embedded.slim
     - else
       table
         - articles.each do |a|
           <tr><td>#{a.name}</td><td>#{a.description}</td></tr>
-          / <- meta.tag.inline
-          /^^^^^^^ meta.tag
-          /       ^^^^^^^^^ meta.interpolation.slim
-          /                ^^^^^^^^^ meta.tag
-          /                         ^^^^^^^^^^^^^^^^ meta.interpolation.slim
-          /                                         ^^^^^^^^^^ meta.tag
+/         ^^^^ meta.tag.structure.tr.start.html
+/             ^^^^ meta.tag.structure.td.start.html
+/                 ^^^^^^^^^ source.ruby.embedded.html
+/                          ^^^^^ meta.tag.structure.td.end.html
+/                               ^^^^ meta.tag.structure.td.start.html
+/                                   ^^^^^^^^^^^^^^^^ source.ruby.embedded.html
+/                                                   ^^^^^ meta.tag.structure.td.end.html
+/                                                        ^^^^^ meta.tag.structure.tr.end.html
   </body>
-  / <- text.html.embedded.slim meta.tag punctuation.definition.tag.begin
-  /^^^^^^ text.html.embedded.slim meta.tag
-  / ^^^^ entity.name.tag
-  /     ^ punctuation.definition.tag.end
+/ ^^^^^^^ text.html.embedded.slim meta.tag.structure.body.end.html
 </html>
-/ <- text.html.embedded.slim meta.tag punctuation.definition.tag.begin
-/^^^^^^ text.html.embedded.slim meta.tag
-/ ^^^^ entity.name.tag
-/     ^ punctuation.definition.tag.end
+/ <- text.html.embedded.slim meta.tag.structure.html.end.html
+/^^^^^^ text.html.embedded.slim meta.tag.structure.html.end.html
 
 .inline Text <normal html_underscore="value" normal="attribute" html-dash="value"><and this="this"> Text</normal>
 /            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ text.html.embedded.slim meta.tag

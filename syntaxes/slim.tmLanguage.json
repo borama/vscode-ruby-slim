@@ -364,12 +364,16 @@
       ]
     },
     {
-      "begin": "(?=<[\\w\\d\\:]+)",
-      "end": "$|\\/\\>",
       "comment": "Inline and root-level HTML tags",
+      "begin": "(?=</?[\\w\\d\\:]+)",
+      "end": "$|\\/\\>",
+      "contentName": "text.html.embedded.slim",
       "patterns": [
         {
           "include": "text.html.basic"
+        },
+        {
+          "include": "#embedded-ruby"
         }
       ]
     }
@@ -486,10 +490,15 @@
       ]
     },
     "rubyline": {
-      "begin": "(==|=)(<>|><|<'|'<|<|>)?|-",
+      "begin": "(==|=)(<>|><|<'|'<|<|>)?|-\\s*",
       "contentName": "source.ruby.embedded.slim",
       "end": "(do\\s*\\n$)|(?<!\\\\|,|,\\n|\\\\\\n)$",
       "comment": "Hack to thwart Sublime's Ruby highlighter. It thinks do without a variable continues the next line (this can be muted with a / at the end of the line). For things like yields, do is unnecessary without an argument, so this hack will suffice",
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.section.embedded.slim"
+        }
+      },
       "endCaptures": {
         "1": {
           "name": "keyword.control.start-block.ruby"
