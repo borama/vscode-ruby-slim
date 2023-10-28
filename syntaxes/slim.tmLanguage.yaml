@@ -169,7 +169,7 @@ patterns:
       '0':
         name: meta.tag.sgml.doctype.slim
 
-  - begin: ^\s*(\.|#|[-a-zA-Z0-9]+)([\w-]+)?
+  - begin: ^\s*((\.)|(#)|[-a-zA-Z0-9]+)([\w-]+)?
     end: $|(?!\.|#|:|-|~|/|\}|\]|\*|\s?[\*\{])
     name: meta.tag.slim
     comment: >-
@@ -179,7 +179,11 @@ patterns:
       '1':
         name: entity.name.tag.slim
       '2':
-        name: entity.other.attribute-name.event.slim
+        name: punctuation.definition.attribute.class.slim
+      '3':
+        name: punctuation.definition.attribute.id.slim
+      '4':
+        name: entity.other.attribute-name.slim
     patterns:
       - begin: (:[\w\d]+)+
         end: $|\s

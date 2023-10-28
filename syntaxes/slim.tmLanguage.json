@@ -276,7 +276,7 @@
       }
     },
     {
-      "begin": "^\\s*(\\.|#|[-a-zA-Z0-9]+)([\\w-]+)?",
+      "begin": "^\\s*((\\.)|(#)|[-a-zA-Z0-9]+)([\\w-]+)?",
       "end": "$|(?!\\.|#|:|-|~|/|\\}|\\]|\\*|\\s?[\\*\\{])",
       "name": "meta.tag.slim",
       "comment": "1 - dot OR hash OR any combination of word, number; 2 - OPTIONAL any combination of word, number, dash or underscore (following a . or",
@@ -285,7 +285,13 @@
           "name": "entity.name.tag.slim"
         },
         "2": {
-          "name": "entity.other.attribute-name.event.slim"
+          "name": "punctuation.definition.attribute.class.slim"
+        },
+        "3": {
+          "name": "punctuation.definition.attribute.id.slim"
+        },
+        "4": {
+          "name": "entity.other.attribute-name.slim"
         }
       },
       "patterns": [
