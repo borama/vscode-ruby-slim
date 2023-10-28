@@ -267,6 +267,15 @@
       ]
     },
     {
+      "comment": "Doctypes",
+      "match": "^\\s*(doctype)\\s+.*(\\n|$)",
+      "captures": {
+        "0": {
+          "name": "meta.tag.sgml.doctype.slim"
+        }
+      }
+    },
+    {
       "begin": "^\\s*(\\.|#|[-a-zA-Z0-9]+)([\\w-]+)?",
       "end": "$|(?!\\.|#|:|-|~|/|\\}|\\]|\\*|\\s?[\\*\\{])",
       "name": "meta.tag",
