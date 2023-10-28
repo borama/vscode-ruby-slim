@@ -153,7 +153,7 @@ patterns:
   - include: '#embedded-ruby'
 
   - comment: Verbatim text (can include HTML tags and copied lines)
-    begin: ^(\s*)(\||')\s*
+    begin: ^(\s*)([|']<?>?)\s*
     beginCaptures:
       '2':
         name: punctuation.section.verbatim.slim
