@@ -288,16 +288,16 @@ section
 /[ Tag Text Tests ]////////////////////////////////////////////////////////////
 
 tag with text
-/ <- text.slim meta.tag.slim entity.name.tag.slim
-/^^^ text.slim meta.tag.slim
-/   ^^^^^^^^^ text.slim text.html.embedded.slim - meta.tag
+/ <- meta.tag.slim entity.name.tag.slim
+/^^^ meta.tag.slim
+/   ^^^^^^^^^ text.html.embedded.slim - meta.tag
 
 tag
   with text
-/^ text.slim - text.html.embedded.slim
-/^ text.slim - meta.tag
-/ ^^^^^ text.slim meta.tag.slim
-/      ^^^^ text.slim text.html.embedded.slim - meta.tag
+/^ - text.html.embedded.slim
+/^ - meta.tag
+/ ^^^^^ meta.tag.slim
+/      ^^^^ text.html.embedded.slim - meta.tag
 
 tag with
   text
@@ -1163,20 +1163,20 @@ span.class>< Both
 /[ Self Closing Tag Tests ]////////////////////////////////////////////////////
 
 img src="image.png" / .no-attrib
-/ <- text.slim meta.tag.slim entity.name.tag.slim
-/^^^^^^^^^^^^^^^^^^^^ text.slim meta.tag.slim - text.html.embedded.slim
-/                    ^^^^^^^^^^^^ text.slim - text.html.embedded.slim
-/                    ^^^^^^^^^^^^ text.slim - meta.tag
+/ <- meta.tag.slim entity.name.tag.slim
+/^^^^^^^^^^^^^^^^^^^^ meta.tag.slim - text.html.embedded.slim
+/                    ^^^^^^^^^^^^ - text.html.embedded.slim
+/                    ^^^^^^^^^^^^ - meta.tag
 /^^ entity.name.tag.slim
 /                   ^ punctuation.terminator.tag.slim
 
 img( src = "image.png" / ) / .no-attrib
-/ <- text.slim meta.tag.slim entity.name.tag.slim
+/ <- meta.tag.slim entity.name.tag.slim
 /^^ meta.tag.slim
-/  ^^^^^^^^^^^^^^^^^^^^^^^ text.slim meta.tag.slim meta.parens.slim
-/                         ^^ text.slim meta.tag.slim
-/                           ^^^^^^^^^^^^ text.slim - text.html.embedded.slim
-/                           ^^^^^^^^^^^^ text.slim - meta.tag
+/  ^^^^^^^^^^^^^^^^^^^^^^^ meta.tag.slim meta.parens.slim
+/                         ^^ meta.tag.slim
+/                           ^^^^^^^^^^^^ - text.html.embedded.slim
+/                           ^^^^^^^^^^^^ - meta.tag
 /^^ entity.name.tag.slim
 /  ^ punctuation.section.parens.begin.slim
 /                      ^ invalid.illegal.unexpected-terminator.slim
@@ -1184,12 +1184,12 @@ img( src = "image.png" / ) / .no-attrib
 /                          ^ punctuation.terminator.tag.slim
 
 img[ src = "image.png" / ] / .no-attrib
-/ <- text.slim meta.tag.slim entity.name.tag.slim
-/^^ text.slim meta.tag.slim
-/  ^^^^^^^^^^^^^^^^^^^^^^^ text.slim meta.tag.slim meta.brackets.slim
-/                         ^^ text.slim meta.tag.slim
-/                           ^^^^^^^^^^^^ text.slim - text.html.embedded.slim
-/                           ^^^^^^^^^^^^ text.slim - meta.tag
+/ <- meta.tag.slim entity.name.tag.slim
+/^^ meta.tag.slim
+/  ^^^^^^^^^^^^^^^^^^^^^^^ meta.tag.slim meta.brackets.slim
+/                         ^^ meta.tag.slim
+/                           ^^^^^^^^^^^^ - text.html.embedded.slim
+/                           ^^^^^^^^^^^^ - meta.tag
 /^^ entity.name.tag.slim
 /  ^ punctuation.section.brackets.begin.slim
 /                      ^ invalid.illegal.unexpected-terminator.slim
@@ -1197,12 +1197,12 @@ img[ src = "image.png" / ] / .no-attrib
 /                          ^ punctuation.terminator.tag.slim
 
 img{ src = "image.png" / } / .no-attrib
-/ <- text.slim meta.tag.slim entity.name.tag.slim
-/^^ text.slim meta.tag.slim
-/  ^^^^^^^^^^^^^^^^^^^^^^^ text.slim meta.tag.slim meta.braces.slim
-/                         ^^ text.slim meta.tag.slim
-/                           ^^^^^^^^^^^^ text.slim - text.html.embedded.slim
-/                           ^^^^^^^^^^^^ text.slim - meta.tag
+/ <- meta.tag.slim entity.name.tag.slim
+/^^ meta.tag.slim
+/  ^^^^^^^^^^^^^^^^^^^^^^^ meta.tag.slim meta.braces.slim
+/                         ^^ meta.tag.slim
+/                           ^^^^^^^^^^^^ - text.html.embedded.slim
+/                           ^^^^^^^^^^^^ - meta.tag
 /^^ entity.name.tag.slim
 /  ^ punctuation.section.braces.begin.slim
 /                      ^ invalid.illegal.unexpected-terminator.slim
@@ -1210,12 +1210,12 @@ img{ src = "image.png" / } / .no-attrib
 /                          ^ punctuation.terminator.tag.slim
 
 img*{ src = "image.png" // } / .no-attrib
-/ <- text.slim meta.tag.slim entity.name.tag.slim
-/^^ text.slim meta.tag.slim
-/  ^^^^^^^^^^^^^^^^^^^^^^^^^ text.slim meta.tag.slim meta.embedded.slim
-/                           ^^ text.slim meta.tag.slim - meta.embedded
-/                             ^^^^^^^^^^^^ text.slim - text.html.embedded.slim
-/                             ^^^^^^^^^^^^ text.slim - meta.tag
+/ <- meta.tag.slim entity.name.tag.slim
+/^^ meta.tag.slim
+/  ^^^^^^^^^^^^^^^^^^^^^^^^^ meta.tag.slim meta.embedded.slim
+/                           ^^ meta.tag.slim - meta.embedded
+/                             ^^^^^^^^^^^^ - text.html.embedded.slim
+/                             ^^^^^^^^^^^^ - meta.tag
 /^^ entity.name.tag.slim
 /  ^^ punctuation.section.embedded.begin.ruby
 /                       ^^ string
@@ -1268,8 +1268,8 @@ span.klass Additional code shouldn"t be highlighted
 /[ Inline Tag Tests ]//////////////////////////////////////////////////////////
 
 ul: li: a[href="/b"] B link
-/ <- text.slim meta.tag.slim entity.name.tag.slim - text.html.embedded.slim
-/^^^^^^^^^^^^^^^^^^^ text.slim - text.html.embedded.slim
+/ <- meta.tag.slim entity.name.tag.slim - text.html.embedded.slim
+/^^^^^^^^^^^^^^^^^^^ - text.html.embedded.slim
 /^^ meta.tag.slim - meta.brackets
 /  ^ - meta.tag
 /   ^^^ meta.tag.slim
@@ -1284,8 +1284,8 @@ ul: li: a[href="/b"] B link
 /       ^ entity.name.tag.slim
 
 ul: li.klass: a[href="/b"] B link
-/ <- text.slim meta.tag.slim entity.name.tag.slim - text.html.embedded.slim
-/^^^^^^^^^^^^^^^^^^^^^^^^^ text.slim - text.html.embedded.slim
+/ <- meta.tag.slim entity.name.tag.slim - text.html.embedded.slim
+/^^^^^^^^^^^^^^^^^^^^^^^^^ - text.html.embedded.slim
 /^^ meta.tag.slim - meta.brackets
 /  ^ - meta.tag
 /   ^^^^^^^^^ meta.tag.slim
@@ -1295,8 +1295,8 @@ ul: li.klass: a[href="/b"] B link
 /                         ^^^^^^^^ text.html.embedded.slim - meta.tag
 
 ul: li#id: a[href="/b"] B link
-/ <- text.slim meta.tag.slim entity.name.tag.slim - text.html.embedded.slim
-/^^^^^^^^^^^^^^^^^^^^^^ text.slim - text.html.embedded.slim
+/ <- meta.tag.slim entity.name.tag.slim - text.html.embedded.slim
+/^^^^^^^^^^^^^^^^^^^^^^ - text.html.embedded.slim
 /^^ meta.tag.slim - meta.brackets
 /  ^ - meta.tag
 /   ^^^^^^ meta.tag.slim
@@ -1306,8 +1306,8 @@ ul: li#id: a[href="/b"] B link
 /                      ^^^^^^^^ text.html.embedded.slim - meta.tag
 
 ul: li class="klass": a[href="/b"] B link
-/ <- text.slim meta.tag.slim entity.name.tag.slim - text.html.embedded.slim
-/^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ text.slim - text.html.embedded.slim
+/ <- meta.tag.slim entity.name.tag.slim - text.html.embedded.slim
+/^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ - text.html.embedded.slim
 /^^ meta.tag.slim - meta.brackets
 /  ^ - meta.tag
 /   ^^^^^^^^^^^^^^^^^ meta.tag.slim
@@ -1317,8 +1317,8 @@ ul: li class="klass": a[href="/b"] B link
 /                                 ^^^^^^^^ text.html.embedded.slim - meta.tag
 
 ul: li class = "klass" : a[href="/b"] B link
-/ <- text.slim meta.tag.slim entity.name.tag.slim - text.html.embedded.slim
-/^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ text.slim - text.html.embedded.slim
+/ <- meta.tag.slim entity.name.tag.slim - text.html.embedded.slim
+/^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ - text.html.embedded.slim
 /^^ meta.tag.slim - meta.brackets
 /  ^ - meta.tag
 /   ^^^^^^^^^^^^^^^^^^^^ meta.tag.slim
@@ -1328,8 +1328,8 @@ ul: li class = "klass" : a[href="/b"] B link
 /                                    ^^^^^^^^ text.html.embedded.slim - meta.tag
 
 ul: li ( class = "klass" ): a[href="/b"] B link
-/ <- text.slim meta.tag.slim entity.name.tag.slim - text.html.embedded.slim
-/^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ text.slim - text.html.embedded.slim
+/ <- meta.tag.slim entity.name.tag.slim - text.html.embedded.slim
+/^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ - text.html.embedded.slim
 /^^ meta.tag.slim - meta.brackets
 /  ^ - meta.tag
 /   ^^^ meta.tag.slim - meta.parens
@@ -1341,8 +1341,8 @@ ul: li ( class = "klass" ): a[href="/b"] B link
 /                                       ^^^^^^^^ text.html.embedded.slim - meta.tag
 
 ul: li [ class = "klass" ]: a[href="/b"] B link
-/ <- text.slim meta.tag.slim entity.name.tag.slim - text.html.embedded.slim
-/^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ text.slim - text.html.embedded.slim
+/ <- meta.tag.slim entity.name.tag.slim - text.html.embedded.slim
+/^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ - text.html.embedded.slim
 /^^ meta.tag.slim - meta.brackets
 /  ^ - meta.tag
 /   ^^^ meta.tag.slim - meta.brackets
@@ -1354,8 +1354,8 @@ ul: li [ class = "klass" ]: a[href="/b"] B link
 /                                       ^^^^^^^^ text.html.embedded.slim - meta.tag
 
 ul: li { class = "klass" }: a[href="/b"] B link
-/ <- text.slim meta.tag.slim entity.name.tag.slim - text.html.embedded.slim
-/^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ text.slim - text.html.embedded.slim
+/ <- meta.tag.slim entity.name.tag.slim - text.html.embedded.slim
+/^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ - text.html.embedded.slim
 /^^ meta.tag.slim - meta.brackets
 /  ^ - meta.tag
 /   ^^^ meta.tag.slim - meta.braces
@@ -1367,8 +1367,8 @@ ul: li { class = "klass" }: a[href="/b"] B link
 /                                       ^^^^^^^^ text.html.embedded.slim - meta.tag
 
 ul: li*{ 'class' => "klass" }: a[href="/b"] B link
-/ <- text.slim meta.tag.slim entity.name.tag.slim - text.html.embedded.slim
-/^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ text.slim - text.html.embedded.slim
+/ <- meta.tag.slim entity.name.tag.slim - text.html.embedded.slim
+/^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ - text.html.embedded.slim
 /^^ meta.tag.slim - meta.brackets
 /  ^ - meta.tag
 /   ^^ meta.tag.slim - meta.embedded
@@ -1680,10 +1680,10 @@ html
       anon: ->
         console.log 'hello world'
   body
-/ <- text.slim - meta.filter
-/ <- text.slim - meta.tag
-/^ text.slim - meta.filter
-/^ text.slim - meta.tag
+/ <- - meta.filter
+/ <- - meta.tag
+/^ - meta.filter
+/^ - meta.tag
 / ^^^^ meta.tag.slim entity.name.tag.slim
 
 html
@@ -1692,10 +1692,10 @@ html
       .hello:before {
         content: 'hello #{@world}';
   body
-/ <- text.slim - meta.filter
-/ <- text.slim - meta.tag
-/^ text.slim - meta.filter
-/^ text.slim - meta.tag
+/ <- - meta.filter
+/ <- - meta.tag
+/^ - meta.filter
+/^ - meta.tag
 / ^^^^ meta.tag.slim entity.name.tag.slim
 
 html
@@ -1703,10 +1703,10 @@ html
     erb:
       <%= hello_world if hello_world.present? %>
   body
-/ <- text.slim - meta.filter
-/ <- text.slim - meta.tag
-/^ text.slim - meta.filter
-/^ text.slim - meta.tag
+/ <- - meta.filter
+/ <- - meta.tag
+/^ - meta.filter
+/^ - meta.tag
 / ^^^^ meta.tag.slim entity.name.tag.slim
 
 html
@@ -1715,10 +1715,10 @@ html
      (function() {
         console.log('hello #{@world}');
   body
-/ <- text.slim - meta.filter
-/ <- text.slim - meta.tag
-/^ text.slim - meta.filter
-/^ text.slim - meta.tag
+/ <- - meta.filter
+/ <- - meta.tag
+/^ - meta.filter
+/^ - meta.tag
 / ^^^^ meta.tag.slim entity.name.tag.slim
 
 html
@@ -1727,10 +1727,10 @@ html
       .hello:before {
         content: 'hello #{@world}';
   body
-/ <- text.slim - meta.filter
-/ <- text.slim - meta.tag
-/^ text.slim - meta.filter
-/^ text.slim - meta.tag
+/ <- - meta.filter
+/ <- - meta.tag
+/^ - meta.filter
+/^ - meta.tag
 / ^^^^ meta.tag.slim entity.name.tag.slim
 
 body
@@ -1738,10 +1738,10 @@ body
     # Hello
     **World** #{:var}
   div
-/ <- text.slim - meta.filter
-/ <- text.slim - meta.tag
-/^ text.slim - meta.filter
-/^ text.slim - meta.tag
+/ <- - meta.filter
+/ <- - meta.tag
+/^ - meta.filter
+/^ - meta.tag
 / ^^^ meta.tag.slim entity.name.tag.slim
 
 html
@@ -1749,10 +1749,10 @@ html
     ruby:
       blank = []
   body
-/ <- text.slim - meta.filter
-/ <- text.slim - meta.tag
-/^ text.slim - meta.filter
-/^ text.slim - meta.tag
+/ <- - meta.filter
+/ <- - meta.tag
+/^ - meta.filter
+/^ - meta.tag
 / ^^^^ meta.tag.slim entity.name.tag.slim
 
 html
@@ -1761,10 +1761,10 @@ html
       .hello
         content: $world
   body
-/ <- text.slim - meta.filter
-/ <- text.slim - meta.tag
-/^ text.slim - meta.filter
-/^ text.slim - meta.tag
+/ <- - meta.filter
+/ <- - meta.tag
+/^ - meta.filter
+/^ - meta.tag
 / ^^^^ meta.tag.slim entity.name.tag.slim
 
 html
@@ -1773,8 +1773,8 @@ html
       .hello:before {
         color: $world
   body
-/ <- text.slim - meta.filter
-/ <- text.slim - meta.tag
-/^ text.slim - meta.filter
-/^ text.slim - meta.tag
+/ <- - meta.filter
+/ <- - meta.tag
+/^ - meta.filter
+/^ - meta.tag
 / ^^^^ meta.tag.slim entity.name.tag.slim
