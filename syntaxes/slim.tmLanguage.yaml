@@ -104,6 +104,7 @@ patterns:
     match: ^(! )($|\s.*)
     name: meta.prolog.slim
 
+  # HTML comments [https://github.com/slim-template/slim#html-comment-]
   - comment: "HTML comment"
     begin: ^(\s*)((/!)\s*.*)$
     beginCaptures:
@@ -114,6 +115,7 @@ patterns:
     end: ^(?!(\1\s)|\s*$)
     name: comment.block.html.slim
 
+  # IE conditional comments [https://github.com/slim-template/slim#ie-conditional-comment-]
   - comment: "IE conditional comment"
     begin: ^(\s*)((/)((\[).*(\])).*)$
     beginCaptures:
@@ -130,6 +132,7 @@ patterns:
     end: ^(?!(\1\s)|\s*$)
     name: comment.block.slim
 
+  # Slim comments [https://github.com/slim-template/slim#code-comment-]
   - comment: "Slim comment"
     begin: ^(\s*)((/)\s*.*)$
     beginCaptures:
@@ -140,20 +143,24 @@ patterns:
     end: ^(?!(\1\s)|\s*$)
     name: comment.block.slim
 
+  # Ruby code line [https://github.com/slim-template/slim#control-code--]
   - begin: ^\s*(?=-)
     end: $
     patterns:
       - include: '#rubyline'
 
+  # Ruby output line [https://github.com/slim-template/slim#output-]
   - begin: (?==+|~)
     end: $
     patterns:
       - include: '#rubyline'
+
   - include: '#tag-attribute'
   - include: '#embedded-ruby'
 
+  # Verbatim text [https://github.com/slim-template/slim#verbatim-text-]
   - comment: Verbatim text (can include HTML tags and copied lines)
-    begin: ^(\s*)([|']<?>?)\s*
+    begin: ^(\s*)([|'][<>]{0,2})\s*
     beginCaptures:
       '2':
         name: punctuation.section.verbatim.slim
@@ -163,12 +170,14 @@ patterns:
       - include: text.html.basic
       - include: '#embedded-ruby'
 
+  # Doctypes [https://github.com/slim-template/slim#doctype-declaration]
   - comment: Doctypes
     match: ^\s*(doctype)\s+.*(\n|$)
     captures:
       '0':
         name: meta.tag.sgml.doctype.slim
 
+  # Slim HTML tags [https://github.com/slim-template/slim#html-tags]
   - begin: ^\s*((\.)|(#)|[-a-zA-Z0-9]+)([\w-]+)?
     end: $|(?!\.|#|:|-|~|/|\}|\]|\*|\s?[\*\{])
     name: meta.tag.slim
@@ -184,11 +193,15 @@ patterns:
         name: punctuation.definition.attribute.id.slim
       '4':
         name: entity.other.attribute-name.slim
+
     patterns:
+      # XML tags
       - begin: (:[\w\d]+)+
         end: $|\s
         comment: XML
         name: entity.name.tag.slim
+
+      # Inline tags [https://github.com/slim-template/slim#inline-tags]
       - begin: (:\s)(\.|#|[a-zA-Z0-9]+)([\w-]+)?
         end: $|(?!\.|#|=|-|~|/|\}|\]|\*|\s?[\*\{])
         comment: >-
@@ -205,6 +218,9 @@ patterns:
         patterns:
           - include: '#root-class-id-tag'
           - include: '#tag-attribute'
+          - include: '#closed-tag-terminaor'
+
+      # Splat attributes
       - begin: (\*\{)(?=.*\}|.*\|\s*$)
         end: (\})|$|^(?!.*\|\s*$)
         name: source.ruby.embedded.slim
@@ -217,10 +233,12 @@ patterns:
             name: punctuation.section.embedded.ruby
         patterns:
           - include: '#embedded-ruby'
+
       - include: '#root-class-id-tag'
       - include: '#rubyline'
       - match: /
         name: punctuation.terminator.tag.slim
+  # Escape
   - captures:
       '1':
         name: meta.escape.slim
@@ -232,6 +250,7 @@ patterns:
       - include: '#embedded-ruby'
       - include: text.html.basic
 
+  # Inline HTML [https://github.com/slim-template/slim#inline-html-]
   - comment: Inline and root-level HTML tags
     begin: (?=</?[\w\d\:]+)
     end: $|\/\>
@@ -292,10 +311,12 @@ repository:
         name: constant.character.entity.html
       - match: '&'
         name: invalid.illegal.bad-ampersand.html
+
   interpolated-ruby:
     begin: =(?=\b)
     end: \s|\w$
     name: source.ruby.embedded.html
+
   tag-attribute:
     begin: ([\w.#_-]+)(=)(?!\s)(true|false|nil)?(\s*\(|\{)?
     name: meta.attribute-with-value.slim

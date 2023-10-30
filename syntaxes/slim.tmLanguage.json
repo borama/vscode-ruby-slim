@@ -249,7 +249,7 @@
     },
     {
       "comment": "Verbatim text (can include HTML tags and copied lines)",
-      "begin": "^(\\s*)([|']<?>?)\\s*",
+      "begin": "^(\\s*)([|'][<>]{0,2})\\s*",
       "beginCaptures": {
         "2": {
           "name": "punctuation.section.verbatim.slim"
