@@ -322,6 +322,9 @@
             },
             {
               "include": "#tag-attribute"
+            },
+            {
+              "include": "#closed-tag-terminaor"
             }
           ]
         },
@@ -353,8 +356,10 @@
           "include": "#rubyline"
         },
         {
-          "match": "/",
-          "name": "punctuation.terminator.tag.slim"
+          "include": "#tag-attribute"
+        },
+        {
+          "include": "#closed-tag-terminaor"
         }
       ]
     },
@@ -401,6 +406,10 @@
         }
       },
       "match": "([\\\\,])\\s*\\n"
+    },
+    "closed-tag-terminaor": {
+      "match": "\\s*/\\s*$",
+      "name": "punctuation.terminator.tag.slim"
     },
     "delimited-ruby-a": {
       "begin": "=\\(",

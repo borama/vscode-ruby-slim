@@ -236,8 +236,9 @@ patterns:
 
       - include: '#root-class-id-tag'
       - include: '#rubyline'
-      - match: /
-        name: punctuation.terminator.tag.slim
+      - include: '#tag-attribute'
+      - include: '#closed-tag-terminaor'
+
   # Escape
   - captures:
       '1':
@@ -265,6 +266,11 @@ repository:
       '1':
         name: punctuation.separator.continuation.slim
     match: '([\\,])\s*\n'
+
+  # Closed tag [https://github.com/slim-template/slim#closed-tags-trailing-]
+  closed-tag-terminaor:
+    match: \s*/\s*$
+    name: punctuation.terminator.tag.slim
 
   delimited-ruby-a:
     begin: =\(
