@@ -178,12 +178,11 @@ patterns:
         name: meta.tag.sgml.doctype.slim
 
   # Slim HTML tags [https://github.com/slim-template/slim#html-tags]
-  - begin: ^\s*((\.)|(#)|[-a-zA-Z0-9]+)([\w-]+)?
+  - begin: ^\s*((\.)|(#)|[\w-]+)([\w-]+)?
     end: $|(?!\.|#|:|-|~|/|\}|\]|\*|\s?[\*\{])
     name: meta.tag.slim
     comment: >-
-      1 - dot OR hash OR any combination of word, number; 2 - OPTIONAL any
-      combination of word, number, dash or underscore (following a . or
+      1 - dot OR hash OR tag name; 2 - OPTIONAL classname OR id
     captures:
       '1':
         name: entity.name.tag.slim
@@ -202,12 +201,10 @@ patterns:
         name: entity.name.tag.slim
 
       # Inline tags [https://github.com/slim-template/slim#inline-tags]
-      - begin: (:\s)(\.|#|[a-zA-Z0-9]+)([\w-]+)?
+      - begin: (:\s)(\.|#|[\w-]+)([\w-]+)?
         end: $|(?!\.|#|=|-|~|/|\}|\]|\*|\s?[\*\{])
         comment: >-
-          Inline HTML / 1 - colon; 2 - dot OR hash OR any combination of word,
-          number; 3 - OPTIONAL any combination of word, number, dash or
-          underscore (following a . or
+          1 - colon; 2 - dot OR hash OR tag name; 3 - OPTIONAL classname OR id
         captures:
           '1':
             name: punctuation.definition.tag.end.slim

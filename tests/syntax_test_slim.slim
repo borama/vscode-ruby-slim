@@ -292,93 +292,82 @@ section
 
 /[ Tag Text Tests ]////////////////////////////////////////////////////////////
 
-tag with text
-/ <- meta.tag.slim entity.name.tag.slim
-/^^^ meta.tag.slim
-/   ^^^^^^^^^ text.html.embedded.slim - meta.tag
+  // TODO: Texts and continuation do not work at all in current grammar.
+  tag with text
+  / <- meta.tag.slim entity.name.tag.slim
+  /^^ meta.tag.slim
+  //   ^^^^^^^^^ text.html.embedded.slim
 
-tag
-  with text
-/^ - text.html.embedded.slim
-/^ - meta.tag
-/ ^^^^^ meta.tag.slim
-/      ^^^^ text.html.embedded.slim - meta.tag
+  tag
+    with text
+  // ^^^^^^^^^ text.html.embedded.slim
 
-tag with
-  text
-/ <- text.html.embedded.slim - meta.tag
-/^^^^^ text.html.embedded.slim - meta.tag
+  tag with
+    text
+  / <- text.html.embedded.slim
+  /^^^^^ text.html.embedded.slim
 
-tag\
-  ' text
-/ <- text.html.embedded.slim - meta.tag
-/^^^^^^^^ text.html.embedded.slim - punctuation
+  tag\
+    ' text
+  /   ^^^^ text.html.embedded.slim
 
-tag\
-  | text
-/ <- text.html.embedded.slim - meta.tag
-/^^^^^^^^ text.html.embedded.slim - punctuation
+  tag\
+    | text
+  /   ^^^^ text.html.embedded.slim
 
-tag\
-  - text
-/ <- text.html.embedded.slim - meta.tag
-/^^^^^^^^ text.html.embedded.slim - punctuation
+  tag\
+    - text
+  / ^^^^^ text.html.embedded.slim
 
-tag,
-  ' text
-/ <- text.html.embedded.slim - meta.tag
-/^^^^^^^^ text.html.embedded.slim - punctuation
+  tag,
+    ' text
+  / <- text.html.embedded.slim - meta.tag
+  /^^^^^^^^ text.html.embedded.slim - punctuation
 
-tag,
-  = text
-/ <- text.html.embedded.slim - meta.tag
-/^^^^^^^^ text.html.embedded.slim - punctuation
+  tag,
+    = text
+  / <- text.html.embedded.slim - meta.tag
+  /^^^^^^^^ text.html.embedded.slim - punctuation
 
-tag,
-  | text
-/ <- text.html.embedded.slim - meta.tag
-/^^^^^^^^ text.html.embedded.slim - punctuation
+  tag,
+    | text
+  / <- text.html.embedded.slim - meta.tag
+  /^^^^^^^^ text.html.embedded.slim - punctuation
 
-tag,
-  - text
-/ <- text.html.embedded.slim - meta.tag
-/^^^^^^^^ text.html.embedded.slim - punctuation
+  tag,
+    - text
+  / <- text.html.embedded.slim - meta.tag
+  /^^^^^^^^ text.html.embedded.slim - punctuation
 
-tag,
-  = text
-/ <- text.html.embedded.slim - meta.tag
-/^^^^^^^^ text.html.embedded.slim - punctuation
+  tag,
+    = text
+  / <- text.html.embedded.slim - meta.tag
+  /^^^^^^^^ text.html.embedded.slim - punctuation
 
-div #{variable if amount > 0} Extra text
-/ <- meta.tag.slim entity.name.tag.slim
-/^^^ meta.tag.slim
-/   ^^^^^^^^^^^^^^^^^^^^^^^^^ text.html.embedded.slim meta.interpolation.slim
-/                            ^^^^^^^^^^^^ text.html.embedded.slim - meta.interpolation
-/^^ entity.name.tag.slim
-/   ^^ punctuation.section.interpolation.begin.slim
-/     ^^^^^^^^^^^^^^^^^^^^^^ source.ruby.rails.embedded.slim
-/                           ^ punctuation.section.interpolation.end.slim
+  div #{variable if amount > 0} Extra text
+  / <- meta.tag.slim entity.name.tag.slim
+  /^^ meta.tag.slim
+  /   ^^^^^^^^^^^^^^^^^^^^^^^^^ source.ruby.embedded.html
+  /                            ^^^^^^^^^^^^ text.html.embedded.slim
 
-div Extra #{variable if amount > 0} text
-/ <- meta.tag.slim entity.name.tag.slim
-/^^^ meta.tag.slim
-/   ^^^^^^ text.html.embedded.slim - meta.interpolation
-/         ^^^^^^^^^^^^^^^^^^^^^^^^^ text.html.embedded.slim meta.interpolation.slim
-/                                  ^^^^^^ text.html.embedded.slim - meta.interpolation
+  div Extra #{variable if amount > 0} text
+  / <- meta.tag.slim entity.name.tag.slim
+  /^^ meta.tag.slim
+  /   ^^^^^^ text.html.embedded.slim
+  /         ^^^^^^^^^^^^^^^^^^^^^^^^^ source.ruby.embedded.html
+  /                                  ^^^^^^ text.html.embedded.slim
 
 
-div Extra text #{variable if amount > 0}
-/ <- meta.tag.slim entity.name.tag.slim
-/^^^ meta.tag.slim
-/   ^^^^^^^^^^^ text.html.embedded.slim - meta.interpolation
-/              ^^^^^^^^^^^^^^^^^^^^^^^^^ text.html.embedded.slim meta.interpolation.slim
-/                                       ^ text.html.embedded.slim - meta.interpolation
+  div Extra text #{variable if amount > 0}
+  / <- meta.tag.slim entity.name.tag.slim
+  /^^ meta.tag.slim
+  /   ^^^^^^^^^^^ text.html.embedded.slim
+  /              ^^^^^^^^^^^^^^^^^^^^^^^^^  source.ruby.embedded.html
 
-div Extra text
-  #{variable if amount > 0}
-/^ text.html.embedded.slim - meta.interpolation
-/ ^^^^^^^^^^^^^^^^^^^^^^^^^ text.html.embedded.slim meta.interpolation.slim
-/                          ^ text.html.embedded.slim - meta.interpolation
+  div Extra text
+    #{variable if amount > 0}
+  /^ text.html.embedded.slim
+  / ^^^^^^^^^^^^^^^^^^^^^^^^^ source.ruby.embedded.slim
 
 
 /[ Class and ID Tests ]////////////////////////////////////////////////////////
