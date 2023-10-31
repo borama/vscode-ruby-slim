@@ -215,7 +215,7 @@ patterns:
         patterns:
           - include: '#root-class-id-tag'
           - include: '#tag-attribute'
-          - include: '#closed-tag-terminaor'
+          - include: '#closed-tag-terminator'
 
       # Splat attributes
       - begin: (\*\{)(?=.*\}|.*\|\s*$)
@@ -234,7 +234,7 @@ patterns:
       - include: '#root-class-id-tag'
       - include: '#rubyline'
       - include: '#tag-attribute'
-      - include: '#closed-tag-terminaor'
+      - include: '#closed-tag-terminator'
 
   # Escape
   - captures:
@@ -265,7 +265,7 @@ repository:
     match: '([\\,])\s*\n'
 
   # Closed tag [https://github.com/slim-template/slim#closed-tags-trailing-]
-  closed-tag-terminaor:
+  closed-tag-terminator:
     match: \s*/\s*$
     name: punctuation.terminator.tag.slim
 

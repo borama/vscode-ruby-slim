@@ -324,7 +324,7 @@
               "include": "#tag-attribute"
             },
             {
-              "include": "#closed-tag-terminaor"
+              "include": "#closed-tag-terminator"
             }
           ]
         },
@@ -359,7 +359,7 @@
           "include": "#tag-attribute"
         },
         {
-          "include": "#closed-tag-terminaor"
+          "include": "#closed-tag-terminator"
         }
       ]
     },
@@ -407,7 +407,7 @@
       },
       "match": "([\\\\,])\\s*\\n"
     },
-    "closed-tag-terminaor": {
+    "closed-tag-terminator": {
       "match": "\\s*/\\s*$",
       "name": "punctuation.terminator.tag.slim"
     },
