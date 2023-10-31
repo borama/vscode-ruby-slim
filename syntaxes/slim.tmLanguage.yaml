@@ -178,20 +178,20 @@ patterns:
         name: meta.tag.sgml.doctype.slim
 
   # Slim HTML tags [https://github.com/slim-template/slim#html-tags]
-  - begin: ^\s*((\.)|(#)|[\w-]+)([\w-]+)?
+  - begin: ^\s*(?:([\w-]+)|(\.)((?:[\w:-]+)(?:/\d+)?)|(#)((?:[\w:-]+)(?:/\d+)?))
     end: $|(?!\.|#|:|-|~|/|\}|\]|\*|\s?[\*\{])
     name: meta.tag.slim
-    comment: >-
-      1 - dot OR hash OR tag name; 2 - OPTIONAL classname OR id
     captures:
       '1':
         name: entity.name.tag.slim
       '2':
         name: punctuation.definition.attribute.class.slim
       '3':
-        name: punctuation.definition.attribute.id.slim
+        name: entity.other.attribute-name.class.html
       '4':
-        name: entity.other.attribute-name.slim
+        name: punctuation.definition.attribute.id.slim
+      '5':
+        name: entity.other.attribute-name.id.html
 
     patterns:
       # XML tags
@@ -266,7 +266,7 @@ repository:
 
   # Closed tag [https://github.com/slim-template/slim#closed-tags-trailing-]
   closed-tag-terminator:
-    match: \s*/\s*$
+    match: \s*/\s*
     name: punctuation.terminator.tag.slim
 
   delimited-ruby-a:
@@ -390,12 +390,16 @@ repository:
       - include: '#entities'
 
   root-class-id-tag:
-    match: (\.|#)([\w\d\-]+)
+    match: (\.)(([\w:-]+)(/\d+)?)|(#)(([\w:-]+)(/\d+)?)
     captures:
       '1':
-        name: punctuation.separator.key-value.html
+        name: punctuation.definition.attribute.class.slim
       '2':
-        name: entity.other.attribute-name.html
+        name: entity.other.attribute-name.class.html
+      '5':
+        name: punctuation.definition.attribute.id.slim
+      '6':
+        name: entity.other.attribute-name.id.html
 
   tag-stuff:
     patterns:
