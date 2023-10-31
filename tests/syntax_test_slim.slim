@@ -180,7 +180,6 @@ div
   head
     title Example
 /   ^^^^^ meta.tag.slim entity.name.tag.slim
-/         ^^^^^^^^ - meta.tag.slim
   <body
     class = "foo">
 /   ^^^^^^^^^^^^^ text.html.embedded.slim meta.tag.structure.body.start.html meta.attribute.class.html
@@ -502,7 +501,7 @@ butoon.w-2/a
 /     ^ punctuation.definition.attribute.class.slim
 /      ^^^ entity.other.attribute-name.class.html
 /         ^ punctuation.terminator.tag.slim
-/          ^^ - text.html.embedded.slim
+/          ^ text.html.embedded.slim
 
 /! Tailwind classes with brackets are not supported by slim 4.1.0 with default options
 bottom.top-[117px].bg-cyan-700
@@ -594,7 +593,7 @@ bottom.top-[117px].bg-cyan-700
 
 div quoted="attribute"
 / <- meta.tag.slim entity.name.tag.slim
-/^^^ meta.tag.slim - meta.attribute-with-value
+/^^ meta.tag.slim
 /   ^^^^^^^^^^^^^^^^^^ meta.tag.slim meta.attribute-with-value.slim
 /^^ entity.name.tag.slim
 /   ^^^^^^ entity.other.attribute-name.slim
@@ -603,9 +602,6 @@ div quoted="attribute"
 
 div quoted = "attribute" single = 'quoted' = text
 /^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.tag.slim
-/                                         ^ - meta.tag
-/                                         ^ - meta.embedded.slim
-/                                          ^^^^^^ meta.embedded.slim
 /^^^ - meta.attribute-with-value
 /   ^^^^^^^^^^^^^^^^^^^^ meta.attribute-with-value.slim
 /                       ^ - meta.attribute-with-value
@@ -640,6 +636,11 @@ div.class with-attribute="attribute\
   multiple lines"
 / <- meta.tag.slim meta.attribute-with-value.slim meta.string.html string.quoted.double.html
 /^^^^^^^^^^^^^^^^ meta.tag.slim meta.attribute-with-value.slim meta.string.html string.quoted.double.html
+
+div.class with-attribute='attribute\
+  multiple lines'
+/ <- meta.tag.slim meta.attribute-with-value.slim meta.string.html string.quoted.single.html
+/^^^^^^^^^^^^^^^^ meta.tag.slim meta.attribute-with-value.slim meta.string.html string.quoted.single.html
 
 a href="http://slim-#{url}.com" title='Slim #{title}' Goto the Slim homepage
 / <- meta.tag.slim entity.name.tag.slim

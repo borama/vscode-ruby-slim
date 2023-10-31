@@ -248,23 +248,10 @@
       "include": "#embedded-ruby"
     },
     {
-      "comment": "Verbatim text (can include HTML tags and copied lines)",
-      "begin": "^(\\s*)([|'][<>]{0,2})\\s*",
-      "beginCaptures": {
-        "2": {
-          "name": "punctuation.section.verbatim.slim"
-        }
-      },
-      "end": "^(?!(\\1\\s)|\\s*$)",
-      "contentName": "text.html.embedded.slim",
-      "patterns": [
-        {
-          "include": "text.html.basic"
-        },
-        {
-          "include": "#embedded-ruby"
-        }
-      ]
+      "include": "#verbatim-text"
+    },
+    {
+      "include": "#inline-html"
     },
     {
       "comment": "Doctypes",
@@ -276,23 +263,23 @@
       }
     },
     {
-      "begin": "^\\s*(?:([\\w-]+)|(\\.)((?:[\\w:-]+)(?:/\\d+)?)|(#)((?:[\\w:-]+)(?:/\\d+)?))",
-      "end": "$|(?!\\.|#|:|-|~|/|\\}|\\]|\\*|\\s?[\\*\\{])",
+      "begin": "^(\\s*)(?:([\\w-]+)|(\\.)((?:[\\w:-]+)(?:/\\d+)?)|(#)((?:[\\w:-]+)(?:/\\d+)?))",
+      "end": "$",
       "name": "meta.tag.slim",
       "captures": {
-        "1": {
+        "2": {
           "name": "entity.name.tag.slim"
         },
-        "2": {
+        "3": {
           "name": "punctuation.definition.attribute.class.slim"
         },
-        "3": {
+        "4": {
           "name": "entity.other.attribute-name.class.html"
         },
-        "4": {
+        "5": {
           "name": "punctuation.definition.attribute.id.slim"
         },
-        "5": {
+        "6": {
           "name": "entity.other.attribute-name.id.html"
         }
       },
@@ -315,7 +302,7 @@
               "name": "entity.name.tag.slim"
             },
             "3": {
-              "name": "entity.other.attribute-name.event.slim"
+              "name": "entity.other.attribute-name.slim"
             }
           },
           "patterns": [
@@ -361,7 +348,19 @@
           "include": "#tag-attribute"
         },
         {
+          "include": "#whitespace"
+        },
+        {
           "include": "#closed-tag-terminator"
+        },
+        {
+          "include": "#verbatim-text"
+        },
+        {
+          "include": "#inline-html"
+        },
+        {
+          "include": "#inline-text"
         }
       ]
     },
@@ -382,20 +381,6 @@
         },
         {
           "include": "text.html.basic"
-        }
-      ]
-    },
-    {
-      "comment": "Inline and root-level HTML tags",
-      "begin": "(?=</?[\\w\\d\\:]+)",
-      "end": "$|\\/\\>",
-      "contentName": "text.html.embedded.slim",
-      "patterns": [
-        {
-          "include": "text.html.basic"
-        },
-        {
-          "include": "#embedded-ruby"
         }
       ]
     }
@@ -483,37 +468,53 @@
         }
       ]
     },
+    "inline-html": {
+      "begin": "(?=</?[\\w\\d\\:]+)",
+      "end": "$|\\/\\>",
+      "contentName": "meta.embedded.slim text.html.embedded.slim",
+      "patterns": [
+        {
+          "include": "text.html.basic"
+        },
+        {
+          "include": "#embedded-ruby"
+        }
+      ]
+    },
+    "inline-text": {
+      "begin": "(?=.+)",
+      "end": "$",
+      "name": "meta.embedded.slim text.html.embedded.slim",
+      "patterns": [
+        {
+          "include": "text.html.basic"
+        },
+        {
+          "include": "#embedded-ruby"
+        }
+      ]
+    },
     "interpolated-ruby": {
       "begin": "=(?=\\b)",
       "end": "\\s|\\w$",
       "name": "source.ruby.embedded.html"
     },
-    "tag-attribute": {
-      "begin": "([\\w.#_-]+)(=)(?!\\s)(true|false|nil)?(\\s*\\(|\\{)?",
-      "name": "meta.attribute-with-value.slim",
+    "root-class-id-tag": {
+      "match": "(\\.)(([\\w:-]+)(/\\d+)?)|(#)(([\\w:-]+)(/\\d+)?)",
       "captures": {
         "1": {
-          "name": "entity.other.attribute-name.event.slim"
+          "name": "punctuation.definition.attribute.class.slim"
         },
         "2": {
-          "name": "punctuation.separator.key-value.html"
+          "name": "entity.other.attribute-name.class.html"
         },
-        "3": {
-          "name": "constant.language.slim"
+        "5": {
+          "name": "punctuation.definition.attribute.id.slim"
+        },
+        "6": {
+          "name": "entity.other.attribute-name.id.html"
         }
-      },
-      "end": "\\}|\\)|$",
-      "patterns": [
-        {
-          "include": "#tag-stuff"
-        },
-        {
-          "include": "#string-double-quoted"
-        },
-        {
-          "include": "#string-single-quoted"
-        }
-      ]
+      }
     },
     "rubyline": {
       "begin": "(==|=)(<>|><|<'|'<|<|>)?|-\\s*",
@@ -559,7 +560,7 @@
           "name": "punctuation.definition.string.end.html"
         }
       },
-      "name": "string.quoted.double.html",
+      "name": "meta.string.html string.quoted.double.html",
       "patterns": [
         {
           "include": "#embedded-ruby"
@@ -583,7 +584,7 @@
           "name": "punctuation.definition.string.end.html"
         }
       },
-      "name": "string.quoted.single.html",
+      "name": "meta.string.html string.quoted.single.html",
       "patterns": [
         {
           "include": "#embedded-ruby"
@@ -593,22 +594,32 @@
         }
       ]
     },
-    "root-class-id-tag": {
-      "match": "(\\.)(([\\w:-]+)(/\\d+)?)|(#)(([\\w:-]+)(/\\d+)?)",
+    "tag-attribute": {
+      "begin": "([\\w.#_-]+)\\s*?(=)(true|false|nil)?(\\s*\\(|\\{)?",
+      "name": "meta.attribute-with-value.slim",
       "captures": {
         "1": {
-          "name": "punctuation.definition.attribute.class.slim"
+          "name": "entity.other.attribute-name.slim"
         },
         "2": {
-          "name": "entity.other.attribute-name.class.html"
+          "name": "punctuation.separator.key-value.slim"
         },
-        "5": {
-          "name": "punctuation.definition.attribute.id.slim"
-        },
-        "6": {
-          "name": "entity.other.attribute-name.id.html"
+        "3": {
+          "name": "constant.language.slim"
         }
-      }
+      },
+      "end": "\\}|\\)|$",
+      "patterns": [
+        {
+          "include": "#tag-stuff"
+        },
+        {
+          "include": "#string-double-quoted"
+        },
+        {
+          "include": "#string-single-quoted"
+        }
+      ]
     },
     "tag-stuff": {
       "patterns": [
@@ -634,6 +645,28 @@
           "include": "#embedded-ruby"
         }
       ]
+    },
+    "verbatim-text": {
+      "comment": "Verbatim text (can include HTML tags and copied lines)",
+      "begin": "^(\\s*)([|'][<>]{0,2})\\s*",
+      "beginCaptures": {
+        "2": {
+          "name": "punctuation.section.verbatim.slim"
+        }
+      },
+      "end": "^(?!(\\1\\s)|\\s*$)",
+      "contentName": "text.html.embedded.slim",
+      "patterns": [
+        {
+          "include": "text.html.basic"
+        },
+        {
+          "include": "#embedded-ruby"
+        }
+      ]
+    },
+    "whitespace": {
+      "match": "\\s+"
     }
   },
   "scopeName": "source.slim",
