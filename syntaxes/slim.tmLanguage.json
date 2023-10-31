@@ -595,7 +595,7 @@
       ]
     },
     "tag-attribute": {
-      "begin": "([\\w.#_-]+)\\s*?(=)(true|false|nil)?(\\s*\\(|\\{)?",
+      "begin": "([\\w.#_-]+)\\s*(=)\\s*(true|false|nil)?(\\s*\\(|\\{)?",
       "name": "meta.attribute-with-value.slim",
       "captures": {
         "1": {
@@ -608,7 +608,7 @@
           "name": "constant.language.slim"
         }
       },
-      "end": "\\}|\\)|$",
+      "end": "\\}|\\)|(?=\\s+)|$",
       "patterns": [
         {
           "include": "#tag-stuff"

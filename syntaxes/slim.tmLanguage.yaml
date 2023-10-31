@@ -390,7 +390,7 @@ repository:
       - include: '#entities'
 
   tag-attribute:
-    begin: ([\w.#_-]+)\s*?(=)(true|false|nil)?(\s*\(|\{)?
+    begin: ([\w.#_-]+)\s*(=)\s*(true|false|nil)?(\s*\(|\{)?
     name: meta.attribute-with-value.slim
     captures:
       '1':
@@ -399,7 +399,7 @@ repository:
         name: punctuation.separator.key-value.slim
       '3':
         name: constant.language.slim
-    end: \}|\)|$
+    end: \}|\)|(?=\s+)|$
     patterns:
       - include: '#tag-stuff'
       - include: '#string-double-quoted'

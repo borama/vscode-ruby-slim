@@ -602,9 +602,9 @@ div quoted="attribute"
 
 div quoted = "attribute" single = 'quoted' = text
 /^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.tag.slim
-/^^^ - meta.attribute-with-value
+/^^^ - meta.attribute-with-value.slim
 /   ^^^^^^^^^^^^^^^^^^^^ meta.attribute-with-value.slim
-/                       ^ - meta.attribute-with-value
+/                       ^ - meta.attribute-with-value.slim
 /                        ^^^^^^^^^^^^^^^^^ meta.attribute-with-value.slim
 /                                         ^ - meta.attribute-with-value
 /   ^^^^^^ entity.other.attribute-name.slim
@@ -645,48 +645,42 @@ div.class with-attribute='attribute\
 a href="http://slim-#{url}.com" title='Slim #{title}' Goto the Slim homepage
 / <- meta.tag.slim entity.name.tag.slim
 /^ meta.tag.slim - meta.attribute-with-value
-/ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.tag.slim meta.attribute-with-value.href.slim
+/ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.tag.slim meta.attribute-with-value.slim
 /                              ^ meta.tag.slim - meta.attribute-with-value
 /                               ^^^^^^^^^^^^^^^^^^^^^ meta.tag.slim meta.attribute-with-value.slim
-/                                                    ^ meta.tag.slim - meta.attribute-with-value
-/                                                     ^^^^^^^^^^^^^^^^^^^^^^^ - meta.tag
+/                                                    ^ meta.tag.slim - meta.attribute-with-value.slim
+/                                                     ^^^^^^^^^^^^^^^^^^^^^^ text.html.embedded.slim
 
 /! url attribute value is continued on next line
 a href="http://slim
     -#{url}.com" Goto the Slim homepage
 / <- meta.tag.slim meta.attribute-with-value.slim meta.string.html string.quoted.double.html
 /^^^^^^^^^^^^^^^ meta.tag.slim meta.attribute-with-value.slim meta.string.html
-/               ^ meta.tag.slim - meta.attribute-with-value
-/                ^^^^^^^^^^^^^^^^^^^^^^^ - meta.tag
+/               ^ meta.tag.slim - meta.attribute-with-value.slim
 
 /! url attribute value with line continuation being evaluated
 a href="http://slim\
     -#{url}.com" Goto the Slim homepage
-/ <- meta.tag.slim meta.attribute-with-value.href.slim meta.path.url.html meta.string.html string.quoted.double.html
-/^^^^^^^^^^^^^^^ meta.tag.slim meta.attribute-with-value.href.slim meta.string.html
-/               ^ meta.tag.slim - meta.attribute-with-value
-/                ^^^^^^^^^^^^^^^^^^^^^^^ - meta.tag
+/ <- meta.tag.slim meta.attribute-with-value.slim meta.string.html string.quoted.double.html
+/^^^^^^^^^^^^^^^ meta.tag.slim meta.attribute-with-value.slim meta.string.html
+/               ^ meta.tag.slim - meta.attribute-with-value.slim
+/                ^^^^^^^^^^^^^^^^^^^^^^ text.html.embedded.slim
 
 div style = "color:#{$color}" onclick = "runClick(#{funcName})" text
 /^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.tag.slim
 /^^ entity.name.tag.slim
-/   ^^^^^^^^ meta.attribute-with-value.style.slim - meta.string
-/           ^ meta.attribute-with-value.style.slim meta.string.html - source.css
-/            ^^^^^^^^^^^^^^^ meta.attribute-with-value.style.slim meta.string.html source.css.embedded.html
-/                           ^ meta.attribute-with-value.style.slim meta.string.html - source.css
-/                            ^ - meta.attribute-with-value
-/                             ^^^^^^^^^^ meta.attribute-with-value.event.slim - meta.string
-/                                       ^ meta.attribute-with-value.event.slim meta.string.html - source.js
-/                                        ^^^^^^^^^^^^^^^^^^^^^ meta.attribute-with-value.event.slim meta.string.html source.js.embedded.html
-/                                                             ^ meta.attribute-with-value.event.slim meta.string.html - source.js
-/                                                              ^ - meta.attribute-with-value
-/                                                               ^^^^^ text.html.embedded.slim - meta.tag
+/   ^^^^^^^^ meta.attribute-with-value.slim
+/           ^ meta.attribute-with-value.slim meta.string.html
+/            ^^^^^^^^^^^^^^^ meta.attribute-with-value.slim meta.string.html string.quoted.double.html
+/                             ^^^^^^^^^^ meta.attribute-with-value.slim
+/                                       ^^^^^^^^^^^^^^^^^^^^^^ meta.attribute-with-value.slim meta.string.html
+/                                                                ^^^^ text.html.embedded.slim
 
 div style = "color:\
   #{$color}" text
 /^^^^^^^^^^^ meta.tag.slim
-/^^^^^^^^^^ meta.attribute-with-value.style.slim meta.string.html source.css.embedded.html
-/          ^ meta.attribute-with-value.style.slim meta.string.html - source.css
+/^^^^^^^^^^ meta.attribute-with-value.slim meta.string.html source.css.embedded.html
+/          ^ meta.attribute-with-value.slim meta.string.html - source.css
 /           ^ - meta.attribute-with-value
 /            ^^^^^ text.html.embedded.slim - meta.tag
 
@@ -723,9 +717,9 @@ div const1=false const2=true const3=nil const3= nil
 
 / unescaped ruby attribute values
 a href==action_path(:start)
-/ ^^^^^ meta.tag.slim meta.attribute-with-value.href.slim - meta.embedded
-/ ^^^^^ meta.tag.slim meta.attribute-with-value.href.slim - source.ruby
-/       ^^^^^^^^^^^^^^^^^^^ meta.tag.slim meta.attribute-with-value.href.slim meta.embedded.slim source.ruby.rails.embedded.slim
+/ ^^^^^ meta.tag.slim meta.attribute-with-value.slim - meta.embedded
+/ ^^^^^ meta.tag.slim meta.attribute-with-value.slim - source.ruby
+/       ^^^^^^^^^^^^^^^^^^^ meta.tag.slim meta.attribute-with-value.slim meta.embedded.slim source.ruby.rails.embedded.slim
 / ^^^^ entity.other.attribute-name.slim
 /     ^^ punctuation.separator.key-value.slim
 
@@ -857,7 +851,7 @@ div (
 /                               ^ punctuation.definition.string.end.html
 
     style = "color:#{$color}"
-/   ^^^^^^^^^^^^^^^^^^^^^^^^^ meta.tag.slim meta.parens.slim meta.attribute-with-value.style.slim
+/   ^^^^^^^^^^^^^^^^^^^^^^^^^ meta.tag.slim meta.parens.slim meta.attribute-with-value.slim
 /                            ^ meta.tag.slim meta.parens.slim - meta.attribute-with-value
 /   ^^^^^ entity.other.attribute-name.slim
 /         ^ punctuation.separator.key-value.slim
@@ -911,7 +905,7 @@ div [
 /                               ^ punctuation.definition.string.end.html
 
     style = "color:#{$color}"
-/   ^^^^^^^^^^^^^^^^^^^^^^^^^ meta.tag.slim meta.brackets.slim meta.attribute-with-value.style.slim
+/   ^^^^^^^^^^^^^^^^^^^^^^^^^ meta.tag.slim meta.brackets.slim meta.attribute-with-value.slim
 /                            ^ meta.tag.slim meta.brackets.slim - meta.attribute-with-value
 /   ^^^^^ entity.other.attribute-name.slim
 /         ^ punctuation.separator.key-value.slim
@@ -965,7 +959,7 @@ div {
 /                               ^ punctuation.definition.string.end.html
 
     style = "color:#{$color}"
-/   ^^^^^^^^^^^^^^^^^^^^^^^^^ meta.tag.slim meta.braces.slim meta.attribute-with-value.style.slim
+/   ^^^^^^^^^^^^^^^^^^^^^^^^^ meta.tag.slim meta.braces.slim meta.attribute-with-value.slim
 /                            ^ meta.tag.slim meta.braces.slim - meta.attribute-with-value
 /   ^^^^^ entity.other.attribute-name.slim
 /         ^ punctuation.separator.key-value.slim
