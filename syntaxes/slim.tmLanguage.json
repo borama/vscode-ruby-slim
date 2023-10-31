@@ -547,7 +547,7 @@
       ]
     },
     "string-double-quoted": {
-      "begin": "(\")(?=.*\")",
+      "begin": "(\")(?=.*(\"|\\\\$))",
       "beginCaptures": {
         "0": {
           "name": "punctuation.definition.string.begin.html"
@@ -571,7 +571,7 @@
       ]
     },
     "string-single-quoted": {
-      "begin": "(')(?=.*')",
+      "begin": "(')(?=.*('|\\\\$))",
       "beginCaptures": {
         "0": {
           "name": "punctuation.definition.string.begin.html"
