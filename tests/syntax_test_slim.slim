@@ -679,18 +679,21 @@ div style = "color:#{$color}" onclick = "runClick(#{funcName})" text
 div style = "color:\
   #{$color}" text
 /^^^^^^^^^^^ meta.tag.slim
-/^^^^^^^^^^ meta.attribute-with-value.slim meta.string.html source.css.embedded.html
-/          ^ meta.attribute-with-value.slim meta.string.html - source.css
-/           ^ - meta.attribute-with-value
-/            ^^^^^ text.html.embedded.slim - meta.tag
+/^^^^^^^^^^ meta.attribute-with-value.slim meta.string.html
+/          ^ meta.attribute-with-value.slim meta.string.html
+/           ^ - meta.attribute-with-value.slim
+/            ^^^^^ text.html.embedded.slim
 
 div onclick = "\
 runClick(#{funcName})" text
 /^^^^^^^^^^^^^^^^^^^^^ meta.tag.slim
-/^^^^^^^^^^^^^^^^^^^^ meta.attribute-with-value.event.slim meta.string.html source.js.embedded.html
-/                    ^ meta.attribute-with-value.event.slim meta.string.html - source.js
+/^^^^^^^^^^^^^^^^^^^^ meta.attribute-with-value.slim meta.string.html
+/                    ^ meta.attribute-with-value.slim meta.string.html
 /                     ^ - meta.attribute-with-value
-/                      ^^^^^ text.html.embedded.slim - meta.tag
+/                      ^^^^^ text.html.embedded.slim
+
+
+/[ Ruby Attributes Tests ]//////////////////////////////////////////////////////////
 
 div const1=false const2=true const3=nil const3= nil
 / <- meta.tag.slim entity.name.tag.slim
@@ -707,19 +710,19 @@ div const1=false const2=true const3=nil const3= nil
 /^^ entity.name.tag.slim
 /   ^^^^^^ entity.other.attribute-name.slim
 /         ^ punctuation.separator.key-value.slim
-/          ^^^^^ constant.language
+/          ^^^^^ constant.language.slim
 /                ^^^^^^ entity.other.attribute-name.slim
 /                      ^ punctuation.separator.key-value.slim
-/                       ^^^^ constant.language
+/                       ^^^^ constant.language.slim
 /                            ^^^^^^ entity.other.attribute-name.slim
 /                                  ^ punctuation.separator.key-value.slim
-/                                   ^^^ constant.language
+/                                   ^^^ constant.language.slim
 
 / unescaped ruby attribute values
 a href==action_path(:start)
-/ ^^^^^ meta.tag.slim meta.attribute-with-value.slim - meta.embedded
+/ ^^^^^ meta.tag.slim meta.attribute-with-value.slim - meta.embedded.slim
 / ^^^^^ meta.tag.slim meta.attribute-with-value.slim - source.ruby
-/       ^^^^^^^^^^^^^^^^^^^ meta.tag.slim meta.attribute-with-value.slim meta.embedded.slim source.ruby.rails.embedded.slim
+/       ^^^^^^^^^^^^^^^^^^^ meta.tag.slim meta.attribute-with-value.slim meta.embedded.slim source.ruby.embedded.slim
 / ^^^^ entity.other.attribute-name.slim
 /     ^^ punctuation.separator.key-value.slim
 
@@ -728,20 +731,20 @@ div array=:menu,:highlight
 /^^^ meta.tag.slim - meta.attribute-with-value
 /   ^^^^^^ meta.tag.slim meta.attribute-with-value.slim - meta.embedded
 /   ^^^^^^ meta.tag.slim meta.attribute-with-value.slim - source.ruby
-/         ^^^^^^^^^^^^^^^^ meta.tag.slim meta.attribute-with-value.slim meta.embedded.slim source.ruby.rails.embedded.slim
+/         ^^^^^^^^^^^^^^^^ meta.tag.slim meta.attribute-with-value.slim meta.embedded.slim source.ruby.embedded.slim
 /                         ^ - meta.tag
 /                         ^ - meta.attribute-with-value
 /   ^^^^^ entity.other.attribute-name.slim
 /        ^ punctuation.separator.key-value.slim
 /         ^^^^^ constant.other.symbol.ruby
-/              ^ punctuation.separator.sequence.ruby
+/              ^ punctuation.separator.object.ruby
 /               ^^^^^^^^^^ constant.other.symbol.ruby
 
 div group=( [ 'menu', "highlight" ] )
 /^^^ meta.tag.slim - meta.attribute-with-value
 /   ^^^^^^ meta.tag.slim meta.attribute-with-value.slim - meta.embedded
 /   ^^^^^^ meta.tag.slim meta.attribute-with-value.slim - source.ruby
-/         ^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.tag.slim meta.attribute-with-value.slim meta.embedded.slim source.ruby.rails.embedded.slim
+/         ^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.tag.slim meta.attribute-with-value.slim meta.embedded.slim source.ruby.embedded.slim
 /   ^^^^^ entity.other.attribute-name.slim
 /        ^ punctuation.separator.key-value.slim
 /         ^ punctuation.definition.group.begin.ruby
@@ -753,49 +756,49 @@ div array=[ 'menu', "highlight" ]
 /^^^ meta.tag.slim - meta.attribute-with-value
 /   ^^^^^^ meta.tag.slim meta.attribute-with-value.slim - meta.embedded
 /   ^^^^^^ meta.tag.slim meta.attribute-with-value.slim - source.ruby
-/         ^^^^^^^^^^^^^^^^^^^^^^^ meta.tag.slim meta.attribute-with-value.slim meta.embedded.slim source.ruby.rails.embedded.slim
+/         ^^^^^^^^^^^^^^^^^^^^^^^ meta.tag.slim meta.attribute-with-value.slim meta.embedded.slim source.ruby.embedded.slim
 /   ^^^^^ entity.other.attribute-name.slim
 /        ^ punctuation.separator.key-value.slim
-/         ^ punctuation.section.array.ruby
+/         ^ punctuation.section.array.begin.ruby
 /           ^^^^^^ meta.string.ruby string.quoted.single.ruby
-/                 ^ punctuation.separator.sequence.ruby
+/                 ^ punctuation.separator.object.ruby
 /                   ^^^^^^^^^^^ meta.string.ruby string.quoted.double.ruby
-/                               ^ punctuation.section.array.ruby
+/                               ^ punctuation.section.array.end.ruby
 
 div hashes={ 0, 'str', "str" }
 /^^^ meta.tag.slim - meta.attribute-with-value
 /   ^^^^^^^ meta.tag.slim meta.attribute-with-value.slim - meta.embedded
 /   ^^^^^^^ meta.tag.slim meta.attribute-with-value.slim - source.ruby
-/          ^^^^^^^^^^^^^^^^^^^ meta.tag.slim meta.attribute-with-value.slim meta.embedded.slim source.ruby.rails.embedded.slim
+/          ^^^^^^^^^^^^^^^^^^^ meta.tag.slim meta.attribute-with-value.slim meta.embedded.slim source.ruby.embedded.slim
 /   ^^^^^^ entity.other.attribute-name.slim
 /         ^ punctuation.separator.key-value.slim
-/          ^ punctuation.section.scope.ruby
-/            ^ meta.number.integer.decimal.ruby constant.numeric.value.ruby
-/             ^ punctuation.separator.sequence.ruby
+/          ^ punctuation.section.scope.begin.ruby
+/            ^ constant.numeric.integer.ruby
+/             ^ punctuation.separator.object.ruby
 /               ^^^^^ meta.string.ruby string.quoted.single.ruby
-/                    ^ punctuation.separator.sequence.ruby
+/                    ^ punctuation.separator.object.ruby
 /                      ^^^^^ meta.string.ruby string.quoted.double.ruby
-/                            ^ punctuation.section.scope.ruby
+/                            ^ punctuation.section.scope.end.ruby
 
 div array==:menu,:highlight
 / <- meta.tag.slim entity.name.tag.slim
 /^^^ meta.tag.slim - meta.attribute-with-value
 /   ^^^^^^^ meta.tag.slim meta.attribute-with-value.slim - meta.embedded
 /   ^^^^^^^ meta.tag.slim meta.attribute-with-value.slim - source.ruby
-/          ^^^^^^^^^^^^^^^^ meta.tag.slim meta.attribute-with-value.slim meta.embedded.slim source.ruby.rails.embedded.slim
+/          ^^^^^^^^^^^^^^^^ meta.tag.slim meta.attribute-with-value.slim meta.embedded.slim source.ruby.embedded.slim
 /                          ^ - meta.tag
 /                          ^ - meta.attribute-with-value
 /   ^^^^^ entity.other.attribute-name.slim
 /        ^^ punctuation.separator.key-value.slim
 /          ^^^^^ constant.other.symbol.ruby
-/               ^ punctuation.separator.sequence.ruby
+/               ^ punctuation.separator.object.ruby
 /                ^^^^^^^^^^ constant.other.symbol.ruby
 
 div group==( [ 'menu', "highlight" ] )
 /^^^ meta.tag.slim - meta.attribute-with-value
 /   ^^^^^^^ meta.tag.slim meta.attribute-with-value.slim - meta.embedded
 /   ^^^^^^^ meta.tag.slim meta.attribute-with-value.slim - source.ruby
-/          ^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.tag.slim meta.attribute-with-value.slim meta.embedded.slim source.ruby.rails.embedded.slim
+/          ^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.tag.slim meta.attribute-with-value.slim meta.embedded.slim source.ruby.embedded.slim
 /   ^^^^^ entity.other.attribute-name.slim
 /        ^^ punctuation.separator.key-value.slim
 /          ^ punctuation.definition.group.begin.ruby
@@ -807,29 +810,29 @@ div array==[ 'menu', "highlight" ]
 /^^^ meta.tag.slim - meta.attribute-with-value
 /   ^^^^^^^ meta.tag.slim meta.attribute-with-value.slim - meta.embedded
 /   ^^^^^^^ meta.tag.slim meta.attribute-with-value.slim - source.ruby
-/          ^^^^^^^^^^^^^^^^^^^^^^^ meta.tag.slim meta.attribute-with-value.slim meta.embedded.slim source.ruby.rails.embedded.slim
+/          ^^^^^^^^^^^^^^^^^^^^^^^ meta.tag.slim meta.attribute-with-value.slim meta.embedded.slim source.ruby.embedded.slim
 /   ^^^^^ entity.other.attribute-name.slim
 /        ^^ punctuation.separator.key-value.slim
-/          ^ punctuation.section.array.ruby
+/          ^ punctuation.section.array.begin.ruby
 /            ^^^^^^ meta.string.ruby string.quoted.single.ruby
-/                  ^ punctuation.separator.sequence.ruby
+/                  ^ punctuation.separator.object.ruby
 /                    ^^^^^^^^^^^ meta.string.ruby string.quoted.double.ruby
-/                                ^ punctuation.section.array.ruby
+/                                ^ punctuation.section.array.end.ruby
 
 div hashes=={ 0, 'str', "str" }
 /^^^ meta.tag.slim - meta.attribute-with-value
 /   ^^^^^^^^ meta.tag.slim meta.attribute-with-value.slim - meta.embedded
 /   ^^^^^^^^ meta.tag.slim meta.attribute-with-value.slim - source.ruby
-/           ^^^^^^^^^^^^^^^^^^^ meta.tag.slim meta.attribute-with-value.slim meta.embedded.slim source.ruby.rails.embedded.slim
+/           ^^^^^^^^^^^^^^^^^^^ meta.tag.slim meta.attribute-with-value.slim meta.embedded.slim source.ruby.embedded.slim
 /   ^^^^^^ entity.other.attribute-name.slim
 /         ^^ punctuation.separator.key-value.slim
-/           ^ punctuation.section.scope.ruby
-/             ^ meta.number.integer.decimal.ruby constant.numeric.value.ruby
-/              ^ punctuation.separator.sequence.ruby
+/           ^ punctuation.section.scope.begin.ruby
+/             ^ constant.numeric.integer.ruby
+/              ^ punctuation.separator.object.ruby
 /                ^^^^^ meta.string.ruby string.quoted.single.ruby
-/                     ^ punctuation.separator.sequence.ruby
+/                     ^ punctuation.separator.object.ruby
 /                       ^^^^^ meta.string.ruby string.quoted.double.ruby
-/                             ^ punctuation.section.scope.ruby
+/                             ^ punctuation.section.scope.end.ruby
 
 div (
 / <- meta.tag.slim entity.name.tag.slim
@@ -859,12 +862,12 @@ div (
 /            ^^^^^ meta.string.html source.css.embedded.html meta.property-name.css support.type.property-name.css
 /                 ^ meta.string.html source.css.embedded.html punctuation.separator.key-value.css
 /                  ^^ meta.string.html source.css.embedded.html meta.interpolation.slim punctuation.section.interpolation.begin.slim
-/                    ^^^^^^ meta.string.html source.css.embedded.html meta.interpolation.slim source.ruby.rails.embedded.slim variable.other
+/                    ^^^^^^ meta.string.html source.css.embedded.html meta.interpolation.slim source.ruby.embedded.slim variable.other
 /                          ^ meta.string.html source.css.embedded.html meta.interpolation.slim punctuation.section.interpolation.end.slim
 /                           ^ meta.string.html string.quoted.double.html punctuation.definition.string.end.html
 
     onclick = "runClick(#{funcName})"
-/   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.tag.slim meta.parens.slim meta.attribute-with-value.event.slim
+/   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.tag.slim meta.parens.slim meta.attribute-with-value.slim
 /                                    ^ meta.tag.slim meta.parens.slim - meta.attribute-with-value
 /   ^^^^^^^ entity.other.attribute-name.slim
 /           ^ punctuation.separator.key-value.slim
@@ -872,7 +875,7 @@ div (
 /              ^^^^^^^^^ meta.string.html source.js.embedded.html - meta.interpolation
 /                      ^ punctuation.section.group.begin.js
 /                       ^^ meta.string.html source.js.embedded.html meta.interpolation.slim punctuation.section.interpolation.begin.slim
-/                         ^^^^^^^^ meta.string.html source.js.embedded.html meta.interpolation.slim source.ruby.rails.embedded.slim
+/                         ^^^^^^^^ meta.string.html source.js.embedded.html meta.interpolation.slim source.ruby.embedded.slim
 /                                 ^ meta.string.html source.js.embedded.html meta.interpolation.slim punctuation.section.interpolation.end.slim
 /                                  ^ meta.string.html source.js.embedded.html punctuation.section.group.end.js - meta.interpolation
 /                                   ^ meta.string.html string.quoted.double.html punctuation.definition.string.end.html
@@ -913,12 +916,12 @@ div [
 /            ^^^^^ meta.string.html source.css.embedded.html meta.property-name.css support.type.property-name.css
 /                 ^ meta.string.html source.css.embedded.html punctuation.separator.key-value.css
 /                  ^^ meta.string.html source.css.embedded.html meta.interpolation.slim punctuation.section.interpolation.begin.slim
-/                    ^^^^^^ meta.string.html source.css.embedded.html meta.interpolation.slim source.ruby.rails.embedded.slim variable.other
+/                    ^^^^^^ meta.string.html source.css.embedded.html meta.interpolation.slim source.ruby.embedded.slim variable.other
 /                          ^ meta.string.html source.css.embedded.html meta.interpolation.slim punctuation.section.interpolation.end.slim
 /                           ^ meta.string.html string.quoted.double.html punctuation.definition.string.end.html
 
     onclick = "runClick(#{funcName})"
-/   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.tag.slim meta.brackets.slim meta.attribute-with-value.event.slim
+/   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.tag.slim meta.brackets.slim meta.attribute-with-value.slim
 /                                    ^ meta.tag.slim meta.brackets.slim - meta.attribute-with-value
 /   ^^^^^^^ entity.other.attribute-name.slim
 /           ^ punctuation.separator.key-value.slim
@@ -926,7 +929,7 @@ div [
 /              ^^^^^^^^^ meta.string.html source.js.embedded.html - meta.interpolation
 /                      ^ punctuation.section.group.begin.js
 /                       ^^ meta.string.html source.js.embedded.html meta.interpolation.slim punctuation.section.interpolation.begin.slim
-/                         ^^^^^^^^ meta.string.html source.js.embedded.html meta.interpolation.slim source.ruby.rails.embedded.slim
+/                         ^^^^^^^^ meta.string.html source.js.embedded.html meta.interpolation.slim source.ruby.embedded.slim
 /                                 ^ meta.string.html source.js.embedded.html meta.interpolation.slim punctuation.section.interpolation.end.slim
 /                                  ^ meta.string.html source.js.embedded.html punctuation.section.group.end.js - meta.interpolation
 /                                   ^ meta.string.html string.quoted.double.html punctuation.definition.string.end.html
@@ -967,12 +970,12 @@ div {
 /            ^^^^^ meta.string.html source.css.embedded.html meta.property-name.css support.type.property-name.css
 /                 ^ meta.string.html source.css.embedded.html punctuation.separator.key-value.css
 /                  ^^ meta.string.html source.css.embedded.html meta.interpolation.slim punctuation.section.interpolation.begin.slim
-/                    ^^^^^^ meta.string.html source.css.embedded.html meta.interpolation.slim source.ruby.rails.embedded.slim variable.other
+/                    ^^^^^^ meta.string.html source.css.embedded.html meta.interpolation.slim source.ruby.embedded.slim variable.other
 /                          ^ meta.string.html source.css.embedded.html meta.interpolation.slim punctuation.section.interpolation.end.slim
 /                           ^ meta.string.html string.quoted.double.html punctuation.definition.string.end.html
 
     onclick = "runClick(#{funcName})"
-/   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.tag.slim meta.braces.slim meta.attribute-with-value.event.slim
+/   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.tag.slim meta.braces.slim meta.attribute-with-value.slim
 /                                    ^ meta.tag.slim meta.braces.slim - meta.attribute-with-value
 /   ^^^^^^^ entity.other.attribute-name.slim
 /           ^ punctuation.separator.key-value.slim
@@ -980,7 +983,7 @@ div {
 /              ^^^^^^^^^ meta.string.html source.js.embedded.html - meta.interpolation
 /                      ^ punctuation.section.group.begin.js
 /                       ^^ meta.string.html source.js.embedded.html meta.interpolation.slim punctuation.section.interpolation.begin.slim
-/                         ^^^^^^^^ meta.string.html source.js.embedded.html meta.interpolation.slim source.ruby.rails.embedded.slim
+/                         ^^^^^^^^ meta.string.html source.js.embedded.html meta.interpolation.slim source.ruby.embedded.slim
 /                                 ^ meta.string.html source.js.embedded.html meta.interpolation.slim punctuation.section.interpolation.end.slim
 /                                  ^ meta.string.html source.js.embedded.html punctuation.section.group.end.js - meta.interpolation
 /                                   ^ meta.string.html string.quoted.double.html punctuation.definition.string.end.html
@@ -1044,7 +1047,7 @@ div.cls[
 .splat *method_which_returns_hash = place.name
 / <- meta.tag.slim punctuation.definition.attribute.class.slim
 /^^^^^^ meta.tag.slim - meta.embedded
-/      ^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.tag.slim meta.embedded.slim source.ruby.rails.embedded.slim
+/      ^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.tag.slim meta.embedded.slim source.ruby.embedded.slim
 /                                ^ - meta.tag
 /                                ^ - meta.embedded
 /                                 ^^^^^^^^^^^^ meta.embedded.slim
@@ -1053,12 +1056,12 @@ div.cls[
 /      ^ punctuation.section.embedded.begin.ruby
 /       ^^^^^^^^^^^^^^^^^^^^^^^^^ variable.function.ruby
 /                                 ^ punctuation.section.embedded.slim
-/                                  ^^^^^^^^^^^ source.ruby.rails.embedded.slim
+/                                  ^^^^^^^^^^^ source.ruby.embedded.slim
 
 .splat *@hash_instance_variable = place.name
 / <- meta.tag.slim punctuation.definition.attribute.class.slim
 /^^^^^^ meta.tag.slim - meta.embedded
-/      ^^^^^^^^^^^^^^^^^^^^^^^^  meta.tag.slim meta.embedded.slim source.ruby.rails.embedded.slim
+/      ^^^^^^^^^^^^^^^^^^^^^^^^  meta.tag.slim meta.embedded.slim source.ruby.embedded.slim
 /                              ^ - meta.tag
 /                              ^ - meta.embedded
 /                               ^^^^^^^^^^^^ meta.embedded.slim
@@ -1068,14 +1071,14 @@ div.cls[
 /       ^^^^^^^^^^^^^^^^^^^^^^^ variable.other.readwrite.instance.ruby
 /       ^ punctuation.definition.variable.ruby
 /                               ^ punctuation.section.embedded.slim
-/                                ^^^^^^^^^^^ source.ruby.rails.embedded.slim
+/                                ^^^^^^^^^^^ source.ruby.embedded.slim
 
 .splat attrib="value" *method_which_returns_hash
 / <- meta.tag.slim punctuation.definition.attribute.class.slim
 /^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.tag.slim
 /^^^^^ entity.other.attribute-name.class.html
 /      ^^^^^^^^^^^^^^ meta.attribute-with-value.slim
-/                     ^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.embedded.slim source.ruby.rails.embedded.slim
+/                     ^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.embedded.slim source.ruby.embedded.slim
 /                     ^ punctuation.section.embedded.begin.ruby
 
 #splat*{ 'attribute' => 'value'}
@@ -1083,7 +1086,7 @@ div.cls[
 /^^^^^ meta.tag.slim entity.name.attribute.id.slim
 /     ^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.tag.slim meta.embedded.slim
 /     ^^ punctuation.section.embedded.begin.ruby
-/       ^^^^^^^^^^^^^^^^^^^^^^^ source.ruby.rails.embedded.slim
+/       ^^^^^^^^^^^^^^^^^^^^^^^ source.ruby.embedded.slim
 /                              ^ punctuation.section.embedded.ruby
 
 .card*{'data-url'=>place_path(place), 'data-id'=>place.id} = place.name
@@ -1097,12 +1100,12 @@ div.cls[
 /    ^^ punctuation.section.embedded.begin.ruby
 /      ^^^^^^^^^^ meta.string.ruby string.quoted.single.ruby
 /                ^^ punctuation.separator.key-value.ruby
-/                                   ^ punctuation.separator.sequence.ruby
+/                                   ^ punctuation.separator.object.ruby
 /                                     ^^^^^^^^^ meta.string.ruby string.quoted.single.ruby
 /                                              ^^ punctuation.separator.key-value.ruby
 /                                                        ^ punctuation.section.embedded.ruby
 /                                                          ^ punctuation.section.embedded.slim
-/                                                            ^^^^^^^^^^ source.ruby.rails.embedded.slim
+/                                                            ^^^^^^^^^^ source.ruby.embedded.slim
 
 #splat *{attribute: 'value'} Regular text
 / <- meta.tag.slim punctuation.definition.attribute.id.slim
@@ -1126,13 +1129,13 @@ ruby:
 
 - @page_current = true
 *a_unless_current Link
-/ <- meta.tag.slim meta.embedded.slim source.ruby.rails.embedded.slim punctuation.section.embedded.begin.ruby
-/^^^^^^^^^^^^^^^^ meta.tag.slim meta.embedded.slim source.ruby.rails.embedded.slim variable.function.ruby
+/ <- meta.tag.slim meta.embedded.slim source.ruby.embedded.slim punctuation.section.embedded.begin.ruby
+/^^^^^^^^^^^^^^^^ meta.tag.slim meta.embedded.slim source.ruby.embedded.slim variable.function.ruby
 /                ^^^^^^ - meta.embedded
 - @page_current = false
 *a_unless_current Link
-/ <- meta.tag.slim meta.embedded.slim source.ruby.rails.embedded.slim punctuation.section.embedded.begin.ruby
-/^^^^^^^^^^^^^^^^ meta.tag.slim meta.embedded.slim source.ruby.rails.embedded.slim variable.function.ruby
+/ <- meta.tag.slim meta.embedded.slim source.ruby.embedded.slim punctuation.section.embedded.begin.ruby
+/^^^^^^^^^^^^^^^^ meta.tag.slim meta.embedded.slim source.ruby.embedded.slim variable.function.ruby
 
 
 /[ Whitespace Tests ]//////////////////////////////////////////////////////////
@@ -1426,14 +1429,14 @@ loc:url: .this is="attr" this is text Title
 
 - array.each do |item|
 / <- meta.embedded.slim punctuation.section.embedded.slim - source
-/^^^^^^^^^^^^^^^^^^^^^ meta.embedded.slim source.ruby.rails.embedded.slim
+/^^^^^^^^^^^^^^^^^^^^^ meta.embedded.slim source.ruby.embedded.slim
 
 - array.each do |item|
   - if true
 /^ - meta.embedded
 / ^^^^^^^^^ meta.embedded.slim
 / ^ punctuation.section.embedded.slim - source
-/  ^^^^^^^^ source.ruby.rails.embedded.slim - punctuation
+/  ^^^^^^^^ source.ruby.embedded.slim - punctuation
 
 - array.each do |item|
   - if true
@@ -1441,7 +1444,7 @@ loc:url: .this is="attr" this is text Title
 /^ - meta.embedded
 / ^^^^^^ meta.embedded.slim
 / ^ punctuation.section.embedded.slim - source
-/  ^^^^^ source.ruby.rails.embedded.slim - punctuation
+/  ^^^^^ source.ruby.embedded.slim - punctuation
 
 - content_for :hello_slim do |this|
   p.class
@@ -1457,7 +1460,7 @@ loc:url: .this is="attr" this is text Title
 /  ^ - meta.embedded
 /   ^^^^^^^^ meta.embedded.slim
 /   ^ punctuation.section.embedded.slim
-/    ^^^^^^^ source.ruby.rails.embedded.slim
+/    ^^^^^^^ source.ruby.embedded.slim
 
 =
 / <- meta.embedded.slim punctuation.section.embedded.slim
@@ -1506,7 +1509,7 @@ loc:url: .this is="attr" this is text Title
 / <- meta.embedded.slim punctuation.section.embedded.slim
 /^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.embedded.slim
 /^ meta.embedded.slim punctuation.section.embedded.slim
-/ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ruby.rails.embedded.slim
+/ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ruby.embedded.slim
 
 h1 = yield :yield_sym
 / <- meta.tag.slim entity.name.tag.slim
@@ -1515,53 +1518,53 @@ h1 = yield :yield_sym
 / ^ - meta.embedded
 /  ^^^^^^^^^^^^^^^^^^ meta.embedded.slim
 /  ^ punctuation.section.embedded.slim - source
-/   ^^^^^^^^^^^^^^^^^ source.ruby.rails.embedded.slim
+/   ^^^^^^^^^^^^^^^^^ source.ruby.embedded.slim
 
 = app_helper('string', sym: 'value', class: 'value')
 / <- meta.embedded.slim punctuation.section.embedded.slim
-/^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.embedded.slim source.ruby.rails.embedded.slim
+/^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.embedded.slim source.ruby.embedded.slim
 
 == render 'multiline',
 / <- meta.embedded.slim punctuation.section.embedded.slim
 /^^^^^^^^^^^^^^^^^^^^^^ meta.embedded.slim
 /^ meta.embedded.slim punctuation.section.embedded.slim
-/ ^^^^^^^^^^^^^^^^^^^^ source.ruby.rails.embedded.slim
+/ ^^^^^^^^^^^^^^^^^^^^ source.ruby.embedded.slim
 /  ^^^^^^ support.function
 /         ^^^^^^^^^^^ meta.string.ruby string.quoted.single.ruby
 /                    ^ punctuation.separator.sequence.slim
 
 == render 'multiline',
   with: 'locals',
-/ <- meta.embedded.slim source.ruby.rails.embedded.slim
-/^^^^^^^^^^^^^^^^ meta.embedded.slim source.ruby.rails.embedded.slim
+/ <- meta.embedded.slim source.ruby.embedded.slim
+/^^^^^^^^^^^^^^^^ meta.embedded.slim source.ruby.embedded.slim
 /               ^ punctuation.separator.sequence.slim
 
 == render 'multiline',
   with: 'locals',
   and: :symbols
-/ <- meta.embedded.slim source.ruby.rails.embedded.slim
-/^^^^^^^^^^^^^^ meta.embedded.slim source.ruby.rails.embedded.slim
+/ <- meta.embedded.slim source.ruby.embedded.slim
+/^^^^^^^^^^^^^^ meta.embedded.slim source.ruby.embedded.slim
 
 == render 'multiline'\
 / <- meta.embedded.slim punctuation.section.embedded.slim
 /^^^^^^^^^^^^^^^^^^^^^^ meta.embedded.slim
 /^ meta.embedded.slim punctuation.section.embedded.slim
-/ ^^^^^^^^^^^^^^^^^^^^^ source.ruby.rails.embedded.slim
+/ ^^^^^^^^^^^^^^^^^^^^^ source.ruby.embedded.slim
 /  ^^^^^^ support.function
 /         ^^^^^^^^^^^ meta.string.ruby string.quoted.single.ruby
 /                    ^ punctuation.separator.continuation.slim
 
 == render 'multiline'\
   with: 'locals',
-/ <- meta.embedded.slim source.ruby.rails.embedded.slim
-/^^^^^^^^^^^^^^^^^ meta.embedded.slim source.ruby.rails.embedded.slim
+/ <- meta.embedded.slim source.ruby.embedded.slim
+/^^^^^^^^^^^^^^^^^ meta.embedded.slim source.ruby.embedded.slim
 /               ^ punctuation.separator.sequence.slim
 
 == render 'multiline'\
   with: 'locals',
   and: :symbols
-/ <- meta.embedded.slim source.ruby.rails.embedded.slim
-/^^^^^^^^^^^^^^ meta.embedded.slim source.ruby.rails.embedded.slim
+/ <- meta.embedded.slim source.ruby.embedded.slim
+/^^^^^^^^^^^^^^ meta.embedded.slim source.ruby.embedded.slim
 
 div= ruby_var_with_no_space_from_tag
 / <- meta.tag.slim entity.name.tag.slim
@@ -1619,7 +1622,7 @@ markdown:
   /^^^^^^^^ markup.bold.markdown
   /         ^^^^^^^ meta.filter.slim text.html.markdown.embedded.slim meta.interpolation.slim
   /         ^^ punctuation.section.interpolation.begin.slim
-  /           ^^^^ source.ruby.rails.embedded.slim constant.other.symbol.ruby
+  /           ^^^^ source.ruby.embedded.slim constant.other.symbol.ruby
   /               ^ punctuation.section.interpolation.end.slim
 
   <br class="#{:name}">
@@ -1632,7 +1635,7 @@ markdown:
   /        ^ punctuation.separator.key-value.html
   /         ^ punctuation.definition.string.begin.html
   /          ^^ punctuation.section.interpolation.begin.slim
-  /            ^^^^^ source.ruby.rails.embedded.slim constant.other.symbol.ruby
+  /            ^^^^^ source.ruby.embedded.slim constant.other.symbol.ruby
   /                 ^ punctuation.section.interpolation.end.slim
   /                  ^ punctuation.definition.string.end.html
   /                   ^ punctuation.definition.tag.end.html
@@ -1654,8 +1657,8 @@ ruby:
   end
   # Comment
   blank = @instance.map(&:name)
-/ <- meta.filter.slim source.ruby.rails.embedded.slim - meta.tag
-/^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.filter.slim source.ruby.rails.embedded.slim - meta.tag
+/ <- meta.filter.slim source.ruby.embedded.slim - meta.tag
+/^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.filter.slim source.ruby.embedded.slim - meta.tag
 
 sass:
   .hello

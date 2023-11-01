@@ -388,7 +388,7 @@
   "repository": {
     "boolean-attribute-value": {
       "begin": "true|false|nil",
-      "end": "\\s|\\w$",
+      "end": "(?=\\s)|$",
       "name": "constant.language.slim"
     },
     "continuation": {
@@ -403,30 +403,21 @@
       "match": "\\s*/\\s*",
       "name": "punctuation.terminator.tag.slim"
     },
-    "delimited-ruby-a": {
-      "begin": "=\\(",
-      "end": "\\)(?=( \\w|$))",
-      "name": "source.ruby.embedded.slim",
-      "patterns": [
-        {
-          "include": "source.ruby"
+    "delimited-ruby-group": {
+      "begin": "\\(",
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.definition.group.begin.ruby"
         }
-      ]
-    },
-    "delimited-ruby-b": {
-      "begin": "=\\[",
-      "end": "\\](?=( \\w|$))",
-      "name": "source.ruby.embedded.slim",
-      "patterns": [
-        {
-          "include": "source.ruby"
+      },
+      "end": "(\\))(?=( \\w|$))",
+      "endCaptures": {
+        "1": {
+          "name": "punctuation.definition.group.end.ruby"
         }
-      ]
-    },
-    "delimited-ruby-c": {
-      "begin": "=\\{",
-      "end": "\\}(?=( \\w|$))",
-      "name": "source.ruby.embedded.slim",
+      },
+      "name": "meta.embedded.slim meta.string.ruby source.ruby.embedded.slim",
+      "contentName": "meta.source.ruby",
       "patterns": [
         {
           "include": "source.ruby"
@@ -446,7 +437,7 @@
           "name": "punctuation.section.embedded.ruby"
         }
       },
-      "name": "source.ruby.embedded.slim",
+      "name": "meta.embedded.slim meta.string.ruby source.ruby.embedded.slim",
       "patterns": [
         {
           "include": "source.ruby"
@@ -499,11 +490,6 @@
         }
       ]
     },
-    "interpolated-ruby": {
-      "begin": "=(?=\\b)",
-      "end": "\\s|\\w$",
-      "name": "source.ruby.embedded.slim"
-    },
     "root-class-id-tag": {
       "match": "(\\.)(([\\w:-]+)(/\\d+)?)|(#)(([\\w:-]+)(/\\d+)?)",
       "captures": {
@@ -521,9 +507,54 @@
         }
       }
     },
+    "ruby-attribute-array": {
+      "begin": "(?=\\[)",
+      "end": "(?<=\\])",
+      "name": "meta.embedded.slim meta.string.ruby source.ruby.embedded.slim",
+      "patterns": [
+        {
+          "include": "source.ruby"
+        }
+      ]
+    },
+    "ruby-attribute-hash": {
+      "begin": "(?=\\{)",
+      "end": "(?<=\\})",
+      "name": "meta.embedded.slim meta.string.ruby source.ruby.embedded.slim",
+      "patterns": [
+        {
+          "include": "source.ruby"
+        }
+      ]
+    },
+    "ruby-attribute-symbol-array": {
+      "begin": "=?(?=:)",
+      "end": "\\w(?=( \\w|$))",
+      "name": "meta.embedded.slim meta.string.ruby source.ruby.embedded.slim",
+      "patterns": [
+        {
+          "include": "source.ruby"
+        }
+      ]
+    },
+    "ruby-attribute-value": {
+      "begin": "(?=\\b)",
+      "beginCaptures": {
+        "1": {
+          "name": "punctuation.separator.key-value.slim"
+        }
+      },
+      "end": "(?=\\s)|$",
+      "name": "meta.embedded.slim meta.string.ruby source.ruby.embedded.slim",
+      "patterns": [
+        {
+          "include": "source.ruby"
+        }
+      ]
+    },
     "rubyline": {
       "begin": "(==|=)(<>|><|<'|'<|<|>)?|-\\s*",
-      "contentName": "source.ruby.embedded.slim",
+      "contentName": "meta.embedded.slim meta.string.ruby source.ruby.embedded.slim",
       "end": "(do\\s*\\n$)|(?<!\\\\|,|,\\n|\\\\\\n)$",
       "comment": "Hack to thwart Sublime's Ruby highlighter. It thinks do without a variable continues the next line (this can be muted with a / at the end of the line). For things like yields, do is unnecessary without an argument, so this hack will suffice",
       "beginCaptures": {
@@ -600,7 +631,7 @@
       ]
     },
     "tag-attribute": {
-      "begin": "([\\w.#_-]+)\\s*(=)\\s*(\\s*\\(|\\{)?",
+      "begin": "([\\w.#-]+)\\s*(==?)\\s*",
       "name": "meta.attribute-with-value.slim",
       "captures": {
         "1": {
@@ -610,38 +641,31 @@
           "name": "punctuation.separator.key-value.slim"
         }
       },
-      "end": "\\}|\\)|(?=\\s+)|$",
+      "end": "(?=\\s+)|$",
       "patterns": [
-        {
-          "include": "#tag-attribute"
-        },
-        {
-          "include": "#interpolated-ruby"
-          "include": "#boolean-attribute-value"
-        },
-        {
-          "include": "#ruby-attribute-value"
-        },
-        {
-          "include": "#delimited-ruby-a"
-        },
-        {
-          "include": "#delimited-ruby-b"
-        },
-        {
-          "include": "#delimited-ruby-c"
-        },
-        {
-          "include": "#rubyline"
-        },
-        {
-          "include": "#embedded-ruby"
-        },
         {
           "include": "#string-double-quoted"
         },
         {
           "include": "#string-single-quoted"
+        },
+        {
+          "include": "#boolean-attribute-value"
+        },
+        {
+          "include": "#delimited-ruby-group"
+        },
+        {
+          "include": "#ruby-attribute-array"
+        },
+        {
+          "include": "#ruby-attribute-hash"
+        },
+        {
+          "include": "#ruby-attribute-symbol-array"
+        },
+        {
+          "include": "#ruby-attribute-value"
         }
       ]
     },
@@ -666,7 +690,7 @@
     },
     "whitespace": {
       "match": "\\s+",
-      "name": "text.html.embedded.WW.slim"
+      "name": "text.html.embedded.whitespace.slim"
     }
   },
   "scopeName": "source.slim",
