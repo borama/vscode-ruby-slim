@@ -286,7 +286,7 @@ repository:
     endCaptures:
       '0':
         name: punctuation.section.embedded.ruby
-    name: source.ruby.embedded.html
+    name: source.ruby.embedded.slim
     patterns:
       - include: source.ruby
 
@@ -312,17 +312,17 @@ repository:
       - include: '#embedded-ruby'
 
   inline-text:
-    begin: (?=.+)
-    end: $
+    begin: (?=.)
+    end: (?<!\\\n)$
     name: meta.embedded.slim text.html.embedded.slim
     patterns:
-      - include: text.html.basic
       - include: '#embedded-ruby'
+      - match: ([^#]|\\#)*\n
 
   interpolated-ruby:
     begin: =(?=\b)
     end: \s|\w$
-    name: source.ruby.embedded.html
+    name: source.ruby.embedded.slim
 
   root-class-id-tag:
     match: (\.)(([\w:-]+)(/\d+)?)|(#)(([\w:-]+)(/\d+)?)
@@ -401,12 +401,6 @@ repository:
         name: constant.language.slim
     end: \}|\)|(?=\s+)|$
     patterns:
-      - include: '#tag-stuff'
-      - include: '#string-double-quoted'
-      - include: '#string-single-quoted'
-
-  tag-stuff:
-    patterns:
       - include: '#tag-attribute'
       - include: '#interpolated-ruby'
       - include: '#delimited-ruby-a'
@@ -414,6 +408,8 @@ repository:
       - include: '#delimited-ruby-c'
       - include: '#rubyline'
       - include: '#embedded-ruby'
+      - include: '#string-double-quoted'
+      - include: '#string-single-quoted'
 
   # Verbatim text [https://github.com/slim-template/slim#verbatim-text-]
   verbatim-text:
@@ -428,9 +424,10 @@ repository:
       - include: text.html.basic
       - include: '#embedded-ruby'
 
-  # Whitespace - only matches text, no need to add scope
+  # Whitespace
   whitespace:
     match: \s+
+    name: text.html.embedded.whitespace.slim
 
 scopeName: source.slim
 uuid: 36302CC1-1E76-4910-B7B6-F1915EBBA0D3

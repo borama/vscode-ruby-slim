@@ -39,9 +39,9 @@
 / <- punctuation.section.verbatim.slim
 / ^^^^^^^^^^^^ text.html.embedded.slim
 /          ^^^ meta.tag.inline.b.start.html
-/             ^^^^^^^ source.ruby.embedded.html
+/             ^^^^^^^ source.ruby.embedded.slim
 /             ^^ punctuation.section.embedded.ruby
-/               ^^^^ source.ruby.embedded.html
+/               ^^^^ source.ruby.embedded.slim
 /                   ^ punctuation.section.embedded.ruby
 /                    ^^^^ meta.tag.inline.b.end.html
 /                    ^^^^^^^^^^^^^^^^^^^^^^^^ text.html.embedded.slim
@@ -71,7 +71,7 @@
 / ^^^^^^^^^^^^^^^^^^^^^^^^ text.html.embedded.slim
 / ^^^ meta.tag.inline.b.start.html
 /    ^^ punctuation.section.embedded.ruby
-/      ^^^^ source.ruby.embedded.html
+/      ^^^^ source.ruby.embedded.slim
 /          ^ punctuation.section.embedded.ruby
 /           ^^^^ meta.tag.inline.b.end.html
 
@@ -87,9 +87,9 @@ p
 / <- punctuation.section.verbatim.slim
 / ^^^^^^^^^^^^ text.html.embedded.slim
 /          ^^^ meta.tag.inline.b.start.html
-/             ^^^^^^^ source.ruby.embedded.html
+/             ^^^^^^^ source.ruby.embedded.slim
 /             ^^ punctuation.section.embedded.ruby
-/               ^^^^ source.ruby.embedded.html
+/               ^^^^ source.ruby.embedded.slim
 /                   ^ punctuation.section.embedded.ruby
 /                    ^^^^ meta.tag.inline.b.end.html
 /                    ^^^^^^^^^^^^^^^^^^^^^^^^ text.html.embedded.slim
@@ -99,7 +99,7 @@ p
 / ^^^^^^^^^^^^^^^^^^^^^^^^ text.html.embedded.slim
 / ^^^ meta.tag.inline.b.start.html
 /    ^^ punctuation.section.embedded.ruby
-/      ^^^^ source.ruby.embedded.html
+/      ^^^^ source.ruby.embedded.slim
 /          ^ punctuation.section.embedded.ruby
 /           ^^^^ meta.tag.inline.b.end.html
 
@@ -129,7 +129,7 @@ p
 - array.each do
   | verbatim \#{a.name}
 / ^ punctuation.section.verbatim.slim
-/   ^^^^^^^^^^^^^^^^^^^ text.html.embedded.slim - source.ruby.embedded.html
+/   ^^^^^^^^^^^^^^^^^^^ text.html.embedded.slim - source.ruby.embedded.slim
 
 - articles.each do |a|
   | <tr><td>#{a.name}</td><td>#{a.description}</td></tr>
@@ -137,10 +137,10 @@ p
 /   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ text.html.embedded.slim
 /   ^^^^ meta.tag.structure.tr.start.html
 /       ^^^^ meta.tag.structure.td.start.html
-/           ^^^^^^^^^ source.ruby.embedded.html
+/           ^^^^^^^^^ source.ruby.embedded.slim
 /                    ^^^^^ meta.tag.structure.td.end.html
 /                         ^^^^ meta.tag.structure.td.start.html
-/                             ^^^^^^^^^^^^^^^^ source.ruby.embedded.html
+/                             ^^^^^^^^^^^^^^^^ source.ruby.embedded.slim
 /                                             ^^^^^ meta.tag.structure.td.end.html
 /                                                  ^^^^^ meta.tag.structure.tr.end.html
 
@@ -192,10 +192,10 @@ div
           <tr><td>#{a.name}</td><td>#{a.description}</td></tr>
 /         ^^^^ meta.tag.structure.tr.start.html
 /             ^^^^ meta.tag.structure.td.start.html
-/                 ^^^^^^^^^ source.ruby.embedded.html
+/                 ^^^^^^^^^ source.ruby.embedded.slim
 /                          ^^^^^ meta.tag.structure.td.end.html
 /                               ^^^^ meta.tag.structure.td.start.html
-/                                   ^^^^^^^^^^^^^^^^ source.ruby.embedded.html
+/                                   ^^^^^^^^^^^^^^^^ source.ruby.embedded.slim
 /                                                   ^^^^^ meta.tag.structure.td.end.html
 /                                                        ^^^^^ meta.tag.structure.tr.end.html
   </body>
@@ -291,33 +291,35 @@ section
 
 /[ Tag Text Tests ]////////////////////////////////////////////////////////////
 
-  // TODO: Texts and continuation do not work at all in current grammar.
-  tag with text
-  / <- meta.tag.slim entity.name.tag.slim
-  /^^ meta.tag.slim
-  //   ^^^^^^^^^ text.html.embedded.slim
+tag with text
+/ <- meta.tag.slim entity.name.tag.slim
+/^^ meta.tag.slim
+/   ^^^^^^^^^ text.html.embedded.slim
 
-  tag
-    with text
-  // ^^^^^^^^^ text.html.embedded.slim
+tag
+  with text
+/ ^^^^ meta.tag.slim - text.html.embedded.slim
+/      ^^^^ text.html.embedded.slim
 
+tag\
+  ' text
+/ ^^^^^^ text.html.embedded.slim
+
+tag\
+  | text
+/ ^^^^^^ text.html.embedded.slim
+
+tag\
+  - text
+/ ^^^^^ text.html.embedded.slim
+
+  // TODO: How to do these? They need to retain knowledge about text scope and indentation among lines
+  // which is probably impossible with the current grammar...
   tag with
     text
   / <- text.html.embedded.slim
   /^^^^^ text.html.embedded.slim
 
-  tag\
-    ' text
-  /   ^^^^ text.html.embedded.slim
-
-  tag\
-    | text
-  /   ^^^^ text.html.embedded.slim
-
-  tag\
-    - text
-  / ^^^^^ text.html.embedded.slim
-
   tag,
     ' text
   / <- text.html.embedded.slim - meta.tag
@@ -343,30 +345,28 @@ section
   / <- text.html.embedded.slim - meta.tag
   /^^^^^^^^ text.html.embedded.slim - punctuation
 
-  div #{variable if amount > 0} Extra text
-  / <- meta.tag.slim entity.name.tag.slim
-  /^^ meta.tag.slim
-  /   ^^^^^^^^^^^^^^^^^^^^^^^^^ source.ruby.embedded.html
-  /                            ^^^^^^^^^^^^ text.html.embedded.slim
+div #{variable if amount > 0} Extra text
+/ <- meta.tag.slim entity.name.tag.slim
+/^^ meta.tag.slim
+/   ^^^^^^^^^^^^^^^^^^^^^^^^^ source.ruby.embedded.slim
+/                            ^^^^^^^^^^^^ text.html.embedded.slim
 
-  div Extra #{variable if amount > 0} text
-  / <- meta.tag.slim entity.name.tag.slim
-  /^^ meta.tag.slim
-  /   ^^^^^^ text.html.embedded.slim
-  /         ^^^^^^^^^^^^^^^^^^^^^^^^^ source.ruby.embedded.html
-  /                                  ^^^^^^ text.html.embedded.slim
+div Extra #{variable if amount > 0} text
+/ <- meta.tag.slim entity.name.tag.slim
+/^^ meta.tag.slim
+/   ^^^^^^ text.html.embedded.slim
+/         ^^^^^^^^^^^^^^^^^^^^^^^^^ source.ruby.embedded.slim
+/                                  ^^^^^^ text.html.embedded.slim
 
+div Extra text #{variable if amount > 0}
+/ <- meta.tag.slim entity.name.tag.slim
+/^^ meta.tag.slim
+/   ^^^^^^^^^^^ text.html.embedded.slim
+/              ^^^^^^^^^^^^^^^^^^^^^^^^^  source.ruby.embedded.slim
 
-  div Extra text #{variable if amount > 0}
-  / <- meta.tag.slim entity.name.tag.slim
-  /^^ meta.tag.slim
-  /   ^^^^^^^^^^^ text.html.embedded.slim
-  /              ^^^^^^^^^^^^^^^^^^^^^^^^^  source.ruby.embedded.html
-
-  div Extra text
-    #{variable if amount > 0}
-  /^ text.html.embedded.slim
-  / ^^^^^^^^^^^^^^^^^^^^^^^^^ source.ruby.embedded.slim
+div Extra text
+  #{variable if amount > 0}
+/ ^^^^^^^^^^^^^^^^^^^^^^^^^ source.ruby.embedded.slim
 
 
 /[ Class and ID Tests ]////////////////////////////////////////////////////////

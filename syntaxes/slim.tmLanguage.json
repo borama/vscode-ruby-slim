@@ -441,7 +441,7 @@
           "name": "punctuation.section.embedded.ruby"
         }
       },
-      "name": "source.ruby.embedded.html",
+      "name": "source.ruby.embedded.slim",
       "patterns": [
         {
           "include": "source.ruby"
@@ -482,22 +482,22 @@
       ]
     },
     "inline-text": {
-      "begin": "(?=.+)",
-      "end": "$",
+      "begin": "(?=.)",
+      "end": "(?<!\\\\\\n)$",
       "name": "meta.embedded.slim text.html.embedded.slim",
       "patterns": [
         {
-          "include": "text.html.basic"
+          "include": "#embedded-ruby"
         },
         {
-          "include": "#embedded-ruby"
+          "match": "([^#]|\\\\#)*\\n"
         }
       ]
     },
     "interpolated-ruby": {
       "begin": "=(?=\\b)",
       "end": "\\s|\\w$",
-      "name": "source.ruby.embedded.html"
+      "name": "source.ruby.embedded.slim"
     },
     "root-class-id-tag": {
       "match": "(\\.)(([\\w:-]+)(/\\d+)?)|(#)(([\\w:-]+)(/\\d+)?)",
@@ -611,19 +611,6 @@
       "end": "\\}|\\)|(?=\\s+)|$",
       "patterns": [
         {
-          "include": "#tag-stuff"
-        },
-        {
-          "include": "#string-double-quoted"
-        },
-        {
-          "include": "#string-single-quoted"
-        }
-      ]
-    },
-    "tag-stuff": {
-      "patterns": [
-        {
           "include": "#tag-attribute"
         },
         {
@@ -643,6 +630,12 @@
         },
         {
           "include": "#embedded-ruby"
+        },
+        {
+          "include": "#string-double-quoted"
+        },
+        {
+          "include": "#string-single-quoted"
         }
       ]
     },
@@ -666,7 +659,8 @@
       ]
     },
     "whitespace": {
-      "match": "\\s+"
+      "match": "\\s+",
+      "name": "text.html.embedded.WW.slim"
     }
   },
   "scopeName": "source.slim",
