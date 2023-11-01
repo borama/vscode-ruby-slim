@@ -245,6 +245,12 @@ patterns:
 
 
 repository:
+  # Boolean attribute value [https://github.com/slim-template/slim#boolean-attributes]
+  boolean-attribute-value:
+    begin: true|false|nil
+    end: \s|\w$
+    name: constant.language.slim
+
   continuation:
     captures:
       '1':
@@ -390,19 +396,19 @@ repository:
       - include: '#entities'
 
   tag-attribute:
-    begin: ([\w.#_-]+)\s*(=)\s*(true|false|nil)?(\s*\(|\{)?
+    begin: ([\w.#_-]+)\s*(=)\s*(\s*\(|\{)?
     name: meta.attribute-with-value.slim
     captures:
       '1':
         name: entity.other.attribute-name.slim
       '2':
         name: punctuation.separator.key-value.slim
-      '3':
-        name: constant.language.slim
     end: \}|\)|(?=\s+)|$
     patterns:
       - include: '#tag-attribute'
       - include: '#interpolated-ruby'
+      - include: '#boolean-attribute-value'
+      - include: '#ruby-attribute-value'
       - include: '#delimited-ruby-a'
       - include: '#delimited-ruby-b'
       - include: '#delimited-ruby-c'
