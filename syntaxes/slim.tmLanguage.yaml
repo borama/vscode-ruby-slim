@@ -156,7 +156,7 @@ patterns:
       - include: '#rubyline'
 
   - include: '#tag-attribute'
-  - include: '#embedded-ruby'
+  - include: '#interpolated-ruby'
   - include: '#verbatim-text'
   - include: '#inline-html'
 
@@ -219,9 +219,12 @@ patterns:
           '1':
             name: punctuation.section.embedded.ruby
         patterns:
-          - include: '#embedded-ruby'
+          - include: '#interpolated-ruby'
 
       - include: '#root-class-id-tag'
+      - include: '#attribute-wrapper-parens'
+      - include: '#attribute-wrapper-brackets'
+      - include: '#attribute-wrapper-braces'
       - include: '#rubyline'
       - include: '#tag-attribute'
       - include: '#whitespace'
@@ -239,12 +242,54 @@ patterns:
   - begin: ^\s*(?=\||')
     end: $
     patterns:
-      - include: '#embedded-ruby'
+      - include: '#interpolated-ruby'
       - include: text.html.basic
 
 
 
 repository:
+  # Attribute wrappers [https://github.com/slim-template/slim#attributes-wrapper]
+  attribute-wrapper-braces:
+    begin: \{
+    beginCaptures:
+      '0':
+        name: punctuation.section.braces.begin.slim
+    end: \}
+    endCaptures:
+      '0':
+        name: punctuation.section.braces.end.slim
+    name: meta.braces.slim
+    patterns:
+      - include: '#tag-attribute'
+
+  # Attribute wrappers [https://github.com/slim-template/slim#attributes-wrapper]
+  attribute-wrapper-brackets:
+    begin: \[
+    beginCaptures:
+      '0':
+        name: punctuation.section.brackets.begin.slim
+    end: \]
+    endCaptures:
+      '0':
+        name: punctuation.section.brackets.end.slim
+    name: meta.brackets.slim
+    patterns:
+      - include: '#tag-attribute'
+
+  # Attribute wrappers [https://github.com/slim-template/slim#attributes-wrapper]
+  attribute-wrapper-parens:
+    begin: \(
+    beginCaptures:
+      '0':
+        name: punctuation.section.parens.begin.slim
+    end: \)
+    endCaptures:
+      '0':
+        name: punctuation.section.parens.end.slim
+    name: meta.parens.slim
+    patterns:
+      - include: '#tag-attribute'
+
   # Boolean attribute value [https://github.com/slim-template/slim#boolean-attributes]
   boolean-attribute-value:
     begin: true|false|nil
@@ -267,26 +312,26 @@ repository:
     begin: \(
     beginCaptures:
       '0':
-        name: punctuation.definition.group.begin.ruby
-    end: (\))(?=( \w|$))
+        name: punctuation.definition.group.begin.slim
+    end: (\))(?=(\s|\]|\}$))
     endCaptures:
       '1':
-        name: punctuation.definition.group.end.ruby
+        name: punctuation.definition.group.end.slim
     name: meta.embedded.slim meta.string.ruby source.ruby.embedded.slim
     contentName: meta.source.ruby
     patterns:
       - include: source.ruby
 
-  embedded-ruby:
+  interpolated-ruby:
     begin: (?<!\\)#\{{1,2}
     beginCaptures:
       '0':
-        name: punctuation.section.embedded.ruby
+        name: punctuation.section.interpolation.begin.slim
     end: \}{1,2}
     endCaptures:
       '0':
-        name: punctuation.section.embedded.ruby
-    name: meta.embedded.slim meta.string.ruby source.ruby.embedded.slim
+        name: punctuation.section.interpolation.end.slim
+    name: meta.interpolation.slim meta.string.ruby source.ruby.embedded.slim
     patterns:
       - include: source.ruby
 
@@ -309,14 +354,14 @@ repository:
     contentName: meta.embedded.slim text.html.embedded.slim
     patterns:
       - include: text.html.basic
-      - include: '#embedded-ruby'
+      - include: '#interpolated-ruby'
 
   inline-text:
     begin: (?=.)
     end: (?<!\\\n)$
     name: meta.embedded.slim text.html.embedded.slim
     patterns:
-      - include: '#embedded-ruby'
+      - include: '#interpolated-ruby'
       - match: ([^#]|\\#)*\n
 
   root-class-id-tag:
@@ -350,7 +395,7 @@ repository:
   # Ruby symbol array attribute value attribute=:a,:b [https://github.com/slim-template/slim#attribute-merging]
   ruby-attribute-symbol-array:
     begin: =?(?=:)
-    end: \w(?=( \w|$))
+    end: (?=\s)|$
     name: meta.embedded.slim meta.string.ruby source.ruby.embedded.slim
     patterns:
       - include: source.ruby
@@ -394,14 +439,13 @@ repository:
     beginCaptures:
       '0':
         name: punctuation.definition.string.begin.html
-    contentName: meta.toc-list.id.html
     end: '"'
     endCaptures:
       '0':
         name: punctuation.definition.string.end.html
     name: meta.string.html string.quoted.double.html
     patterns:
-      - include: '#embedded-ruby'
+      - include: '#interpolated-ruby'
       - include: '#entities'
 
   string-single-quoted:
@@ -409,18 +453,16 @@ repository:
     beginCaptures:
       '0':
         name: punctuation.definition.string.begin.html
-    contentName: meta.toc-list.id.html
     end: ''''
     endCaptures:
       '0':
         name: punctuation.definition.string.end.html
     name: meta.string.html string.quoted.single.html
     patterns:
-      - include: '#embedded-ruby'
+      - include: '#interpolated-ruby'
       - include: '#entities'
 
   tag-attribute:
-    # begin: ([\w.#_-]+)\s*(=)\s*(\s*\(|\{)?
     begin: ([\w.#-]+)\s*(==?)\s*
     name: meta.attribute-with-value.slim
     captures:
@@ -428,9 +470,8 @@ repository:
         name: entity.other.attribute-name.slim
       '2':
         name: punctuation.separator.key-value.slim
-    end: (?=\s+)|$
+    end: (?=(?:\s|\)|\]|\}))|$
     patterns:
-      # - include: '#tag-attribute'
       - include: '#string-double-quoted'
       - include: '#string-single-quoted'
       - include: '#boolean-attribute-value'
@@ -451,7 +492,7 @@ repository:
     contentName: text.html.embedded.slim
     patterns:
       - include: text.html.basic
-      - include: '#embedded-ruby'
+      - include: '#interpolated-ruby'
 
   # Whitespace
   whitespace:

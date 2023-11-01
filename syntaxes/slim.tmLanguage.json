@@ -245,7 +245,7 @@
       "include": "#tag-attribute"
     },
     {
-      "include": "#embedded-ruby"
+      "include": "#interpolated-ruby"
     },
     {
       "include": "#verbatim-text"
@@ -334,12 +334,21 @@
           },
           "patterns": [
             {
-              "include": "#embedded-ruby"
+              "include": "#interpolated-ruby"
             }
           ]
         },
         {
           "include": "#root-class-id-tag"
+        },
+        {
+          "include": "#attribute-wrapper-parens"
+        },
+        {
+          "include": "#attribute-wrapper-brackets"
+        },
+        {
+          "include": "#attribute-wrapper-braces"
         },
         {
           "include": "#rubyline"
@@ -377,7 +386,7 @@
       "end": "$",
       "patterns": [
         {
-          "include": "#embedded-ruby"
+          "include": "#interpolated-ruby"
         },
         {
           "include": "text.html.basic"
@@ -386,6 +395,66 @@
     }
   ],
   "repository": {
+    "attribute-wrapper-braces": {
+      "begin": "\\{",
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.section.braces.begin.slim"
+        }
+      },
+      "end": "\\}",
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.section.braces.end.slim"
+        }
+      },
+      "name": "meta.braces.slim",
+      "patterns": [
+        {
+          "include": "#tag-attribute"
+        }
+      ]
+    },
+    "attribute-wrapper-brackets": {
+      "begin": "\\[",
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.section.brackets.begin.slim"
+        }
+      },
+      "end": "\\]",
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.section.brackets.end.slim"
+        }
+      },
+      "name": "meta.brackets.slim",
+      "patterns": [
+        {
+          "include": "#tag-attribute"
+        }
+      ]
+    },
+    "attribute-wrapper-parens": {
+      "begin": "\\(",
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.section.parens.begin.slim"
+        }
+      },
+      "end": "\\)",
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.section.parens.end.slim"
+        }
+      },
+      "name": "meta.parens.slim",
+      "patterns": [
+        {
+          "include": "#tag-attribute"
+        }
+      ]
+    },
     "boolean-attribute-value": {
       "begin": "true|false|nil",
       "end": "(?=\\s)|$",
@@ -407,13 +476,13 @@
       "begin": "\\(",
       "beginCaptures": {
         "0": {
-          "name": "punctuation.definition.group.begin.ruby"
+          "name": "punctuation.definition.group.begin.slim"
         }
       },
-      "end": "(\\))(?=( \\w|$))",
+      "end": "(\\))(?=(\\s|\\]|\\}$))",
       "endCaptures": {
         "1": {
-          "name": "punctuation.definition.group.end.ruby"
+          "name": "punctuation.definition.group.end.slim"
         }
       },
       "name": "meta.embedded.slim meta.string.ruby source.ruby.embedded.slim",
@@ -424,20 +493,20 @@
         }
       ]
     },
-    "embedded-ruby": {
+    "interpolated-ruby": {
       "begin": "(?<!\\\\)#\\{{1,2}",
       "beginCaptures": {
         "0": {
-          "name": "punctuation.section.embedded.ruby"
+          "name": "punctuation.section.interpolation.begin.slim"
         }
       },
       "end": "\\}{1,2}",
       "endCaptures": {
         "0": {
-          "name": "punctuation.section.embedded.ruby"
+          "name": "punctuation.section.interpolation.end.slim"
         }
       },
-      "name": "meta.embedded.slim meta.string.ruby source.ruby.embedded.slim",
+      "name": "meta.interpolation.slim meta.string.ruby source.ruby.embedded.slim",
       "patterns": [
         {
           "include": "source.ruby"
@@ -473,7 +542,7 @@
           "include": "text.html.basic"
         },
         {
-          "include": "#embedded-ruby"
+          "include": "#interpolated-ruby"
         }
       ]
     },
@@ -483,7 +552,7 @@
       "name": "meta.embedded.slim text.html.embedded.slim",
       "patterns": [
         {
-          "include": "#embedded-ruby"
+          "include": "#interpolated-ruby"
         },
         {
           "match": "([^#]|\\\\#)*\\n"
@@ -529,7 +598,7 @@
     },
     "ruby-attribute-symbol-array": {
       "begin": "=?(?=:)",
-      "end": "\\w(?=( \\w|$))",
+      "end": "(?=\\s)|$",
       "name": "meta.embedded.slim meta.string.ruby source.ruby.embedded.slim",
       "patterns": [
         {
@@ -589,7 +658,6 @@
           "name": "punctuation.definition.string.begin.html"
         }
       },
-      "contentName": "meta.toc-list.id.html",
       "end": "\"",
       "endCaptures": {
         "0": {
@@ -599,7 +667,7 @@
       "name": "meta.string.html string.quoted.double.html",
       "patterns": [
         {
-          "include": "#embedded-ruby"
+          "include": "#interpolated-ruby"
         },
         {
           "include": "#entities"
@@ -613,7 +681,6 @@
           "name": "punctuation.definition.string.begin.html"
         }
       },
-      "contentName": "meta.toc-list.id.html",
       "end": "'",
       "endCaptures": {
         "0": {
@@ -623,7 +690,7 @@
       "name": "meta.string.html string.quoted.single.html",
       "patterns": [
         {
-          "include": "#embedded-ruby"
+          "include": "#interpolated-ruby"
         },
         {
           "include": "#entities"
@@ -641,7 +708,7 @@
           "name": "punctuation.separator.key-value.slim"
         }
       },
-      "end": "(?=\\s+)|$",
+      "end": "(?=(?:\\s|\\)|\\]|\\}))|$",
       "patterns": [
         {
           "include": "#string-double-quoted"
@@ -684,7 +751,7 @@
           "include": "text.html.basic"
         },
         {
-          "include": "#embedded-ruby"
+          "include": "#interpolated-ruby"
         }
       ]
     },
