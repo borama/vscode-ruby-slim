@@ -1287,19 +1287,16 @@ loc:url: .this is="attr" this is text Title
 -
 / <- meta.embedded.slim punctuation.section.embedded.slim
 
-~
-/ <- meta.embedded.slim punctuation.section.embedded.slim
-
 - array.each do |item|
 / <- meta.embedded.slim punctuation.section.embedded.slim - source
-/^^^^^^^^^^^^^^^^^^^^^ meta.embedded.slim source.ruby.embedded.slim
+/ ^^^^^^^^^^^^^^^^^^^^ meta.embedded.slim source.ruby.embedded.slim
 
 - array.each do |item|
   - if true
 /^ - meta.embedded.slim
 / ^^^^^^^^^ meta.embedded.slim
 / ^ punctuation.section.embedded.slim - source
-/  ^^^^^^^^ source.ruby.embedded.slim - punctuation
+/   ^^^^^^^ source.ruby.embedded.slim - punctuation
 
 - array.each do |item|
   - if true
@@ -1307,19 +1304,16 @@ loc:url: .this is="attr" this is text Title
 /^ - meta.embedded.slim
 / ^^^^^^ meta.embedded.slim
 / ^ punctuation.section.embedded.slim - source
-/  ^^^^^ source.ruby.embedded.slim - punctuation
+/   ^^^^ source.ruby.embedded.slim - punctuation
 
 - content_for :hello_slim do |this|
   p.class
-/^ - meta.tag.slim
 / ^^^^^^^ meta.tag.slim
 
 - content_for :hello_slim do |this|
   p.class
   p = @hello
-/^ - meta.tag.slim
 / ^ meta.tag.slim
-/  ^ - meta.tag.slim
 /  ^ - meta.embedded.slim
 /   ^^^^^^^^ meta.embedded.slim
 /   ^ punctuation.section.embedded.slim
@@ -1377,10 +1371,9 @@ loc:url: .this is="attr" this is text Title
 h1 = yield :yield_sym
 / <- meta.tag.slim entity.name.tag.slim
 /^ meta.tag.slim entity.name.tag.slim
-/ ^ - meta.tag.slim
 / ^ - meta.embedded.slim
 /  ^^^^^^^^^^^^^^^^^^ meta.embedded.slim
-/  ^ punctuation.section.embedded.slim - source
+/  ^ punctuation.section.embedded.slim
 /   ^^^^^^^^^^^^^^^^^ source.ruby.embedded.slim
 
 = app_helper('string', sym: 'value', class: 'value')
@@ -1392,15 +1385,14 @@ h1 = yield :yield_sym
 /^^^^^^^^^^^^^^^^^^^^^^ meta.embedded.slim
 /^ meta.embedded.slim punctuation.section.embedded.slim
 / ^^^^^^^^^^^^^^^^^^^^ source.ruby.embedded.slim
-/  ^^^^^^ support.function
 /         ^^^^^^^^^^^ meta.string.ruby string.quoted.single.ruby
-/                    ^ punctuation.separator.sequence.slim
+/                    ^ punctuation.separator.continuation.slim
 
 == render 'multiline',
   with: 'locals',
 / <- meta.embedded.slim source.ruby.embedded.slim
 /^^^^^^^^^^^^^^^^ meta.embedded.slim source.ruby.embedded.slim
-/               ^ punctuation.separator.sequence.slim
+/               ^ punctuation.separator.continuation.slim
 
 == render 'multiline',
   with: 'locals',
@@ -1413,7 +1405,6 @@ h1 = yield :yield_sym
 /^^^^^^^^^^^^^^^^^^^^^^ meta.embedded.slim
 /^ meta.embedded.slim punctuation.section.embedded.slim
 / ^^^^^^^^^^^^^^^^^^^^^ source.ruby.embedded.slim
-/  ^^^^^^ support.function
 /         ^^^^^^^^^^^ meta.string.ruby string.quoted.single.ruby
 /                    ^ punctuation.separator.continuation.slim
 
@@ -1421,7 +1412,7 @@ h1 = yield :yield_sym
   with: 'locals',
 / <- meta.embedded.slim source.ruby.embedded.slim
 /^^^^^^^^^^^^^^^^^ meta.embedded.slim source.ruby.embedded.slim
-/               ^ punctuation.separator.sequence.slim
+/               ^ punctuation.separator.continuation.slim
 
 == render 'multiline'\
   with: 'locals',
@@ -1431,8 +1422,9 @@ h1 = yield :yield_sym
 
 div= ruby_var_with_no_space_from_tag
 / <- meta.tag.slim entity.name.tag.slim
-/^^ meta.tag.slim entity.name.tag.slim
-/  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.embedded.slim - meta.tag.slim
+/^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.tag.slim
+/^^ entity.name.tag.slim
+/  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.embedded.slim
 /                                   ^ - meta.embedded.slim
 /  ^ punctuation.section.embedded.slim
 

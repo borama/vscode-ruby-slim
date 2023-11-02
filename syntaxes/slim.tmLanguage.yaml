@@ -155,7 +155,6 @@ patterns:
     patterns:
       - include: '#rubyline'
 
-  - include: '#tag-attribute'
   - include: '#splat-attribute'
   - include: '#interpolated-ruby'
   - include: '#verbatim-text'
@@ -401,6 +400,8 @@ repository:
     beginCaptures:
       '0':
         name: punctuation.section.embedded.slim
+      '2':
+        name: keyword.operator.whitespace.slim
     endCaptures:
       '1':
         name: keyword.control.start-block.ruby

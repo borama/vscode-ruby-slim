@@ -242,9 +242,6 @@
       ]
     },
     {
-      "include": "#tag-attribute"
-    },
-    {
       "include": "#splat-attribute"
     },
     {
@@ -599,6 +596,9 @@
       "beginCaptures": {
         "0": {
           "name": "punctuation.section.embedded.slim"
+        },
+        "2": {
+          "name": "keyword.operator.whitespace.slim"
         }
       },
       "endCaptures": {
