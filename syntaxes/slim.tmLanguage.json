@@ -330,6 +330,9 @@
           "include": "#splat-attribute"
         },
         {
+          "include": "#whitespace-modifier"
+        },
+        {
           "include": "#rubyline"
         },
         {
@@ -795,6 +798,10 @@
     "whitespace": {
       "match": "\\s+",
       "name": "text.html.embedded.whitespace.slim"
+    },
+    "whitespace-modifier": {
+      "match": "\\>|\\<|\\<\\>|\\>\\<",
+      "name": "keyword.operator.whitespace.slim"
     }
   },
   "scopeName": "source.slim",

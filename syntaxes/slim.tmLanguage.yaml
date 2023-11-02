@@ -211,6 +211,7 @@ patterns:
       - include: '#root-class-id-tag'
       - include: '#attribute-wrapper'
       - include: '#splat-attribute'
+      - include: '#whitespace-modifier'
       - include: '#rubyline'
       - include: '#tag-attribute'
       - include: '#whitespace'
@@ -234,6 +235,7 @@ patterns:
 
 
 repository:
+  # Attribute wrappers [https://github.com/slim-template/slim#attributes-wrapper]
   attribute-wrapper:
     patterns:
       - include: '#attribute-wrapper-parens'
@@ -520,6 +522,11 @@ repository:
   whitespace:
     match: \s+
     name: text.html.embedded.whitespace.slim
+
+  # Whitespace modifier [https://github.com/slim-template/slim#trailing-and-leading-whitespace--]
+  whitespace-modifier:
+    match: \>|\<|\<\>|\>\<
+    name: keyword.operator.whitespace.slim
 
 scopeName: source.slim
 uuid: 36302CC1-1E76-4910-B7B6-F1915EBBA0D3
