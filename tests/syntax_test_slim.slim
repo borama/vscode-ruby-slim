@@ -155,7 +155,7 @@ div
 div
   |
     div
-/   ^ text.html.embedded.slim - meta.tag
+/   ^ text.html.embedded.slim - meta.tag.slim
     if true
 /   ^ text.html.embedded.slim - source.ruby
 
@@ -322,27 +322,27 @@ tag\
 
   tag,
     ' text
-  / <- text.html.embedded.slim - meta.tag
+  / <- text.html.embedded.slim - meta.tag.slim
   /^^^^^^^^ text.html.embedded.slim - punctuation
 
   tag,
     = text
-  / <- text.html.embedded.slim - meta.tag
+  / <- text.html.embedded.slim - meta.tag.slim
   /^^^^^^^^ text.html.embedded.slim - punctuation
 
   tag,
     | text
-  / <- text.html.embedded.slim - meta.tag
+  / <- text.html.embedded.slim - meta.tag.slim
   /^^^^^^^^ text.html.embedded.slim - punctuation
 
   tag,
     - text
-  / <- text.html.embedded.slim - meta.tag
+  / <- text.html.embedded.slim - meta.tag.slim
   /^^^^^^^^ text.html.embedded.slim - punctuation
 
   tag,
     = text
-  / <- text.html.embedded.slim - meta.tag
+  / <- text.html.embedded.slim - meta.tag.slim
   /^^^^^^^^ text.html.embedded.slim - punctuation
 
 div #{variable if amount > 0} Extra text
@@ -747,7 +747,7 @@ div array=:menu,:highlight
 /   ^^^^^^ meta.tag.slim meta.attribute-with-value.slim - meta.embedded.slim
 /   ^^^^^^ meta.tag.slim meta.attribute-with-value.slim - source.ruby
 /         ^^^^^^^^^^^^^^^^ meta.tag.slim meta.attribute-with-value.slim meta.embedded.slim source.ruby.embedded.slim
-/                         ^ - meta.tag
+/                         ^ - meta.tag.slim
 /                         ^ - meta.attribute-with-value.slim
 /   ^^^^^ entity.other.attribute-name.slim
 /        ^ punctuation.separator.key-value.slim
@@ -802,7 +802,7 @@ div array==:menu,:highlight
 /   ^^^^^^^ meta.tag.slim meta.attribute-with-value.slim - meta.embedded.slim
 /   ^^^^^^^ meta.tag.slim meta.attribute-with-value.slim - source.ruby
 /          ^^^^^^^^^^^^^^^^ meta.tag.slim meta.attribute-with-value.slim meta.embedded.slim source.ruby.embedded.slim
-/                          ^ - meta.tag
+/                          ^ - meta.tag.slim
 /                          ^ - meta.attribute-with-value.slim
 /   ^^^^^ entity.other.attribute-name.slim
 /        ^^ punctuation.separator.key-value.slim
@@ -929,7 +929,6 @@ div [
 
 ] = page_tagline
 / <- meta.tag.slim meta.brackets.slim punctuation.section.brackets.end.slim
-/^ - meta.tag
 /^ - meta.embedded.slim
 /   ^^^^^^^^^^^^ meta.embedded.slim
 / ^ punctuation.section.embedded.slim
@@ -982,7 +981,7 @@ div[foo=]
 / <- meta.tag.slim entity.name.tag.slim
 /^^ meta.tag.slim entity.name.tag.slim
 /  ^^^^^^ meta.tag.slim meta.brackets.slim
-/        ^ - meta.tag
+/        ^ - meta.tag.slim
 
 div[foo=]
   div.example
@@ -1039,7 +1038,6 @@ div.cls[
 / <- meta.tag.slim punctuation.definition.attribute.class.slim
 /^^^^^^ meta.tag.slim - meta.embedded.slim
 /      ^^^^^^^^^^^^^^^^^^^^^^^^  meta.tag.slim meta.embedded.slim source.ruby.embedded.slim
-/                              ^ - meta.tag
 /                              ^ - meta.embedded.slim
 /                               ^^^^^^^^^^^^ meta.embedded.slim
 /                                           ^ - meta.embedded.slim
@@ -1069,7 +1067,6 @@ div.cls[
 / <- meta.tag.slim punctuation.definition.attribute.class.slim
 /^^^^ meta.tag.slim entity.other.attribute-name.class.html
 /    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.tag.slim meta.embedded.slim
-/                                                         ^ - meta.tag
 /                                                         ^ - meta.embedded.slim
 /                                                          ^^^^^^^^^^^^ meta.embedded.slim
 /                                                                      ^ - meta.embedded.slim
@@ -1087,13 +1084,11 @@ div.cls[
 / <- meta.tag.slim punctuation.definition.attribute.id.slim
 /^^^^^^ meta.tag.slim - meta.embedded.slim
 /      ^^^^^^^^^^^^^^^^^^^^^ meta.tag.slim meta.embedded.slim
-/                           ^^^^^^^^^^^^^^ - meta.tag
 
 .first *{class: [:second, :third]} Text
 / <- meta.tag.slim punctuation.definition.attribute.class.slim
 /^^^^^^ meta.tag.slim - meta.embedded.slim
 /      ^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.tag.slim meta.embedded.slim
-/                                 ^^^^^^ - meta.tag
 
 / Dynamic Tags
   You can create completely dynamic tags using the splat attributes.
@@ -1131,7 +1126,6 @@ span> attribute="value" After
 /     ^^^^^^^^^ entity.other.attribute-name.slim
 /              ^ punctuation.separator.key-value.slim
 /               ^^^^^^^ meta.string.html string.quoted.double.html
-/                       ^^^^^ - meta.tag
 
 span.class<> Both
 / <- meta.tag.slim entity.name.tag.slim
@@ -1150,109 +1144,39 @@ span.class>< Both
 /         ^^ keyword.operator.whitespace.slim
 
 
-/[ Self Closing Tag Tests ]////////////////////////////////////////////////////
-
-img src="image.png" / .no-attrib
-/ <- meta.tag.slim entity.name.tag.slim
-/^^^^^^^^^^^^^^^^^^^^ meta.tag.slim - text.html.embedded.slim
-/                    ^^^^^^^^^^^^ - text.html.embedded.slim
-/                    ^^^^^^^^^^^^ - meta.tag
-/^^ entity.name.tag.slim
-/                   ^ punctuation.terminator.tag.slim
-
-img( src = "image.png" / ) / .no-attrib
-/ <- meta.tag.slim entity.name.tag.slim
-/^^ meta.tag.slim
-/  ^^^^^^^^^^^^^^^^^^^^^^^ meta.tag.slim meta.parens.slim
-/                         ^^ meta.tag.slim
-/                           ^^^^^^^^^^^^ - text.html.embedded.slim
-/                           ^^^^^^^^^^^^ - meta.tag
-/^^ entity.name.tag.slim
-/  ^ punctuation.section.parens.begin.slim
-/                      ^ invalid.illegal.unexpected-terminator.slim
-/                        ^ punctuation.section.parens.end.slim
-/                          ^ punctuation.terminator.tag.slim
-
-img[ src = "image.png" / ] / .no-attrib
-/ <- meta.tag.slim entity.name.tag.slim
-/^^ meta.tag.slim
-/  ^^^^^^^^^^^^^^^^^^^^^^^ meta.tag.slim meta.brackets.slim
-/                         ^^ meta.tag.slim
-/                           ^^^^^^^^^^^^ - text.html.embedded.slim
-/                           ^^^^^^^^^^^^ - meta.tag
-/^^ entity.name.tag.slim
-/  ^ punctuation.section.brackets.begin.slim
-/                      ^ invalid.illegal.unexpected-terminator.slim
-/                        ^ punctuation.section.brackets.end.slim
-/                          ^ punctuation.terminator.tag.slim
-
-img{ src = "image.png" / } / .no-attrib
-/ <- meta.tag.slim entity.name.tag.slim
-/^^ meta.tag.slim
-/  ^^^^^^^^^^^^^^^^^^^^^^^ meta.tag.slim meta.braces.slim
-/                         ^^ meta.tag.slim
-/                           ^^^^^^^^^^^^ - text.html.embedded.slim
-/                           ^^^^^^^^^^^^ - meta.tag
-/^^ entity.name.tag.slim
-/  ^ punctuation.section.braces.begin.slim
-/                      ^ invalid.illegal.unexpected-terminator.slim
-/                        ^ punctuation.section.braces.end.slim
-/                          ^ punctuation.terminator.tag.slim
-
-img*{ src = "image.png" // } / .no-attrib
-/ <- meta.tag.slim entity.name.tag.slim
-/^^ meta.tag.slim
-/  ^^^^^^^^^^^^^^^^^^^^^^^^^ meta.tag.slim meta.embedded.slim
-/                           ^^ meta.tag.slim - meta.embedded.slim
-/                             ^^^^^^^^^^^^ - text.html.embedded.slim
-/                             ^^^^^^^^^^^^ - meta.tag
-/^^ entity.name.tag.slim
-/  ^^ punctuation.section.embedded.begin.ruby
-/                       ^^ string
-/                          ^ punctuation.section.embedded.ruby
-/                            ^ punctuation.terminator.tag.slim
-
-
 /[ Quotation Tests ]///////////////////////////////////////////////////////////
 
 span This is a ' line with a single quote
-/^^^^ meta.tag
-/    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ text.html.embedded.slim - meta.tag
-/    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ text.html.embedded.slim - punctuation
+/^^^^ meta.tag.slim
+/    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ text.html.embedded.slim
+
 span.klass This is a ' line with a single 'quote'
 /^^^^^^^^^^ meta.tag.slim
-/          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ text.html.embedded.slim - meta.tag
-/          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ text.html.embedded.slim - punctuation
+/          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ text.html.embedded.slim
 
 span.klass attribute="value" This is a ' line with a single unescaped quote
 /^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.tag.slim
-/                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ text.html.embedded.slim - meta.tag
-/                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ text.html.embedded.slim - punctuation
+/                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ text.html.embedded.slim
 
 span.klass Additional code shouldn't be highlighted
 /^^^^^^^^^^ meta.tag.slim
-/          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ text.html.embedded.slim - meta.tag
-/          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ text.html.embedded.slim - punctuation
+/          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ text.html.embedded.slim
 
 span This is a " line with a double quote
-/^^^^ meta.tag
-/    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ text.html.embedded.slim - meta.tag
-/    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ text.html.embedded.slim - punctuation
+/^^^^ meta.tag.slim
+/    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ text.html.embedded.slim
 
 span.klass This is a " line with a double "quote"
 /^^^^^^^^^^ meta.tag.slim
-/          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ text.html.embedded.slim - meta.tag
-/          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ text.html.embedded.slim - punctuation
+/          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ text.html.embedded.slim
 
 span.klass attribute="value" This is a " line with a double unescaped quote
 /^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.tag.slim
-/                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ text.html.embedded.slim - meta.tag
-/                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ text.html.embedded.slim - punctuation
+/                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ text.html.embedded.slim
 
 span.klass Additional code shouldn"t be highlighted
 /^^^^^^^^^^ meta.tag.slim
-/          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ text.html.embedded.slim - meta.tag
-/          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ text.html.embedded.slim - punctuation
+/          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ text.html.embedded.slim
 
 
 /[ Inline Tag Tests ]//////////////////////////////////////////////////////////
@@ -1264,12 +1188,12 @@ ul: li: a[href="/b"] B link
 / <- meta.tag.slim entity.name.tag.slim - text.html.embedded.slim
 /^^^^^^^^^^^^^^^^^^^ - text.html.embedded.slim
 /^^ meta.tag.slim - meta.brackets
-/  ^ - meta.tag
+/  ^ - meta.tag.slim
 /   ^^^ meta.tag.slim
-/      ^ - meta.tag
+/      ^ - meta.tag.slim
 /       ^ meta.tag.slim - meta.brackets
 /        ^^^^^^^^^^^ meta.tag.slim meta.brackets.slim
-/                   ^^^^^^^^ text.html.embedded.slim - meta.tag
+/                   ^^^^^^^^ text.html.embedded.slim - meta.tag.slim
 /^ entity.name.tag.slim
 / ^ punctuation.definition.tag.end.slim
 /   ^^ entity.name.tag.slim
@@ -1280,97 +1204,97 @@ ul: li.klass: a[href="/b"] B link
 / <- meta.tag.slim entity.name.tag.slim - text.html.embedded.slim
 /^^^^^^^^^^^^^^^^^^^^^^^^^ - text.html.embedded.slim
 /^^ meta.tag.slim - meta.brackets
-/  ^ - meta.tag
+/  ^ - meta.tag.slim
 /   ^^^^^^^^^ meta.tag.slim
-/            ^ - meta.tag
+/            ^ - meta.tag.slim
 /             ^ meta.tag.slim - meta.brackets
 /              ^^^^^^^^^^^ meta.tag.slim meta.brackets.slim
-/                         ^^^^^^^^ text.html.embedded.slim - meta.tag
+/                         ^^^^^^^^ text.html.embedded.slim - meta.tag.slim
 
 ul: li#id: a[href="/b"] B link
 / <- meta.tag.slim entity.name.tag.slim - text.html.embedded.slim
 /^^^^^^^^^^^^^^^^^^^^^^ - text.html.embedded.slim
 /^^ meta.tag.slim - meta.brackets
-/  ^ - meta.tag
+/  ^ - meta.tag.slim
 /   ^^^^^^ meta.tag.slim
-/         ^ - meta.tag
+/         ^ - meta.tag.slim
 /          ^ meta.tag.slim - meta.brackets
 /           ^^^^^^^^^^^ meta.tag.slim meta.brackets.slim
-/                      ^^^^^^^^ text.html.embedded.slim - meta.tag
+/                      ^^^^^^^^ text.html.embedded.slim - meta.tag.slim
 
 ul: li class="klass": a[href="/b"] B link
 / <- meta.tag.slim entity.name.tag.slim - text.html.embedded.slim
 /^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ - text.html.embedded.slim
 /^^ meta.tag.slim - meta.brackets
-/  ^ - meta.tag
+/  ^ - meta.tag.slim
 /   ^^^^^^^^^^^^^^^^^ meta.tag.slim
-/                    ^ - meta.tag
+/                    ^ - meta.tag.slim
 /                     ^ meta.tag.slim - meta.brackets
 /                      ^^^^^^^^^^^ meta.tag.slim meta.brackets.slim
-/                                 ^^^^^^^^ text.html.embedded.slim - meta.tag
+/                                 ^^^^^^^^ text.html.embedded.slim - meta.tag.slim
 
 ul: li class = "klass" : a[href="/b"] B link
 / <- meta.tag.slim entity.name.tag.slim - text.html.embedded.slim
 /^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ - text.html.embedded.slim
 /^^ meta.tag.slim - meta.brackets
-/  ^ - meta.tag
+/  ^ - meta.tag.slim
 /   ^^^^^^^^^^^^^^^^^^^^ meta.tag.slim
-/                       ^ - meta.tag
+/                       ^ - meta.tag.slim
 /                        ^ meta.tag.slim - meta.brackets
 /                         ^^^^^^^^^^^ meta.tag.slim meta.brackets.slim
-/                                    ^^^^^^^^ text.html.embedded.slim - meta.tag
+/                                    ^^^^^^^^ text.html.embedded.slim - meta.tag.slim
 
 ul: li ( class = "klass" ): a[href="/b"] B link
 / <- meta.tag.slim entity.name.tag.slim - text.html.embedded.slim
 /^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ - text.html.embedded.slim
 /^^ meta.tag.slim - meta.brackets
-/  ^ - meta.tag
+/  ^ - meta.tag.slim
 /   ^^^ meta.tag.slim - meta.parens
 /      ^^^^^^^^^^^^^^^^^^^ meta.tag.slim meta.parens.slim
 /                         ^ meta.tag.slim - meta.parens
-/                          ^ - meta.tag
+/                          ^ - meta.tag.slim
 /                           ^ meta.tag.slim - meta.brackets
 /                            ^^^^^^^^^^^ meta.tag.slim meta.brackets.slim
-/                                       ^^^^^^^^ text.html.embedded.slim - meta.tag
+/                                       ^^^^^^^^ text.html.embedded.slim - meta.tag.slim
 
 ul: li [ class = "klass" ]: a[href="/b"] B link
 / <- meta.tag.slim entity.name.tag.slim - text.html.embedded.slim
 /^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ - text.html.embedded.slim
 /^^ meta.tag.slim - meta.brackets
-/  ^ - meta.tag
+/  ^ - meta.tag.slim
 /   ^^^ meta.tag.slim - meta.brackets
 /      ^^^^^^^^^^^^^^^^^^^ meta.tag.slim meta.brackets.slim
 /                         ^ meta.tag.slim - meta.brackets
-/                          ^ - meta.tag
+/                          ^ - meta.tag.slim
 /                           ^ meta.tag.slim - meta.brackets
 /                            ^^^^^^^^^^^ meta.tag.slim meta.brackets.slim
-/                                       ^^^^^^^^ text.html.embedded.slim - meta.tag
+/                                       ^^^^^^^^ text.html.embedded.slim - meta.tag.slim
 
 ul: li { class = "klass" }: a[href="/b"] B link
 / <- meta.tag.slim entity.name.tag.slim - text.html.embedded.slim
 /^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ - text.html.embedded.slim
 /^^ meta.tag.slim - meta.brackets
-/  ^ - meta.tag
+/  ^ - meta.tag.slim
 /   ^^^ meta.tag.slim - meta.braces
 /      ^^^^^^^^^^^^^^^^^^^ meta.tag.slim meta.braces.slim
 /                         ^ meta.tag.slim - meta.braces
-/                          ^ - meta.tag
+/                          ^ - meta.tag.slim
 /                           ^ meta.tag.slim - meta.brackets
 /                            ^^^^^^^^^^^ meta.tag.slim meta.brackets.slim
-/                                       ^^^^^^^^ text.html.embedded.slim - meta.tag
+/                                       ^^^^^^^^ text.html.embedded.slim - meta.tag.slim
 
 ul: li*{ 'class' => "klass" }: a[href="/b"] B link
 / <- meta.tag.slim entity.name.tag.slim - text.html.embedded.slim
 /^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ - text.html.embedded.slim
 /^^ meta.tag.slim - meta.brackets
-/  ^ - meta.tag
+/  ^ - meta.tag.slim
 /   ^^ meta.tag.slim - meta.embedded.slim
 /     ^^^^^^^^^^^^^^^^^^^^^^^ meta.tag.slim meta.embedded.slim
 /                            ^ meta.tag.slim - meta.embedded.slim
-/                             ^ - meta.tag
+/                             ^ - meta.tag.slim
 /                              ^ meta.tag.slim - meta.brackets
 /                               ^^^^^^^^^^^ meta.tag.slim meta.brackets.slim
-/                                          ^^^^^^^^ text.html.embedded.slim - meta.tag
+/                                          ^^^^^^^^ text.html.embedded.slim - meta.tag.slim
 
 
 /[ XML Tests ]/////////////////////////////////////////////////////////////////
@@ -1386,7 +1310,7 @@ loc:url .this is="attr" this is text Title
 loc:url: .this is="attr" this is text Title
 / <- meta.tag.slim entity.name.tag.slim
 /^^^^^^^ meta.tag.slim - meta.attribute-with-value.slim
-/       ^ - meta.tag
+/       ^ - meta.tag.slim
 /        ^^^^^^ meta.tag.slim - meta.attribute-with-value.slim
 /              ^^^^^^^^^ meta.tag.slim meta.attribute-with-value.slim
 /^^^^^^ entity.name.tag.slim
@@ -1424,15 +1348,15 @@ loc:url: .this is="attr" this is text Title
 
 - content_for :hello_slim do |this|
   p.class
-/^ - meta.tag
+/^ - meta.tag.slim
 / ^^^^^^^ meta.tag.slim
 
 - content_for :hello_slim do |this|
   p.class
   p = @hello
-/^ - meta.tag
+/^ - meta.tag.slim
 / ^ meta.tag.slim
-/  ^ - meta.tag
+/  ^ - meta.tag.slim
 /  ^ - meta.embedded.slim
 /   ^^^^^^^^ meta.embedded.slim
 /   ^ punctuation.section.embedded.slim
@@ -1490,7 +1414,7 @@ loc:url: .this is="attr" this is text Title
 h1 = yield :yield_sym
 / <- meta.tag.slim entity.name.tag.slim
 /^ meta.tag.slim entity.name.tag.slim
-/ ^ - meta.tag
+/ ^ - meta.tag.slim
 / ^ - meta.embedded.slim
 /  ^^^^^^^^^^^^^^^^^^ meta.embedded.slim
 /  ^ punctuation.section.embedded.slim - source
@@ -1545,7 +1469,7 @@ h1 = yield :yield_sym
 div= ruby_var_with_no_space_from_tag
 / <- meta.tag.slim entity.name.tag.slim
 /^^ meta.tag.slim entity.name.tag.slim
-/  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.embedded.slim - meta.tag
+/  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.embedded.slim - meta.tag.slim
 /                                   ^ - meta.embedded.slim
 /  ^ punctuation.section.embedded.slim
 
@@ -1555,8 +1479,8 @@ div= ruby_var_with_no_space_from_tag
 coffee:
   anon: ->
     console.log 'hello world'
-/ <- meta.filter.slim source.coffee.embedded.slim - meta.tag
-/^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.filter.slim source.coffee.embedded.slim - meta.tag
+/ <- meta.filter.slim source.coffee.embedded.slim - meta.tag.slim
+/^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.filter.slim source.coffee.embedded.slim - meta.tag.slim
 
 css:
   .hello:before {
@@ -1565,12 +1489,12 @@ css:
     /               ^^^^^^^^^ meta.string.css meta.interpolation.slim - string
     /                        ^ meta.string.css string.quoted.single.css
   }
-/ <- meta.filter.slim source.css.embedded.slim - meta.tag
-/^^^ meta.filter.slim source.css.embedded.slim - meta.tag
+/ <- meta.filter.slim source.css.embedded.slim - meta.tag.slim
+/^^^ meta.filter.slim source.css.embedded.slim - meta.tag.slim
 
 erb:
   <%= hello_world if hello_world.present? %>
-/ <- meta.filter.slim text.html.erb.embedded.slim - meta.tag
+/ <- meta.filter.slim text.html.erb.embedded.slim - meta.tag.slim
 /^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.filter.slim text.html.erb.embedded.slim
 
 javascript:
@@ -1580,20 +1504,20 @@ javascript:
   /                    ^^^^^^^^^ meta.string.js meta.interpolation.slim - string
   /                             ^ meta.string.js string.quoted.single.js
   });
-/ <- meta.filter.slim source.js.embedded.slim - meta.tag
-/^^^^^ meta.filter.slim source.js.embedded.slim - meta.tag
+/ <- meta.filter.slim source.js.embedded.slim - meta.tag.slim
+/^^^^^ meta.filter.slim source.js.embedded.slim - meta.tag.slim
 
 less:
   .hello:before {
     content: @world
   }
-/ <- meta.filter.slim source.less.embedded.slim - meta.tag
-/^^^ meta.filter.slim source.less.embedded.slim - meta.tag
+/ <- meta.filter.slim source.less.embedded.slim - meta.tag.slim
+/^^^ meta.filter.slim source.less.embedded.slim - meta.tag.slim
 
 markdown:
   # Hello
   **World** #{:var}
-  / <- meta.filter.slim text.html.markdown.embedded.slim - meta.tag
+  / <- meta.filter.slim text.html.markdown.embedded.slim - meta.tag.slim
   /^^^^^^^^^^^ meta.filter.slim text.html.markdown.embedded.slim
   /^^^^^^^^ markup.bold.markdown
   /         ^^^^^^^ meta.filter.slim text.html.markdown.embedded.slim meta.interpolation.slim
@@ -1602,8 +1526,8 @@ markdown:
   /               ^ punctuation.section.interpolation.end.slim
 
   <br class="#{:name}">
-  / <- meta.filter.slim text.html.markdown.embedded.slim meta.tag
-  /^^^^^^^^^^^^^^^^^^^^ meta.filter.slim text.html.markdown.embedded.slim meta.tag
+  / <- meta.filter.slim text.html.markdown.embedded.slim meta.tag.slim
+  /^^^^^^^^^^^^^^^^^^^^ meta.filter.slim text.html.markdown.embedded.slim meta.tag.slim
   /   ^^^^^^^^^^^^^^^^ meta.attribute-with-value.class.html
   /          ^^^^^^^^ meta.class-name.html meta.string.html meta.interpolation.slim
   /^^ entity.name.tag
@@ -1618,13 +1542,13 @@ markdown:
 
 plain:
   Plain <b>text</b>
-/ <- meta.filter.slim text.plain.embedded.slim - meta.tag
-/^^^^^^^^^^^^^^^^^^^ meta.filter.slim text.plain.embedded.slim - meta.tag
+/ <- meta.filter.slim text.plain.embedded.slim - meta.tag.slim
+/^^^^^^^^^^^^^^^^^^^ meta.filter.slim text.plain.embedded.slim - meta.tag.slim
 
 preserve:
   Plain <b>text</b>
-/ <- meta.filter.slim text.plain.embedded.slim - meta.tag
-/^^^^^^^^^^^^^^^^^^^ meta.filter.slim text.plain.embedded.slim - meta.tag
+/ <- meta.filter.slim text.plain.embedded.slim - meta.tag.slim
+/^^^^^^^^^^^^^^^^^^^ meta.filter.slim text.plain.embedded.slim - meta.tag.slim
 
 ruby:
   blank = []
@@ -1633,21 +1557,21 @@ ruby:
   end
   # Comment
   blank = @instance.map(&:name)
-/ <- meta.filter.slim source.ruby.embedded.slim - meta.tag
-/^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.filter.slim source.ruby.embedded.slim - meta.tag
+/ <- meta.filter.slim source.ruby.embedded.slim - meta.tag.slim
+/^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.filter.slim source.ruby.embedded.slim - meta.tag.slim
 
 sass:
   .hello
     content: $world
-/ <- meta.filter.slim source.sass.embedded.slim - meta.tag
-/^^^^^^^^^^^^^^^^^^^ meta.filter.slim source.sass.embedded.slim - meta.tag
+/ <- meta.filter.slim source.sass.embedded.slim - meta.tag.slim
+/^^^^^^^^^^^^^^^^^^^ meta.filter.slim source.sass.embedded.slim - meta.tag.slim
 
 scss:
   .hello:before {
     color: $world
   }
-/ <- meta.filter.slim source.scss.embedded.slim - meta.tag
-/^^^ meta.filter.slim source.scss.embedded.slim - meta.tag
+/ <- meta.filter.slim source.scss.embedded.slim - meta.tag.slim
+/^^^ meta.filter.slim source.scss.embedded.slim - meta.tag.slim
 
 /! Filters can expand to style tags with attributes
 /! <style class="myClass" type="text/css">body{color:red}</style>
@@ -1662,8 +1586,8 @@ scss class="myClass":
   /                 ^ punctuation.definition.filter.slim
   $color: #f00;
   body { color: $color; }
-/ <- meta.filter.slim source.scss.embedded.slim - meta.tag
-/^^^^^^^^^^^^^^^^^^^^^^^^^ meta.filter.slim source.scss.embedded.slim - meta.tag
+/ <- meta.filter.slim source.scss.embedded.slim - meta.tag.slim
+/^^^^^^^^^^^^^^^^^^^^^^^^^ meta.filter.slim source.scss.embedded.slim - meta.tag.slim
 
 /[ Filter Termination Tests ]//////////////////////////////////////////////////
 
@@ -1674,9 +1598,9 @@ html
         console.log 'hello world'
   body
 / <- - meta.filter
-/ <- - meta.tag
+/ <- - meta.tag.slim
 /^ - meta.filter
-/^ - meta.tag
+/^ - meta.tag.slim
 / ^^^^ meta.tag.slim entity.name.tag.slim
 
 html
@@ -1686,9 +1610,9 @@ html
         content: 'hello #{@world}';
   body
 / <- - meta.filter
-/ <- - meta.tag
+/ <- - meta.tag.slim
 /^ - meta.filter
-/^ - meta.tag
+/^ - meta.tag.slim
 / ^^^^ meta.tag.slim entity.name.tag.slim
 
 html
@@ -1697,9 +1621,9 @@ html
       <%= hello_world if hello_world.present? %>
   body
 / <- - meta.filter
-/ <- - meta.tag
+/ <- - meta.tag.slim
 /^ - meta.filter
-/^ - meta.tag
+/^ - meta.tag.slim
 / ^^^^ meta.tag.slim entity.name.tag.slim
 
 html
@@ -1709,9 +1633,9 @@ html
         console.log('hello #{@world}');
   body
 / <- - meta.filter
-/ <- - meta.tag
+/ <- - meta.tag.slim
 /^ - meta.filter
-/^ - meta.tag
+/^ - meta.tag.slim
 / ^^^^ meta.tag.slim entity.name.tag.slim
 
 html
@@ -1721,9 +1645,9 @@ html
         content: 'hello #{@world}';
   body
 / <- - meta.filter
-/ <- - meta.tag
+/ <- - meta.tag.slim
 /^ - meta.filter
-/^ - meta.tag
+/^ - meta.tag.slim
 / ^^^^ meta.tag.slim entity.name.tag.slim
 
 body
@@ -1732,9 +1656,9 @@ body
     **World** #{:var}
   div
 / <- - meta.filter
-/ <- - meta.tag
+/ <- - meta.tag.slim
 /^ - meta.filter
-/^ - meta.tag
+/^ - meta.tag.slim
 / ^^^ meta.tag.slim entity.name.tag.slim
 
 html
@@ -1743,9 +1667,9 @@ html
       blank = []
   body
 / <- - meta.filter
-/ <- - meta.tag
+/ <- - meta.tag.slim
 /^ - meta.filter
-/^ - meta.tag
+/^ - meta.tag.slim
 / ^^^^ meta.tag.slim entity.name.tag.slim
 
 html
@@ -1755,9 +1679,9 @@ html
         content: $world
   body
 / <- - meta.filter
-/ <- - meta.tag
+/ <- - meta.tag.slim
 /^ - meta.filter
-/^ - meta.tag
+/^ - meta.tag.slim
 / ^^^^ meta.tag.slim entity.name.tag.slim
 
 html
@@ -1767,7 +1691,7 @@ html
         color: $world
   body
 / <- - meta.filter
-/ <- - meta.tag
+/ <- - meta.tag.slim
 /^ - meta.filter
-/^ - meta.tag
+/^ - meta.tag.slim
 / ^^^^ meta.tag.slim entity.name.tag.slim
