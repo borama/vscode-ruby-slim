@@ -324,13 +324,7 @@
           "include": "#root-class-id-tag"
         },
         {
-          "include": "#attribute-wrapper-parens"
-        },
-        {
-          "include": "#attribute-wrapper-brackets"
-        },
-        {
-          "include": "#attribute-wrapper-braces"
+          "include": "#attribute-wrapper"
         },
         {
           "include": "#splat-attribute"
@@ -380,6 +374,19 @@
     }
   ],
   "repository": {
+    "attribute-wrapper": {
+      "patterns": [
+        {
+          "include": "#attribute-wrapper-parens"
+        },
+        {
+          "include": "#attribute-wrapper-brackets"
+        },
+        {
+          "include": "#attribute-wrapper-braces"
+        }
+      ]
+    },
     "attribute-wrapper-braces": {
       "begin": "\\{",
       "beginCaptures": {

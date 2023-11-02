@@ -209,9 +209,7 @@ patterns:
           - include: '#closed-tag-terminator'
 
       - include: '#root-class-id-tag'
-      - include: '#attribute-wrapper-parens'
-      - include: '#attribute-wrapper-brackets'
-      - include: '#attribute-wrapper-braces'
+      - include: '#attribute-wrapper'
       - include: '#splat-attribute'
       - include: '#rubyline'
       - include: '#tag-attribute'
@@ -236,6 +234,12 @@ patterns:
 
 
 repository:
+  attribute-wrapper:
+    patterns:
+      - include: '#attribute-wrapper-parens'
+      - include: '#attribute-wrapper-brackets'
+      - include: '#attribute-wrapper-braces'
+
   # Attribute wrappers [https://github.com/slim-template/slim#attributes-wrapper]
   attribute-wrapper-braces:
     begin: \{
