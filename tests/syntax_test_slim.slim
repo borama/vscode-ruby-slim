@@ -1182,18 +1182,25 @@ span.klass Additional code shouldn"t be highlighted
 /[ Inline Tag Tests ]//////////////////////////////////////////////////////////
 
 ul: li.w-3/4.lg:w-5/8
-/ <- todo
+/ <- meta.tag.slim entity.name.tag.slim - text.html.embedded.slim
+/^ meta.tag.slim - text.html.embedded.slim
+/   ^^ meta.tag.slim - text.html.embedded.slim
+/^ entity.name.tag.slim
+/ ^ punctuation.definition.tag.end.slim
+/   ^^ entity.name.tag.slim
+/     ^ punctuation.definition.attribute.class.slim
+/      ^^^^^ entity.other.attribute-name.class.html
+/           ^ punctuation.definition.attribute.class.slim
+/            ^^^^^^^^ entity.other.attribute-name.class.html
 
 ul: li: a[href="/b"] B link
 / <- meta.tag.slim entity.name.tag.slim - text.html.embedded.slim
-/^^^^^^^^^^^^^^^^^^^ - text.html.embedded.slim
-/^^ meta.tag.slim - meta.brackets
-/  ^ - meta.tag.slim
-/   ^^^ meta.tag.slim
-/      ^ - meta.tag.slim
-/       ^ meta.tag.slim - meta.brackets
+/^ meta.tag.slim - text.html.embedded.slim
+/   ^^ meta.tag.slim - text.html.embedded.slim
+/       ^ meta.tag.slim - text.html.embedded.slim
 /        ^^^^^^^^^^^ meta.tag.slim meta.brackets.slim
-/                   ^^^^^^^^ text.html.embedded.slim - meta.tag.slim
+/                   ^ text.html.embedded.whitespace.slim
+/                    ^^^^^^^ text.html.embedded.slim
 /^ entity.name.tag.slim
 / ^ punctuation.definition.tag.end.slim
 /   ^^ entity.name.tag.slim
@@ -1202,99 +1209,57 @@ ul: li: a[href="/b"] B link
 
 ul: li.klass: a[href="/b"] B link
 / <- meta.tag.slim entity.name.tag.slim - text.html.embedded.slim
-/^^^^^^^^^^^^^^^^^^^^^^^^^ - text.html.embedded.slim
-/^^ meta.tag.slim - meta.brackets
-/  ^ - meta.tag.slim
-/   ^^^^^^^^^ meta.tag.slim
-/            ^ - meta.tag.slim
-/             ^ meta.tag.slim - meta.brackets
+/^^^^^^^^^^^^^^^^^^^^^^^^^ meta.tag.slim - text.html.embedded.slim
 /              ^^^^^^^^^^^ meta.tag.slim meta.brackets.slim
-/                         ^^^^^^^^ text.html.embedded.slim - meta.tag.slim
+/                         ^ text.html.embedded.whitespace.slim
+/                          ^^^^^^ text.html.embedded.slim
 
 ul: li#id: a[href="/b"] B link
 / <- meta.tag.slim entity.name.tag.slim - text.html.embedded.slim
-/^^^^^^^^^^^^^^^^^^^^^^ - text.html.embedded.slim
-/^^ meta.tag.slim - meta.brackets
-/  ^ - meta.tag.slim
-/   ^^^^^^ meta.tag.slim
-/         ^ - meta.tag.slim
-/          ^ meta.tag.slim - meta.brackets
+/^^^^^^^^^^^^^^^^^^^^^^ meta.tag.slim - text.html.embedded.slim
 /           ^^^^^^^^^^^ meta.tag.slim meta.brackets.slim
-/                      ^^^^^^^^ text.html.embedded.slim - meta.tag.slim
+/                      ^ text.html.embedded.whitespace.slim
+/                       ^^^^^^ text.html.embedded.slim
 
 ul: li class="klass": a[href="/b"] B link
 / <- meta.tag.slim entity.name.tag.slim - text.html.embedded.slim
-/^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ - text.html.embedded.slim
-/^^ meta.tag.slim - meta.brackets
-/  ^ - meta.tag.slim
-/   ^^^^^^^^^^^^^^^^^ meta.tag.slim
-/                    ^ - meta.tag.slim
-/                     ^ meta.tag.slim - meta.brackets
+/^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.tag.slim - text.html.embedded.slim
 /                      ^^^^^^^^^^^ meta.tag.slim meta.brackets.slim
-/                                 ^^^^^^^^ text.html.embedded.slim - meta.tag.slim
+/                                  ^^^^^^ text.html.embedded.slim
 
 ul: li class = "klass" : a[href="/b"] B link
 / <- meta.tag.slim entity.name.tag.slim - text.html.embedded.slim
-/^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ - text.html.embedded.slim
-/^^ meta.tag.slim - meta.brackets
-/  ^ - meta.tag.slim
-/   ^^^^^^^^^^^^^^^^^^^^ meta.tag.slim
-/                       ^ - meta.tag.slim
-/                        ^ meta.tag.slim - meta.brackets
+/^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.tag.slim - text.html.embedded.slim
 /                         ^^^^^^^^^^^ meta.tag.slim meta.brackets.slim
-/                                    ^^^^^^^^ text.html.embedded.slim - meta.tag.slim
+/                                     ^^^^^^ text.html.embedded.slim
 
 ul: li ( class = "klass" ): a[href="/b"] B link
 / <- meta.tag.slim entity.name.tag.slim - text.html.embedded.slim
-/^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ - text.html.embedded.slim
-/^^ meta.tag.slim - meta.brackets
-/  ^ - meta.tag.slim
-/   ^^^ meta.tag.slim - meta.parens
+/^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.tag.slim - text.html.embedded.slim
 /      ^^^^^^^^^^^^^^^^^^^ meta.tag.slim meta.parens.slim
-/                         ^ meta.tag.slim - meta.parens
-/                          ^ - meta.tag.slim
-/                           ^ meta.tag.slim - meta.brackets
 /                            ^^^^^^^^^^^ meta.tag.slim meta.brackets.slim
-/                                       ^^^^^^^^ text.html.embedded.slim - meta.tag.slim
+/                                        ^^^^^^ text.html.embedded.slim
 
 ul: li [ class = "klass" ]: a[href="/b"] B link
 / <- meta.tag.slim entity.name.tag.slim - text.html.embedded.slim
-/^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ - text.html.embedded.slim
-/^^ meta.tag.slim - meta.brackets
-/  ^ - meta.tag.slim
-/   ^^^ meta.tag.slim - meta.brackets
+/^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.tag.slim - text.html.embedded.slim
 /      ^^^^^^^^^^^^^^^^^^^ meta.tag.slim meta.brackets.slim
-/                         ^ meta.tag.slim - meta.brackets
-/                          ^ - meta.tag.slim
-/                           ^ meta.tag.slim - meta.brackets
 /                            ^^^^^^^^^^^ meta.tag.slim meta.brackets.slim
-/                                       ^^^^^^^^ text.html.embedded.slim - meta.tag.slim
+/                                        ^^^^^^ text.html.embedded.slim
 
 ul: li { class = "klass" }: a[href="/b"] B link
 / <- meta.tag.slim entity.name.tag.slim - text.html.embedded.slim
-/^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ - text.html.embedded.slim
-/^^ meta.tag.slim - meta.brackets
-/  ^ - meta.tag.slim
-/   ^^^ meta.tag.slim - meta.braces
+/^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.tag.slim - text.html.embedded.slim
 /      ^^^^^^^^^^^^^^^^^^^ meta.tag.slim meta.braces.slim
-/                         ^ meta.tag.slim - meta.braces
-/                          ^ - meta.tag.slim
-/                           ^ meta.tag.slim - meta.brackets
 /                            ^^^^^^^^^^^ meta.tag.slim meta.brackets.slim
-/                                       ^^^^^^^^ text.html.embedded.slim - meta.tag.slim
+/                                        ^^^^^^ text.html.embedded.slim
 
 ul: li*{ 'class' => "klass" }: a[href="/b"] B link
 / <- meta.tag.slim entity.name.tag.slim - text.html.embedded.slim
-/^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ - text.html.embedded.slim
-/^^ meta.tag.slim - meta.brackets
-/  ^ - meta.tag.slim
-/   ^^ meta.tag.slim - meta.embedded.slim
+/^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.tag.slim - text.html.embedded.slim
 /     ^^^^^^^^^^^^^^^^^^^^^^^ meta.tag.slim meta.embedded.slim
-/                            ^ meta.tag.slim - meta.embedded.slim
-/                             ^ - meta.tag.slim
-/                              ^ meta.tag.slim - meta.brackets
 /                               ^^^^^^^^^^^ meta.tag.slim meta.brackets.slim
-/                                          ^^^^^^^^ text.html.embedded.slim - meta.tag.slim
+/                                           ^^^^^^^ text.html.embedded.slim
 
 
 /[ XML Tests ]/////////////////////////////////////////////////////////////////

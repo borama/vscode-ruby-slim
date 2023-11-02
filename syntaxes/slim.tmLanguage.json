@@ -266,10 +266,10 @@
       }
     },
     {
-      "begin": "^(\\s*)(?:([\\w-]+)|(\\.)((?:[\\w:-]+)(?:/\\d+)?)|(#)((?:[\\w:-]+)(?:/\\d+)?))",
-      "end": "$",
+      "begin": "(\\s*)(?:([\\w-]+)|(\\.)((?:[\\w-]|(?::(?!\\s)))+(?:/\\d+)?)|(#)((?:[\\w-]|(?::(?!\\s)))+(?:/\\d+)?))",
+      "end": "$|(:)(?=\\s)",
       "name": "meta.tag.slim",
-      "captures": {
+      "beginCaptures": {
         "2": {
           "name": "entity.name.tag.slim"
         },
@@ -286,39 +286,17 @@
           "name": "entity.other.attribute-name.id.html"
         }
       },
+      "endCaptures": {
+        "1": {
+          "name": "punctuation.definition.tag.end.slim"
+        }
+      },
       "patterns": [
         {
           "begin": "(:[\\w\\d]+)+",
           "end": "$|\\s",
           "comment": "XML",
           "name": "entity.name.tag.slim"
-        },
-        {
-          "begin": "(:\\s)(\\.|#|[\\w-]+)([\\w-]+)?",
-          "end": "$|(?!\\.|#|=|-|~|/|\\}|\\]|\\*|\\s?[\\*\\{])",
-          "comment": "1 - colon; 2 - dot OR hash OR tag name; 3 - OPTIONAL classname OR id",
-          "captures": {
-            "1": {
-              "name": "punctuation.definition.tag.end.slim"
-            },
-            "2": {
-              "name": "entity.name.tag.slim"
-            },
-            "3": {
-              "name": "entity.other.attribute-name.slim"
-            }
-          },
-          "patterns": [
-            {
-              "include": "#root-class-id-tag"
-            },
-            {
-              "include": "#tag-attribute"
-            },
-            {
-              "include": "#closed-tag-terminator"
-            }
-          ]
         },
         {
           "include": "#root-class-id-tag"
@@ -555,7 +533,7 @@
       ]
     },
     "root-class-id-tag": {
-      "match": "(\\.)(([\\w:-]+)(/\\d+)?)|(#)(([\\w:-]+)(/\\d+)?)",
+      "match": "(\\.)(([\\w-]|(?::(?!\\s)))+(/\\d+)?)|(#)(([\\w-]|(?::(?!\\s)))+(/\\d+)?)",
       "captures": {
         "1": {
           "name": "punctuation.definition.attribute.class.slim"
@@ -748,7 +726,7 @@
           "name": "punctuation.separator.key-value.slim"
         }
       },
-      "end": "(?=(?:\\s|\\)|\\]|\\}))|$",
+      "end": "(?=(?::?\\s|\\)|\\]|\\}))|$",
       "patterns": [
         {
           "include": "#string-double-quoted"
