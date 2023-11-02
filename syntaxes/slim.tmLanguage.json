@@ -293,10 +293,7 @@
       },
       "patterns": [
         {
-          "begin": "(:[\\w\\d]+)+",
-          "end": "$|\\s",
-          "comment": "XML",
-          "name": "entity.name.tag.slim"
+          "include": "#xml-namespace"
         },
         {
           "include": "#root-class-id-tag"
@@ -780,6 +777,10 @@
     "whitespace-modifier": {
       "match": "\\>|\\<|\\<\\>|\\>\\<",
       "name": "keyword.operator.whitespace.slim"
+    },
+    "xml-namespace": {
+      "match": "(:[\\w-]+)+",
+      "name": "entity.name.tag.slim"
     }
   },
   "scopeName": "source.slim",

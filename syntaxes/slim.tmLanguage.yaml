@@ -189,12 +189,7 @@ patterns:
         name: punctuation.definition.tag.end.slim
 
     patterns:
-      # XML tags
-      - begin: (:[\w\d]+)+
-        end: $|\s
-        comment: XML
-        name: entity.name.tag.slim
-
+      - include: '#xml-namespace'
       - include: '#root-class-id-tag'
       - include: '#attribute-wrapper'
       - include: '#splat-attribute'
@@ -516,6 +511,11 @@ repository:
   whitespace-modifier:
     match: \>|\<|\<\>|\>\<
     name: keyword.operator.whitespace.slim
+
+  # XML tags a:b:c
+  xml-namespace:
+    match: (:[\w-]+)+
+    name: entity.name.tag.slim
 
 scopeName: source.slim
 uuid: 36302CC1-1E76-4910-B7B6-F1915EBBA0D3
