@@ -245,6 +245,9 @@
       "include": "#tag-attribute"
     },
     {
+      "include": "#splat-attribute"
+    },
+    {
       "include": "#interpolated-ruby"
     },
     {
@@ -318,27 +321,6 @@
           ]
         },
         {
-          "begin": "(\\*\\{)(?=.*\\}|.*\\|\\s*$)",
-          "end": "(\\})|$|^(?!.*\\|\\s*$)",
-          "name": "source.ruby.embedded.slim",
-          "comment": "Splat attributes",
-          "beginCaptures": {
-            "1": {
-              "name": "punctuation.section.embedded.ruby"
-            }
-          },
-          "endCaptures": {
-            "1": {
-              "name": "punctuation.section.embedded.ruby"
-            }
-          },
-          "patterns": [
-            {
-              "include": "#interpolated-ruby"
-            }
-          ]
-        },
-        {
           "include": "#root-class-id-tag"
         },
         {
@@ -349,6 +331,9 @@
         },
         {
           "include": "#attribute-wrapper-braces"
+        },
+        {
+          "include": "#splat-attribute"
         },
         {
           "include": "#rubyline"
@@ -636,7 +621,7 @@
           "name": "keyword.control.start-block.ruby"
         }
       },
-      "name": "meta.line.ruby.slim",
+      "name": "meta.embedded.slim meta.line.ruby.slim",
       "patterns": [
         {
           "comment": "Hack to let ruby comments work in this context properly",
@@ -646,6 +631,51 @@
         {
           "include": "#continuation"
         },
+        {
+          "include": "source.ruby"
+        }
+      ]
+    },
+    "splat-attribute": {
+      "patterns": [
+        {
+          "include": "#splat-attribute-hash"
+        },
+        {
+          "include": "#splat-attribute-direct"
+        }
+      ]
+    },
+    "splat-attribute-direct": {
+      "begin": "\\*",
+      "end": "(?=\\s)|$",
+      "name": "meta.embedded.slim source.ruby.embedded.slim",
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.section.embedded.begin.ruby"
+        }
+      },
+      "patterns": [
+        {
+          "include": "source.ruby"
+        }
+      ]
+    },
+    "splat-attribute-hash": {
+      "begin": "\\*\\{",
+      "end": "\\}",
+      "name": "meta.embedded.slim source.ruby.embedded.slim",
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.section.embedded.begin.ruby"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.section.embedded.end.ruby"
+        }
+      },
+      "patterns": [
         {
           "include": "source.ruby"
         }

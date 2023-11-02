@@ -744,7 +744,7 @@ a href==action_path(:start)
 div array=:menu,:highlight
 / <- meta.tag.slim entity.name.tag.slim
 /^^^ meta.tag.slim - meta.attribute-with-value.slim
-/   ^^^^^^ meta.tag.slim meta.attribute-with-value.slim - meta.embedded
+/   ^^^^^^ meta.tag.slim meta.attribute-with-value.slim - meta.embedded.slim
 /   ^^^^^^ meta.tag.slim meta.attribute-with-value.slim - source.ruby
 /         ^^^^^^^^^^^^^^^^ meta.tag.slim meta.attribute-with-value.slim meta.embedded.slim source.ruby.embedded.slim
 /                         ^ - meta.tag
@@ -758,7 +758,7 @@ div array=:menu,:highlight
 div group=( [ 'menu', "highlight" ] )
 / <- meta.tag.slim - meta.attribute-with-value.slim
 /^^ meta.tag.slim - meta.attribute-with-value.slim
-/   ^^^^^^ meta.tag.slim meta.attribute-with-value.slim - meta.embedded
+/   ^^^^^^ meta.tag.slim meta.attribute-with-value.slim - meta.embedded.slim
 /   ^^^^^^ meta.tag.slim meta.attribute-with-value.slim - source.ruby
 /         ^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.tag.slim meta.attribute-with-value.slim meta.embedded.slim source.ruby.embedded.slim
 /   ^^^^^ entity.other.attribute-name.slim
@@ -770,7 +770,7 @@ div group=( [ 'menu', "highlight" ] )
 
 div array=[ 'menu', "highlight" ]
 /^^^ meta.tag.slim - meta.attribute-with-value.slim
-/   ^^^^^^ meta.tag.slim meta.attribute-with-value.slim - meta.embedded
+/   ^^^^^^ meta.tag.slim meta.attribute-with-value.slim - meta.embedded.slim
 /   ^^^^^^ meta.tag.slim meta.attribute-with-value.slim - source.ruby
 /         ^^^^^^^^^^^^^^^^^^^^^^^ meta.tag.slim meta.attribute-with-value.slim meta.embedded.slim source.ruby.embedded.slim
 /   ^^^^^ entity.other.attribute-name.slim
@@ -783,7 +783,7 @@ div array=[ 'menu', "highlight" ]
 
 div hashes={ 0, 'str', "str" }
 /^^^ meta.tag.slim - meta.attribute-with-value.slim
-/   ^^^^^^^ meta.tag.slim meta.attribute-with-value.slim - meta.embedded
+/   ^^^^^^^ meta.tag.slim meta.attribute-with-value.slim - meta.embedded.slim
 /   ^^^^^^^ meta.tag.slim meta.attribute-with-value.slim - source.ruby
 /          ^^^^^^^^^^^^^^^^^^^ meta.tag.slim meta.attribute-with-value.slim meta.embedded.slim source.ruby.embedded.slim
 /   ^^^^^^ entity.other.attribute-name.slim
@@ -799,7 +799,7 @@ div hashes={ 0, 'str', "str" }
 div array==:menu,:highlight
 / <- meta.tag.slim entity.name.tag.slim
 /^^^ meta.tag.slim - meta.attribute-with-value.slim
-/   ^^^^^^^ meta.tag.slim meta.attribute-with-value.slim - meta.embedded
+/   ^^^^^^^ meta.tag.slim meta.attribute-with-value.slim - meta.embedded.slim
 /   ^^^^^^^ meta.tag.slim meta.attribute-with-value.slim - source.ruby
 /          ^^^^^^^^^^^^^^^^ meta.tag.slim meta.attribute-with-value.slim meta.embedded.slim source.ruby.embedded.slim
 /                          ^ - meta.tag
@@ -812,7 +812,7 @@ div array==:menu,:highlight
 
 div group==( [ 'menu', "highlight" ] )
 /^^^ meta.tag.slim - meta.attribute-with-value.slim
-/   ^^^^^^^ meta.tag.slim meta.attribute-with-value.slim - meta.embedded
+/   ^^^^^^^ meta.tag.slim meta.attribute-with-value.slim - meta.embedded.slim
 /   ^^^^^^^ meta.tag.slim meta.attribute-with-value.slim - source.ruby
 /          ^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.tag.slim meta.attribute-with-value.slim meta.embedded.slim source.ruby.embedded.slim
 /   ^^^^^ entity.other.attribute-name.slim
@@ -824,7 +824,7 @@ div group==( [ 'menu', "highlight" ] )
 
 div array==[ 'menu', "highlight" ]
 /^^^ meta.tag.slim - meta.attribute-with-value.slim
-/   ^^^^^^^ meta.tag.slim meta.attribute-with-value.slim - meta.embedded
+/   ^^^^^^^ meta.tag.slim meta.attribute-with-value.slim - meta.embedded.slim
 /   ^^^^^^^ meta.tag.slim meta.attribute-with-value.slim - source.ruby
 /          ^^^^^^^^^^^^^^^^^^^^^^^ meta.tag.slim meta.attribute-with-value.slim meta.embedded.slim source.ruby.embedded.slim
 /   ^^^^^ entity.other.attribute-name.slim
@@ -837,7 +837,7 @@ div array==[ 'menu', "highlight" ]
 
 div hashes=={ 0, 'str', "str" }
 /^^^ meta.tag.slim - meta.attribute-with-value.slim
-/   ^^^^^^^^ meta.tag.slim meta.attribute-with-value.slim - meta.embedded
+/   ^^^^^^^^ meta.tag.slim meta.attribute-with-value.slim - meta.embedded.slim
 /   ^^^^^^^^ meta.tag.slim meta.attribute-with-value.slim - source.ruby
 /           ^^^^^^^^^^^^^^^^^^^ meta.tag.slim meta.attribute-with-value.slim meta.embedded.slim source.ruby.embedded.slim
 /   ^^^^^^ entity.other.attribute-name.slim
@@ -930,7 +930,7 @@ div [
 ] = page_tagline
 / <- meta.tag.slim meta.brackets.slim punctuation.section.brackets.end.slim
 /^ - meta.tag
-/^ - meta.embedded
+/^ - meta.embedded.slim
 /   ^^^^^^^^^^^^ meta.embedded.slim
 / ^ punctuation.section.embedded.slim
 
@@ -1025,26 +1025,24 @@ div.cls[
 
 .splat *method_which_returns_hash = place.name
 / <- meta.tag.slim punctuation.definition.attribute.class.slim
-/^^^^^^ meta.tag.slim - meta.embedded
+/^^^^^^ meta.tag.slim - meta.embedded.slim
 /      ^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.tag.slim meta.embedded.slim source.ruby.embedded.slim
-/                                ^ - meta.tag
-/                                ^ - meta.embedded
 /                                 ^^^^^^^^^^^^ meta.embedded.slim
-/                                             ^ - meta.embedded
 /^^^^^ entity.other.attribute-name.class.html
 /      ^ punctuation.section.embedded.begin.ruby
-/       ^^^^^^^^^^^^^^^^^^^^^^^^^ variable.function.ruby
 /                                 ^ punctuation.section.embedded.slim
 /                                  ^^^^^^^^^^^ source.ruby.embedded.slim
+  / NOTE: This is not getting matched as it's not inside ruby grammar, though it's shown in VSCode itself:
+  /     ^^^^^^^^^^^^^^^^^^^^^^^^^ variable.other.ruby
 
 .splat *@hash_instance_variable = place.name
 / <- meta.tag.slim punctuation.definition.attribute.class.slim
-/^^^^^^ meta.tag.slim - meta.embedded
+/^^^^^^ meta.tag.slim - meta.embedded.slim
 /      ^^^^^^^^^^^^^^^^^^^^^^^^  meta.tag.slim meta.embedded.slim source.ruby.embedded.slim
 /                              ^ - meta.tag
-/                              ^ - meta.embedded
+/                              ^ - meta.embedded.slim
 /                               ^^^^^^^^^^^^ meta.embedded.slim
-/                                           ^ - meta.embedded
+/                                           ^ - meta.embedded.slim
 /^^^^^ entity.other.attribute-name.class.html
 /      ^ punctuation.section.embedded.begin.ruby
 /       ^^^^^^^^^^^^^^^^^^^^^^^ variable.other.readwrite.instance.ruby
@@ -1060,45 +1058,44 @@ div.cls[
 /                     ^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.embedded.slim source.ruby.embedded.slim
 /                     ^ punctuation.section.embedded.begin.ruby
 
-#splat*{ 'attribute' => 'value'}
+#splat*{ 'attribute' => 'value' }
 / <- meta.tag.slim punctuation.definition.attribute.id.slim
-/^^^^^ meta.tag.slim entity.name.attribute.id.slim
-/     ^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.tag.slim meta.embedded.slim
-/     ^^ punctuation.section.embedded.begin.ruby
-/       ^^^^^^^^^^^^^^^^^^^^^^^ source.ruby.embedded.slim
-/                              ^ punctuation.section.embedded.ruby
+/^^^^^ meta.tag.slim entity.other.attribute-name.id.html
+/      ^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.tag.slim meta.embedded.slim
+/     ^ punctuation.section.embedded.begin.ruby
+/       ^^^^^^^^^^^^^^^^^^^^^^^^ source.ruby.embedded.slim
 
 .card*{'data-url'=>place_path(place), 'data-id'=>place.id} = place.name
 / <- meta.tag.slim punctuation.definition.attribute.class.slim
 /^^^^ meta.tag.slim entity.other.attribute-name.class.html
 /    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.tag.slim meta.embedded.slim
 /                                                         ^ - meta.tag
-/                                                         ^ - meta.embedded
+/                                                         ^ - meta.embedded.slim
 /                                                          ^^^^^^^^^^^^ meta.embedded.slim
-/                                                                      ^ - meta.embedded
+/                                                                      ^ - meta.embedded.slim
 /    ^^ punctuation.section.embedded.begin.ruby
-/      ^^^^^^^^^^ meta.string.ruby string.quoted.single.ruby
-/                ^^ punctuation.separator.key-value.ruby
+/      ^^^^^^^^^^ string.quoted.single.ruby
+/                ^^ punctuation.separator.key-value
 /                                   ^ punctuation.separator.object.ruby
-/                                     ^^^^^^^^^ meta.string.ruby string.quoted.single.ruby
-/                                              ^^ punctuation.separator.key-value.ruby
-/                                                        ^ punctuation.section.embedded.ruby
+/                                     ^^^^^^^^^ string.quoted.single.ruby
+/                                              ^^ punctuation.separator.key-value
+/                                                        ^ punctuation.section.embedded.end.ruby
 /                                                          ^ punctuation.section.embedded.slim
 /                                                            ^^^^^^^^^^ source.ruby.embedded.slim
 
 #splat *{attribute: 'value'} Regular text
 / <- meta.tag.slim punctuation.definition.attribute.id.slim
-/^^^^^^ meta.tag.slim - meta.embedded
+/^^^^^^ meta.tag.slim - meta.embedded.slim
 /      ^^^^^^^^^^^^^^^^^^^^^ meta.tag.slim meta.embedded.slim
 /                           ^^^^^^^^^^^^^^ - meta.tag
 
 .first *{class: [:second, :third]} Text
 / <- meta.tag.slim punctuation.definition.attribute.class.slim
-/^^^^^^ meta.tag.slim - meta.embedded
+/^^^^^^ meta.tag.slim - meta.embedded.slim
 /      ^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.tag.slim meta.embedded.slim
 /                                 ^^^^^^ - meta.tag
 
-/ Dynmic Tags
+/ Dynamic Tags
   You can create completely dynamic tags using the splat attributes.
   Just create a method which returns a hash with the :tag key.
 ruby:
@@ -1108,13 +1105,13 @@ ruby:
 
 - @page_current = true
 *a_unless_current Link
-/ <- meta.tag.slim meta.embedded.slim source.ruby.embedded.slim punctuation.section.embedded.begin.ruby
-/^^^^^^^^^^^^^^^^ meta.tag.slim meta.embedded.slim source.ruby.embedded.slim variable.function.ruby
-/                ^^^^^^ - meta.embedded
+/ <- meta.embedded.slim source.ruby.embedded.slim punctuation.section.embedded.begin.ruby
+/^^^^^^^^^^^^^^^^ meta.embedded.slim source.ruby.embedded.slim
+/                ^^^^^^ - meta.embedded.slim
 - @page_current = false
 *a_unless_current Link
-/ <- meta.tag.slim meta.embedded.slim source.ruby.embedded.slim punctuation.section.embedded.begin.ruby
-/^^^^^^^^^^^^^^^^ meta.tag.slim meta.embedded.slim source.ruby.embedded.slim variable.function.ruby
+/ <- meta.embedded.slim source.ruby.embedded.slim punctuation.section.embedded.begin.ruby
+/^^^^^^^^^^^^^^^^ meta.embedded.slim source.ruby.embedded.slim
 
 
 /[ Whitespace Tests ]//////////////////////////////////////////////////////////
@@ -1206,7 +1203,7 @@ img*{ src = "image.png" // } / .no-attrib
 / <- meta.tag.slim entity.name.tag.slim
 /^^ meta.tag.slim
 /  ^^^^^^^^^^^^^^^^^^^^^^^^^ meta.tag.slim meta.embedded.slim
-/                           ^^ meta.tag.slim - meta.embedded
+/                           ^^ meta.tag.slim - meta.embedded.slim
 /                             ^^^^^^^^^^^^ - text.html.embedded.slim
 /                             ^^^^^^^^^^^^ - meta.tag
 /^^ entity.name.tag.slim
@@ -1367,9 +1364,9 @@ ul: li*{ 'class' => "klass" }: a[href="/b"] B link
 /^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ - text.html.embedded.slim
 /^^ meta.tag.slim - meta.brackets
 /  ^ - meta.tag
-/   ^^ meta.tag.slim - meta.embedded
+/   ^^ meta.tag.slim - meta.embedded.slim
 /     ^^^^^^^^^^^^^^^^^^^^^^^ meta.tag.slim meta.embedded.slim
-/                            ^ meta.tag.slim - meta.embedded
+/                            ^ meta.tag.slim - meta.embedded.slim
 /                             ^ - meta.tag
 /                              ^ meta.tag.slim - meta.brackets
 /                               ^^^^^^^^^^^ meta.tag.slim meta.brackets.slim
@@ -1412,7 +1409,7 @@ loc:url: .this is="attr" this is text Title
 
 - array.each do |item|
   - if true
-/^ - meta.embedded
+/^ - meta.embedded.slim
 / ^^^^^^^^^ meta.embedded.slim
 / ^ punctuation.section.embedded.slim - source
 /  ^^^^^^^^ source.ruby.embedded.slim - punctuation
@@ -1420,7 +1417,7 @@ loc:url: .this is="attr" this is text Title
 - array.each do |item|
   - if true
   - else
-/^ - meta.embedded
+/^ - meta.embedded.slim
 / ^^^^^^ meta.embedded.slim
 / ^ punctuation.section.embedded.slim - source
 /  ^^^^^ source.ruby.embedded.slim - punctuation
@@ -1436,7 +1433,7 @@ loc:url: .this is="attr" this is text Title
 /^ - meta.tag
 / ^ meta.tag.slim
 /  ^ - meta.tag
-/  ^ - meta.embedded
+/  ^ - meta.embedded.slim
 /   ^^^^^^^^ meta.embedded.slim
 /   ^ punctuation.section.embedded.slim
 /    ^^^^^^^ source.ruby.embedded.slim
@@ -1494,7 +1491,7 @@ h1 = yield :yield_sym
 / <- meta.tag.slim entity.name.tag.slim
 /^ meta.tag.slim entity.name.tag.slim
 / ^ - meta.tag
-/ ^ - meta.embedded
+/ ^ - meta.embedded.slim
 /  ^^^^^^^^^^^^^^^^^^ meta.embedded.slim
 /  ^ punctuation.section.embedded.slim - source
 /   ^^^^^^^^^^^^^^^^^ source.ruby.embedded.slim
@@ -1549,7 +1546,7 @@ div= ruby_var_with_no_space_from_tag
 / <- meta.tag.slim entity.name.tag.slim
 /^^ meta.tag.slim entity.name.tag.slim
 /  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.embedded.slim - meta.tag
-/                                   ^ - meta.embedded
+/                                   ^ - meta.embedded.slim
 /  ^ punctuation.section.embedded.slim
 
 

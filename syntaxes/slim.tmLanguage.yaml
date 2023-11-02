@@ -156,6 +156,7 @@ patterns:
       - include: '#rubyline'
 
   - include: '#tag-attribute'
+  - include: '#splat-attribute'
   - include: '#interpolated-ruby'
   - include: '#verbatim-text'
   - include: '#inline-html'
@@ -207,24 +208,11 @@ patterns:
           - include: '#tag-attribute'
           - include: '#closed-tag-terminator'
 
-      # Splat attributes
-      - begin: (\*\{)(?=.*\}|.*\|\s*$)
-        end: (\})|$|^(?!.*\|\s*$)
-        name: source.ruby.embedded.slim
-        comment: Splat attributes
-        beginCaptures:
-          '1':
-            name: punctuation.section.embedded.ruby
-        endCaptures:
-          '1':
-            name: punctuation.section.embedded.ruby
-        patterns:
-          - include: '#interpolated-ruby'
-
       - include: '#root-class-id-tag'
       - include: '#attribute-wrapper-parens'
       - include: '#attribute-wrapper-brackets'
       - include: '#attribute-wrapper-braces'
+      - include: '#splat-attribute'
       - include: '#rubyline'
       - include: '#tag-attribute'
       - include: '#whitespace'
@@ -426,12 +414,42 @@ repository:
     endCaptures:
       '1':
         name: keyword.control.start-block.ruby
-    name: meta.line.ruby.slim
+    name: meta.embedded.slim meta.line.ruby.slim
     patterns:
       - comment: Hack to let ruby comments work in this context properly
         match: '#.*$'
         name: comment.line.number-sign.ruby
       - include: '#continuation'
+      - include: source.ruby
+
+  splat-attribute:
+    patterns:
+      - include: '#splat-attribute-hash'
+      - include: '#splat-attribute-direct'
+
+  # Splat attribute div *method [https://github.com/slim-template/slim#splat-attributes-]
+  splat-attribute-direct:
+    begin: \*
+    end: (?=\s)|$
+    name: meta.embedded.slim source.ruby.embedded.slim
+    beginCaptures:
+      '0':
+        name: punctuation.section.embedded.begin.ruby
+    patterns:
+      - include: source.ruby
+
+  # Splat attribute div *{ a: 3 } [https://github.com/slim-template/slim#splat-attributes-]
+  splat-attribute-hash:
+    begin: \*\{
+    end: \}
+    name: meta.embedded.slim source.ruby.embedded.slim
+    beginCaptures:
+      '0':
+        name: punctuation.section.embedded.begin.ruby
+    endCaptures:
+      '0':
+        name: punctuation.section.embedded.end.ruby
+    patterns:
       - include: source.ruby
 
   string-double-quoted:
