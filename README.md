@@ -31,8 +31,21 @@ npx js-yaml syntaxes/interpolated-ruby.yaml > syntaxes/interpolated-ruby.json
 
 ### Tests run
 
-```bash
-npx vscode-tmgrammar-test -g syntaxes/slim.tmLanguage.json -g tests/support_grammars/html.tmLanguage.json -g tests/support_grammars/ruby.tmLanguage.json -g tests/support_grammars/coffeescript.tmLanguage.json -g tests/support_grammars/css.tmLanguage.json -g tests/support_grammars/less.tmLanguage.json -g tests/support_grammars/erb.tmLanguage.json -g tests/support_grammars/JavaScript.tmLanguage.json -g tests/support_grammars/markdown.tmLanguage.json -g tests/support_grammars/scss.tmLanguage.json tests/syntax_test_slim.slim -g tests/support_grammars/sass.tmLanguage.json -g tests/support_grammars/html-derivative.tmLanguage.json > results.txt
+```sh
+npx vscode-tmgrammar-test \
+    -g syntaxes/slim.tmLanguage.json \
+    -g tests/support_grammars/html.tmLanguage.json \
+    -g tests/support_grammars/ruby.tmLanguage.json \
+    -g tests/support_grammars/coffeescript.tmLanguage.json \
+    -g tests/support_grammars/css.tmLanguage.json \
+    -g tests/support_grammars/less.tmLanguage.json \
+    -g tests/support_grammars/erb.tmLanguage.json \
+    -g tests/support_grammars/JavaScript.tmLanguage.json \
+    -g tests/support_grammars/markdown.tmLanguage.json \
+    -g tests/support_grammars/scss.tmLanguage.json \
+    -g tests/support_grammars/sass.tmLanguage.json \
+    -g tests/support_grammars/html-derivative.tmLanguage.json \
+    tests/syntax_test_slim.slim > results.txt
 ```
 
 ### Slim output test
