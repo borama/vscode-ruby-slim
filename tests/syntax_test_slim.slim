@@ -796,6 +796,9 @@ div hashes={ 0, 'str', "str" }
 /                      ^^^^^ meta.string.ruby string.quoted.double.ruby
 /                            ^ punctuation.section.scope.end.ruby
 
+  / Nested data hashes are not parsed well, currently.
+  / div data={ a: 1, b: { c: 2 } }
+
 div array==:menu,:highlight
 / <- meta.tag.slim entity.name.tag.slim
 /^^^ meta.tag.slim - meta.attribute-with-value.slim
