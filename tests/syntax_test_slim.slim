@@ -1440,24 +1440,20 @@ coffee:
 css:
   .hello:before {
     content: 'hello #{@world}';
-    /        ^^^^^^^ meta.string.css string.quoted.single.css
-    /               ^^^^^^^^^ meta.string.css meta.interpolation.slim - string
-    /                        ^ meta.string.css string.quoted.single.css
+/  ^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.filter.slim source.css.embedded.slim
+/                   ^^^^^^^^^ meta.interpolation.slim
+
   }
 / <- meta.filter.slim source.css.embedded.slim - meta.tag.slim
 /^^^ meta.filter.slim source.css.embedded.slim - meta.tag.slim
 
-erb:
-  <%= hello_world if hello_world.present? %>
-/ <- meta.filter.slim text.html.erb.embedded.slim - meta.tag.slim
-/^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.filter.slim text.html.erb.embedded.slim
+
 
 javascript:
   (function() {
     console.log('hello #{@world}');
-  /             ^^^^^^^ meta.string.js string.quoted.single.js
-  /                    ^^^^^^^^^ meta.string.js meta.interpolation.slim - string
-  /                             ^ meta.string.js string.quoted.single.js
+/   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.filter.slim source.js.embedded.slim
+/                      ^^^^^^^^^ meta.interpolation.slim
   });
 / <- meta.filter.slim source.js.embedded.slim - meta.tag.slim
 /^^^^^ meta.filter.slim source.js.embedded.slim - meta.tag.slim
@@ -1472,38 +1468,26 @@ less:
 markdown:
   # Hello
   **World** #{:var}
-  / <- meta.filter.slim text.html.markdown.embedded.slim - meta.tag.slim
-  /^^^^^^^^^^^ meta.filter.slim text.html.markdown.embedded.slim
-  /^^^^^^^^ markup.bold.markdown
-  /         ^^^^^^^ meta.filter.slim text.html.markdown.embedded.slim meta.interpolation.slim
-  /         ^^ punctuation.section.interpolation.begin.slim
-  /           ^^^^ source.ruby.embedded.slim constant.other.symbol.ruby
-  /               ^ punctuation.section.interpolation.end.slim
+/ ^^^^^^^^^^^ meta.filter.slim text.html.markdown.embedded.slim
+/ ^^^^^^^^^ markup.bold.markdown
+/           ^^^^^^^ meta.filter.slim text.html.markdown.embedded.slim meta.interpolation.slim
+/           ^^ punctuation.section.interpolation.begin.slim
+/             ^^^^ source.ruby.embedded.slim constant.other.symbol.ruby
+/                 ^ punctuation.section.interpolation.end.slim
 
   <br class="#{:name}">
-  / <- meta.filter.slim text.html.markdown.embedded.slim meta.tag.slim
-  /^^^^^^^^^^^^^^^^^^^^ meta.filter.slim text.html.markdown.embedded.slim meta.tag.slim
-  /   ^^^^^^^^^^^^^^^^ meta.attribute-with-value.class.html
-  /          ^^^^^^^^ meta.class-name.html meta.string.html meta.interpolation.slim
-  /^^ entity.name.tag
-  /   ^^^^^ entity.other.attribute-name.class.html
-  /        ^ punctuation.separator.key-value.html
-  /         ^ punctuation.definition.string.begin.html
-  /          ^^ punctuation.section.interpolation.begin.slim
-  /            ^^^^^ source.ruby.embedded.slim constant.other.symbol.ruby
-  /                 ^ punctuation.section.interpolation.end.slim
-  /                  ^ punctuation.definition.string.end.html
-  /                   ^ punctuation.definition.tag.end.html
-
-plain:
-  Plain <b>text</b>
-/ <- meta.filter.slim text.plain.embedded.slim - meta.tag.slim
-/^^^^^^^^^^^^^^^^^^^ meta.filter.slim text.plain.embedded.slim - meta.tag.slim
-
-preserve:
-  Plain <b>text</b>
-/ <- meta.filter.slim text.plain.embedded.slim - meta.tag.slim
-/^^^^^^^^^^^^^^^^^^^ meta.filter.slim text.plain.embedded.slim - meta.tag.slim
+/ ^^^^^^^^^^^^^^^^^^^^^ meta.filter.slim text.html.markdown.embedded.slim
+/     ^^^^^ meta.attribute.class.html
+/            ^^^^^^^^ meta.interpolation.slim
+/  ^^ entity.name.tag.html
+/     ^^^^^ entity.other.attribute-name.html
+/          ^ punctuation.separator.key-value.html
+/           ^ punctuation.definition.string.begin.html
+/            ^^ punctuation.section.interpolation.begin.slim
+/              ^^^^^ source.ruby.embedded.slim constant.other.symbol.ruby
+/                   ^ punctuation.section.interpolation.end.slim
+/                    ^ punctuation.definition.string.end.html
+/                     ^ punctuation.definition.tag.end.html
 
 ruby:
   blank = []
@@ -1524,25 +1508,49 @@ sass:
 scss:
   .hello:before {
     color: $world
+/   ^^^^^^^^^^^^^ meta.filter.slim source.scss.embedded.slim - meta.tag.slim
+
   }
 / <- meta.filter.slim source.scss.embedded.slim - meta.tag.slim
 /^^^ meta.filter.slim source.scss.embedded.slim - meta.tag.slim
 
+erb:
+  <%= hello_world if hello_world.present? %>
+/ <- meta.filter.slim text.html.erb.embedded.slim - meta.tag.slim
+/^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.filter.slim text.html.erb.embedded.slim
+
+
 /! Filters can expand to style tags with attributes
 /! <style class="myClass" type="text/css">body{color:red}</style>
 scss class="myClass":
-  / <- meta.tag.filter.slim constant.other.language-name.slim
-  /^^^^^^^^^^^^^^^^^ meta.tag.filter.slim
-  /  ^^^^^ entity.other.attribute-name.slim
-  /       ^ punctuation.separator.key-value.slim
-  /        ^^^^^^^^^ meta.string.html string.quoted.double.html
-  /        ^ punctuation.definition.string.begin.html
-  /                ^ punctuation.definition.string.end.html
-  /                 ^ punctuation.definition.filter.slim
+/^^^^^^^^^^^^^^^^^^^ meta.filter.slim
+  / TODO: these are not supported currently but could be done
+  /    ^^^^^ entity.other.attribute-name.slim
+  /         ^ punctuation.separator.key-value.slim
+  /          ^^^^^^^^^ meta.string.html string.quoted.double.html
+  /          ^ punctuation.definition.string.begin.html
+  /                  ^ punctuation.definition.string.end.html
+  /                   ^ punctuation.definition.filter.slim
   $color: #f00;
   body { color: $color; }
 / <- meta.filter.slim source.scss.embedded.slim - meta.tag.slim
 /^^^^^^^^^^^^^^^^^^^^^^^^^ meta.filter.slim source.scss.embedded.slim - meta.tag.slim
+
+javascript class="myClass":
+/^^^^^^^^^^^^^^^^^^^ meta.filter.slim
+
+css class="myClass":
+/^^^^^^^^^^^^^^^^^^^ meta.filter.slim
+
+coffee class="myClass":
+/^^^^^^^^^^^^^^^^^^^ meta.filter.slim
+
+less class="myClass":
+/^^^^^^^^^^^^^^^^^^^ meta.filter.slim
+
+sass class="myClass":
+/^^^^^^^^^^^^^^^^^^^ meta.filter.slim
+
 
 /[ Filter Termination Tests ]//////////////////////////////////////////////////
 
@@ -1552,10 +1560,6 @@ html
       anon: ->
         console.log 'hello world'
   body
-/ <- - meta.filter
-/ <- - meta.tag.slim
-/^ - meta.filter
-/^ - meta.tag.slim
 / ^^^^ meta.tag.slim entity.name.tag.slim
 
 html
@@ -1563,11 +1567,8 @@ html
     css:
       .hello:before {
         content: 'hello #{@world}';
+      }
   body
-/ <- - meta.filter
-/ <- - meta.tag.slim
-/^ - meta.filter
-/^ - meta.tag.slim
 / ^^^^ meta.tag.slim entity.name.tag.slim
 
 html
@@ -1575,10 +1576,6 @@ html
     erb:
       <%= hello_world if hello_world.present? %>
   body
-/ <- - meta.filter
-/ <- - meta.tag.slim
-/^ - meta.filter
-/^ - meta.tag.slim
 / ^^^^ meta.tag.slim entity.name.tag.slim
 
 html
@@ -1586,11 +1583,8 @@ html
    javascript:
      (function() {
         console.log('hello #{@world}');
+     })
   body
-/ <- - meta.filter
-/ <- - meta.tag.slim
-/^ - meta.filter
-/^ - meta.tag.slim
 / ^^^^ meta.tag.slim entity.name.tag.slim
 
 html
@@ -1598,11 +1592,8 @@ html
     less:
       .hello:before {
         content: 'hello #{@world}';
+      }
   body
-/ <- - meta.filter
-/ <- - meta.tag.slim
-/^ - meta.filter
-/^ - meta.tag.slim
 / ^^^^ meta.tag.slim entity.name.tag.slim
 
 body
@@ -1610,10 +1601,6 @@ body
     # Hello
     **World** #{:var}
   div
-/ <- - meta.filter
-/ <- - meta.tag.slim
-/^ - meta.filter
-/^ - meta.tag.slim
 / ^^^ meta.tag.slim entity.name.tag.slim
 
 html
@@ -1621,10 +1608,6 @@ html
     ruby:
       blank = []
   body
-/ <- - meta.filter
-/ <- - meta.tag.slim
-/^ - meta.filter
-/^ - meta.tag.slim
 / ^^^^ meta.tag.slim entity.name.tag.slim
 
 html
@@ -1633,10 +1616,6 @@ html
       .hello
         content: $world
   body
-/ <- - meta.filter
-/ <- - meta.tag.slim
-/^ - meta.filter
-/^ - meta.tag.slim
 / ^^^^ meta.tag.slim entity.name.tag.slim
 
 html
@@ -1644,9 +1623,6 @@ html
     scss:
       .hello:before {
         color: $world
+      }
   body
-/ <- - meta.filter
-/ <- - meta.tag.slim
-/^ - meta.filter
-/^ - meta.tag.slim
 / ^^^^ meta.tag.slim entity.name.tag.slim

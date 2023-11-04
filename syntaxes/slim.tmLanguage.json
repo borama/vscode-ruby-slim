@@ -16,7 +16,7 @@
         }
       },
       "end": "^(?!(\\1\\s)|\\s*$)",
-      "name": "text.ruby.filter.slim",
+      "name": "meta.filter.slim source.ruby.embedded.slim",
       "patterns": [
         {
           "include": "source.ruby"
@@ -24,14 +24,14 @@
       ]
     },
     {
-      "begin": "^(\\s*)(javascript):$",
+      "begin": "^(\\s*)(javascript).*:$",
       "beginCaptures": {
         "2": {
           "name": "constant.language.name.javascript.filter.slim"
         }
       },
       "end": "^(?!(\\1\\s)|\\s*$)",
-      "name": "source.js.filter.slim",
+      "name": "meta.filter.slim source.js.embedded.slim",
       "patterns": [
         {
           "include": "source.js"
@@ -59,14 +59,14 @@
       ]
     },
     {
-      "begin": "^(\\s*)(coffee):$",
+      "begin": "^(\\s*)(coffee).*:$",
       "beginCaptures": {
         "2": {
           "name": "constant.language.name.coffeescript.filter.slim"
         }
       },
       "end": "^(?!(\\1\\s)|\\s*$)",
-      "name": "text.coffeescript.filter.slim",
+      "name": "meta.filter.slim source.coffee.embedded.slim",
       "patterns": [
         {
           "include": "source.coffee"
@@ -81,7 +81,7 @@
         }
       },
       "end": "^(?!(\\1\\s)|\\s*$)",
-      "name": "text.markdown.filter.slim",
+      "name": "meta.filter.slim text.html.markdown.embedded.slim",
       "patterns": [
         {
           "include": "text.html.markdown"
@@ -89,14 +89,14 @@
       ]
     },
     {
-      "begin": "^(\\s*)(css):$",
+      "begin": "^(\\s*)(css).*:$",
       "beginCaptures": {
         "2": {
           "name": "constant.language.name.css.filter.slim"
         }
       },
       "end": "^(?!(\\1\\s)|\\s*$)",
-      "name": "text.css.filter.slim",
+      "name": "meta.filter.slim source.css.embedded.slim",
       "patterns": [
         {
           "include": "source.css"
@@ -104,14 +104,14 @@
       ]
     },
     {
-      "begin": "^(\\s*)(sass):$",
+      "begin": "^(\\s*)(sass).*:$",
       "beginCaptures": {
         "2": {
           "name": "constant.language.name.sass.filter.slim"
         }
       },
       "end": "^(?!(\\1\\s)|\\s*$)",
-      "name": "text.sass.filter.slim",
+      "name": "meta.filter.slim source.sass.embedded.slim",
       "patterns": [
         {
           "include": "source.sass"
@@ -119,29 +119,29 @@
       ]
     },
     {
-      "begin": "^(\\s*)(scss):$",
+      "begin": "^(\\s*)(scss).*:$",
       "beginCaptures": {
         "2": {
           "name": "constant.language.name.scss.filter.slim"
         }
       },
       "end": "^(?!(\\1\\s)|\\s*$)",
-      "name": "text.scss.filter.slim",
+      "name": "meta.filter.slim source.scss.embedded.slim",
       "patterns": [
         {
-          "include": "source.scss"
+          "include": "source.css.scss"
         }
       ]
     },
     {
-      "begin": "^(\\s*)(less):$",
+      "begin": "^(\\s*)(less).*:$",
       "beginCaptures": {
         "2": {
           "name": "constant.language.name.less.filter.slim"
         }
       },
       "end": "^(?!(\\1\\s)|\\s*$)",
-      "name": "text.less.filter.slim",
+      "name": "meta.filter.slim source.less.embedded.slim",
       "patterns": [
         {
           "include": "source.less"
@@ -156,21 +156,12 @@
         }
       },
       "end": "^(?!(\\1\\s)|\\s*$)",
-      "name": "text.erb.filter.slim",
+      "name": "meta.filter.slim text.html.erb.embedded.slim",
       "patterns": [
         {
-          "include": "source.erb"
+          "include": "text.html.erb"
         }
       ]
-    },
-    {
-      "captures": {
-        "1": {
-          "name": "punctuation.definition.prolog.slim"
-        }
-      },
-      "match": "^(! )($|\\s.*)",
-      "name": "meta.prolog.slim"
     },
     {
       "comment": "HTML comment",
@@ -460,26 +451,6 @@
         }
       ]
     },
-    "interpolated-ruby": {
-      "begin": "(?<!\\\\)#\\{{1,2}",
-      "beginCaptures": {
-        "0": {
-          "name": "punctuation.section.interpolation.begin.slim"
-        }
-      },
-      "end": "\\}{1,2}",
-      "endCaptures": {
-        "0": {
-          "name": "punctuation.section.interpolation.end.slim"
-        }
-      },
-      "name": "meta.interpolation.slim meta.string.ruby source.ruby.embedded.slim",
-      "patterns": [
-        {
-          "include": "source.ruby"
-        }
-      ]
-    },
     "entities": {
       "patterns": [
         {
@@ -497,6 +468,27 @@
         {
           "match": "&",
           "name": "invalid.illegal.bad-ampersand.html"
+        }
+      ]
+    },
+    "html-attribute-in-filter": {
+      "begin": "\\s*([\\w-]+)",
+      "beginCaptures": {
+        "1": {
+          "name": "entity.other.attribute-name.slim"
+        }
+      },
+      "end": "(?=:)",
+      "patterns": [
+        {
+          "match": "\\s*=\\s*",
+          "name": "punctuation.separator.key-value.slim"
+        },
+        {
+          "include": "#string-double-quoted"
+        },
+        {
+          "include": "#string-single-quoted"
         }
       ]
     },
@@ -523,6 +515,26 @@
         },
         {
           "match": "([^#]|\\\\#)*\\n"
+        }
+      ]
+    },
+    "interpolated-ruby": {
+      "begin": "(?<!\\\\)#\\{{1,2}",
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.section.interpolation.begin.slim"
+        }
+      },
+      "end": "\\}{1,2}",
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.section.interpolation.end.slim"
+        }
+      },
+      "name": "meta.interpolation.slim meta.string.ruby source.ruby.embedded.slim",
+      "patterns": [
+        {
+          "include": "source.ruby"
         }
       ]
     },
