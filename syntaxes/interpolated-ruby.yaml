@@ -1,3 +1,4 @@
+# Injects ruby interpolation (#{...}) into other languages embedeed in Slim templates.
 scopeName: "injection.interpolated-ruby"
 injectionSelector:
   - "L:source.css"

@@ -39,26 +39,6 @@
       ]
     },
     {
-      "begin": "^(---)\\s*\\n",
-      "beginCaptures": {
-        "1": {
-          "name": "storage.frontmatter.slim"
-        }
-      },
-      "end": "^(---)\\s*\\n",
-      "endCaptures": {
-        "1": {
-          "name": "storage.frontmatter.slim"
-        }
-      },
-      "name": "source.yaml.meta.slim",
-      "patterns": [
-        {
-          "include": "source.yaml"
-        }
-      ]
-    },
-    {
       "begin": "^(\\s*)(coffee).*:$",
       "beginCaptures": {
         "2": {
@@ -164,7 +144,6 @@
       ]
     },
     {
-      "comment": "HTML comment",
       "begin": "^(\\s*)((/!)\\s*.*)$",
       "beginCaptures": {
         "2": {
@@ -178,7 +157,6 @@
       "name": "comment.block.html.slim"
     },
     {
-      "comment": "IE conditional comment",
       "begin": "^(\\s*)((/)((\\[).*(\\])).*)$",
       "beginCaptures": {
         "2": {
@@ -201,7 +179,6 @@
       "name": "comment.block.slim"
     },
     {
-      "comment": "Slim comment",
       "begin": "^(\\s*)((/)\\s*.*)$",
       "beginCaptures": {
         "2": {
@@ -245,7 +222,6 @@
       "include": "#inline-html"
     },
     {
-      "comment": "Doctypes",
       "match": "^\\s*(doctype)\\s+.*(\\n|$)",
       "captures": {
         "0": {
@@ -325,18 +301,6 @@
         }
       },
       "match": "^\\s*(\\\\.)"
-    },
-    {
-      "begin": "^\\s*(?=\\||')",
-      "end": "$",
-      "patterns": [
-        {
-          "include": "#interpolated-ruby"
-        },
-        {
-          "include": "text.html.basic"
-        }
-      ]
     }
   ],
   "repository": {
@@ -471,27 +435,6 @@
         }
       ]
     },
-    "html-attribute-in-filter": {
-      "begin": "\\s*([\\w-]+)",
-      "beginCaptures": {
-        "1": {
-          "name": "entity.other.attribute-name.slim"
-        }
-      },
-      "end": "(?=:)",
-      "patterns": [
-        {
-          "match": "\\s*=\\s*",
-          "name": "punctuation.separator.key-value.slim"
-        },
-        {
-          "include": "#string-double-quoted"
-        },
-        {
-          "include": "#string-single-quoted"
-        }
-      ]
-    },
     "inline-html": {
       "begin": "(?=</?[\\w\\d\\:]+)",
       "end": "$|\\/\\>",
@@ -604,7 +547,6 @@
       "begin": "(==|=)(<>|><|<'|'<|<|>)?|-\\s*",
       "contentName": "meta.embedded.slim meta.string.ruby source.ruby.embedded.slim",
       "end": "(do\\s*\\n$)|(?<!\\\\|,|,\\n|\\\\\\n)$",
-      "comment": "Hack to thwart Sublime's Ruby highlighter. It thinks do without a variable continues the next line (this can be muted with a / at the end of the line). For things like yields, do is unnecessary without an argument, so this hack will suffice",
       "beginCaptures": {
         "0": {
           "name": "punctuation.section.embedded.slim"
@@ -621,7 +563,6 @@
       "name": "meta.embedded.slim meta.line.ruby.slim",
       "patterns": [
         {
-          "comment": "Hack to let ruby comments work in this context properly",
           "match": "#.*$",
           "name": "comment.line.number-sign.ruby"
         },
@@ -764,7 +705,6 @@
       ]
     },
     "verbatim-text": {
-      "comment": "Verbatim text (can include HTML tags and copied lines)",
       "begin": "^(\\s*)([|'][<>]{0,2})\\s*",
       "beginCaptures": {
         "2": {

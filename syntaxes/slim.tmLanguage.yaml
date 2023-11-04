@@ -26,18 +26,6 @@ patterns:
     patterns:
       - include: source.js
 
-  - begin: ^(---)\s*\n
-    beginCaptures:
-      '1':
-        name: storage.frontmatter.slim
-    end: ^(---)\s*\n
-    endCaptures:
-      '1':
-        name: storage.frontmatter.slim
-    name: source.yaml.meta.slim
-    patterns:
-      - include: source.yaml
-
   - begin: ^(\s*)(coffee).*:$
     beginCaptures:
       '2':
@@ -81,9 +69,6 @@ patterns:
     end: ^(?!(\1\s)|\s*$)
     name: meta.filter.slim source.scss.embedded.slim
     patterns:
-      # - include: '#html-attribute-in-filter'
-      # - match: :$
-        # name: punctuation.definition.filter.slim
       - include: source.css.scss
 
   - begin: ^(\s*)(less).*:$
@@ -105,8 +90,7 @@ patterns:
       - include: text.html.erb
 
   # HTML comments [https://github.com/slim-template/slim#html-comment-]
-  - comment: "HTML comment"
-    begin: ^(\s*)((/!)\s*.*)$
+  - begin: ^(\s*)((/!)\s*.*)$
     beginCaptures:
       '2':
         name: comment.line.slash.slim
@@ -116,8 +100,7 @@ patterns:
     name: comment.block.html.slim
 
   # IE conditional comments [https://github.com/slim-template/slim#ie-conditional-comment-]
-  - comment: "IE conditional comment"
-    begin: ^(\s*)((/)((\[).*(\])).*)$
+  - begin: ^(\s*)((/)((\[).*(\])).*)$
     beginCaptures:
       '2':
         name: comment.line.slash.slim
@@ -133,8 +116,7 @@ patterns:
     name: comment.block.slim
 
   # Slim comments [https://github.com/slim-template/slim#code-comment-]
-  - comment: "Slim comment"
-    begin: ^(\s*)((/)\s*.*)$
+  - begin: ^(\s*)((/)\s*.*)$
     beginCaptures:
       '2':
         name: comment.line.slash.slim
@@ -161,8 +143,7 @@ patterns:
   - include: '#inline-html'
 
   # Doctypes [https://github.com/slim-template/slim#doctype-declaration]
-  - comment: Doctypes
-    match: ^\s*(doctype)\s+.*(\n|$)
+  - match: ^\s*(doctype)\s+.*(\n|$)
     captures:
       '0':
         name: meta.tag.sgml.doctype.slim
@@ -186,7 +167,6 @@ patterns:
       '1':
         # Inline tag ul: li: a [https://github.com/slim-template/slim#inline-tags]
         name: punctuation.definition.tag.end.slim
-
     patterns:
       - include: '#xml-namespace'
       - include: '#root-class-id-tag'
@@ -206,14 +186,6 @@ patterns:
       '1':
         name: meta.escape.slim
     match: ^\s*(\\.)
-
-  - begin: ^\s*(?=\||')
-    end: $
-    patterns:
-      - include: '#interpolated-ruby'
-      - include: text.html.basic
-
-
 
 repository:
   # Attribute wrappers [https://github.com/slim-template/slim#attributes-wrapper]
@@ -341,6 +313,7 @@ repository:
     patterns:
       - include: source.ruby
 
+  # Class and ID parts of tags [https://github.com/slim-template/slim#id-shortcut--and-class-shortcut-]
   root-class-id-tag:
     match: (\.)(([\w-]|(?::(?!\s)))+(/\d+)?)|(#)(([\w-]|(?::(?!\s)))+(/\d+)?)
 
@@ -389,15 +362,15 @@ repository:
     patterns:
       - include: source.ruby
 
+  # Ruby code line [https://github.com/slim-template/slim#control-code--]
   rubyline:
     begin: (==|=)(<>|><|<'|'<|<|>)?|-\s*
     contentName: meta.embedded.slim meta.string.ruby source.ruby.embedded.slim
     end: (do\s*\n$)|(?<!\\|,|,\n|\\\n)$
-    comment: >-
-      Hack to thwart Sublime's Ruby highlighter. It thinks do without a variable
-      continues the next line (this can be muted with a / at the end of the
-      line). For things like yields, do is unnecessary without an argument, so
-      this hack will suffice
+    # Hack to thwart Sublime's Ruby highlighter. It thinks do without a variable
+    # continues the next line (this can be muted with a / at the end of the
+    # line). For things like yields, do is unnecessary without an argument, so
+    # this hack will suffice
     beginCaptures:
       '0':
         name: punctuation.section.embedded.slim
@@ -408,8 +381,8 @@ repository:
         name: keyword.control.start-block.ruby
     name: meta.embedded.slim meta.line.ruby.slim
     patterns:
-      - comment: Hack to let ruby comments work in this context properly
-        match: '#.*$'
+      # Hack to let ruby comments work in this context properly
+      - match: '#.*$'
         name: comment.line.number-sign.ruby
       - include: '#continuation'
       - include: source.ruby
@@ -472,6 +445,7 @@ repository:
       - include: '#interpolated-ruby'
       - include: '#entities'
 
+  # Tag attributes [https://github.com/slim-template/slim#attributes]
   tag-attribute:
     begin: ([\w.#-]+)\s*(==?)\s*
     name: meta.attribute-with-value.slim
@@ -491,9 +465,8 @@ repository:
       - include: '#ruby-attribute-symbol-array'
       - include: '#ruby-attribute-value'
 
-  # Verbatim text [https://github.com/slim-template/slim#verbatim-text-]
+  # Verbatim text (can include HTML tags) [https://github.com/slim-template/slim#verbatim-text-]
   verbatim-text:
-    comment: Verbatim text (can include HTML tags and copied lines)
     begin: ^(\s*)([|'][<>]{0,2})\s*
     beginCaptures:
       '2':
