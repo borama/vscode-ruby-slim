@@ -1,0 +1,324 @@
+/ These are Slim code blocks extracted from the Slim test suite:
+/ https://github.com/slim-template/slim/blob/main/test/literate/TESTS.md
+
+
+| Text block
+
+|< Text with leading whitespace.
+|  Text with leading whitespace.
+|> Text with trailing whitespace.
+|<> Text with both leading and trailing whitespace.
+
+|  Text
+    block
+
+     with
+
+    multiple
+   lines
+
+|
+
+   Text
+    block
+
+     with
+
+    multiple
+   lines
+
+|><
+
+   Text
+    block
+
+     with
+
+    multiple
+   lines
+
+body
+  | Text
+
+| <a href="http://github.com/slim-template/slim">github.com/slim-template/slim</a>
+
+|<a href="http://github.com/slim-template/slim">github.com/slim-template/slim</a>
+
+' Text block
+
+' Link to
+a href="http://github.com/slim-template/slim" github.com/slim-template/slim
+
+'  Text
+    block
+
+     with
+
+    multiple
+   lines
+
+'
+
+   Text
+    block
+
+     with
+
+    multiple
+   lines
+
+<a href="http://github.com/slim-template/slim">github.com/slim-template/slim</a>
+
+<html>
+  <head>
+    title Example
+  </head>
+  body
+    - if true
+      | yes
+    - else
+      | no
+</html>
+
+- greeting = 'Hello, World!'
+- if false
+  | Not true
+- else
+  = greeting
+
+- greeting = 'Hello, '+\
+     \
+    'World!'
+- if false
+  | Not true
+- else
+  = greeting
+
+- items = [{name: 'table', price: 10}, {name: 'chair', price: 5}]
+table#items
+  - for item in items do
+    tr
+      td.name = item[:name]
+      td.price = item[:price]
+
+- items = [{name: 'table', price: 10}, {name: 'chair', price: 5}]
+table#items
+  - for item in items
+    tr
+      td.name = item[:name]
+      td.price = item[:price]
+
+= 7*7
+
+= '<script>evil();</script>'
+
+= (0..10).map do |i|\
+  2**i \
+end.join(', ')
+
+ruby:
+  def self.test(*args)
+    args.join('-')
+  end
+= test('arg1',
+'arg2',
+'arg3')
+
+=> 7*7
+
+=< 7*7
+
+=<> 7*7
+
+== '<script>evil();</script>'
+
+==> '<script>evil();</script>'
+
+/ Comment
+body
+  / Another comment
+    with
+
+    multiple lines
+  p Hello!
+
+/! Comment
+body
+  /! Another comment
+     with multiple lines
+  p Hello!
+  /!
+      First line determines indentation
+
+      of the comment
+
+/[if IE]
+    p Get a better browser.
+
+doctype xml
+doctype xml ISO-8859-1
+
+doctype html
+doctype 5
+doctype 1.1
+doctype strict
+doctype frameset
+doctype mobile
+doctype basic
+doctype transitional
+
+doctype html
+doctype 5
+doctype strict
+doctype frameset
+doctype transitional
+
+div id="not-closed"
+.closed/
+#closed/
+div id="closed"/
+
+img src="image.png"
+
+a#closed> class="test" /
+a#closed> class="test"/
+a> href='url1' Link1
+a< href='url1' Link1
+
+a> => 'Text1'
+a => 'Text2'
+a> = 'Text3'
+a>= 'Text4'
+a=> 'Text5'
+a<= 'Text6'
+a=< 'Text7'
+
+a#closed< class="test" /
+a#closed< class="test"/
+a< href='url1' Link1
+a< href='url2' Link2
+
+a#closed<> class="test" /
+a#closed>< class="test"/
+a<> href='url1' Link1
+a<> href='url2' Link2
+
+ul
+  li.first: a href="/first" First
+  li: a href="/second" Second
+
+ul
+  li.first: a(href="/first") First
+  li: a(href="/second") Second
+
+li
+  a(href="http://github.com/slim-template/slim" class="important") Link
+li
+  a[href="http://github.com/slim-template/slim" class="important"] Link
+li
+  a{href="http://github.com/slim-template/slim" class="important"} Link
+
+a(href="http://github.com/slim-template/slim"
+
+     class="important") Link
+
+dl(
+  itemprop='address'
+  itemscope
+  itemtype='http://schema.org/PostalAddress'
+)
+
+h1 id = "logo" Logo
+h2 [ id = "tagline" ] Tagline
+
+a href="http://github.com/slim-template/slim" title='Slim Homepage' Goto the Slim homepage
+
+- url='github.com/slim-template/slim'
+a href="http://#{url}" Goto the #{url}
+a href="{"test"}" Test of quoted text in braces
+
+li
+  a href='&' Link
+li
+  a href=="&amp;" Link
+
+a data-title="help" data-content="extremely long help text that goes on
+  and one and one and then starts over...." Link
+
+a data-title="help" data-content="extremely long help text that goes on\
+  and one and one and then starts over...." Link
+
+a href=1+\
+   1 Link
+
+ruby:
+  def self.test(*args)
+    args.join('-')
+  end
+a href=test('arg1',
+'arg2',
+'arg3') Link
+
+- true_value1 = ""
+- true_value2 = true
+input type="text" disabled=true_value1
+input type="text" disabled=true_value2
+input type="text" disabled="disabled"
+input type="text" disabled=true
+input(type="text" disabled)
+
+- false_value1 = false
+- false_value2 = nil
+input type="text" disabled=false_value1
+input type="text" disabled=false_value2
+input type="text"
+input type="text" disabled=false
+input type="text" disabled=nil
+
+a.menu class="highlight" href="http://github.com/slim-template/slim/" github.com/slim-template/slim
+
+- classes = [:alpha, :beta]
+span class=["first","highlight"] class=classes First
+span class=:second,:highlight class=classes Second
+
+ruby:
+  def self.a_unless_current
+    @page_current ? {tag: 'span'} : {tag: 'a', href: 'http://github.com/slim-template/slim/'}
+  end
+- @page_current = true
+*a_unless_current Link
+- @page_current = false
+*a_unless_current Link
+
+sec: c.content Text
+
+&text name="user"
+&password name="pw"
+&submit.CLASS#ID
+
+&text name="user"
+&password name="pw"
+&submit#>CLASS#<ID
+
+.test
+
+.#test
+.test
+#test
+
+.-test text
+#test- text
+.--a#b- text
+.a--test-123#--b text
+.a-1/2#b-1/2 text
+.ab:c-test#d:e text
+
+- user="John Doe <john@doe.net>"
+h1 Welcome #{user}!
+
+doctype xml
+document
+  closed-element/
+  element(boolean-attribute)
+    child attribute="value"
+      | content
