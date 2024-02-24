@@ -6,30 +6,32 @@ The **Ruby Slim** extension brings [Slim template language](https://github.com/s
 ## Features
 
 - A more complete [Tailwind CSS](https://tailwindcss.com) support, including:
+
   - [breakpoint prefixes](https://tailwindcss.com/docs/responsive-design) in class shortcuts (`.sm:text-center`)
+
   - [modifiers](https://tailwindcss.com/docs/responsive-design) in class shortcuts, even multiple ones (`.hover:dark:text-white`)
+
   - [opacity modifiers](https://tailwindcss.com/docs/text-color#changing-the-opacity) (`text-blue-600/50`)
 
-  <img src="img/tailwind.png">
+  <img src="img/tailwind.png" width="600">
 
 
 - Multiline attributes wrapping:
 
-  <img src="img/attribute_wrapping.png" style="max-width: 30em">
+  <img src="img/attribute_wrapping.png" width="500">
 
 - Multiline comments:
 
-  <img src="img/multiline_comments.png" style="max-width: 18em">
+  <img src="img/multiline_comments.png" width="300">
 
 - Embedded languages: Ruby, JavaScript, Markdown, ERB, CSS, CoffeeScript, Sass, Less:
 
-  <img src="img/markdown.png" style="max-width: 30em">
+  <img src="img/markdown.png" width="500">
 
 
 - More precise [scopes](https://macromates.com/manual/en/language_grammars#naming_conventions) for highlighting
 
 - Developer goodies:
-
   - Full tests coverage
   - Grammar in a more human-readable format (YAML instead of JSON)
 
