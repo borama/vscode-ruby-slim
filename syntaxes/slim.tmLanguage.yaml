@@ -467,7 +467,7 @@ repository:
 
   # Verbatim text (can include HTML tags) [https://github.com/slim-template/slim#verbatim-text-]
   verbatim-text:
-    begin: ^(\s*)([|'][<>]{0,2})\s*
+    begin: ^(\s*)([|'](< |> |<> |>< )?)\s*
     beginCaptures:
       '2':
         name: punctuation.section.verbatim.slim

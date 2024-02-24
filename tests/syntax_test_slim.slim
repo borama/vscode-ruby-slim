@@ -46,6 +46,18 @@
 /                    ^^^^ meta.tag.inline.b.end.html
 /                    ^^^^^^^^^^^^^^^^^^^^^^^^ text.html.embedded.slim
 
+| <a href="http://a">link</a>
+/ <- punctuation.section.verbatim.slim
+/ ^^^^^^^^^^^^^^^^^^^^^^^^^^^ text.html.embedded.slim
+/ ^^^^^^^^^^^^^^^^^^^ meta.tag.inline.a.start.html
+/                        ^^^^ meta.tag.inline.a.end.html
+
+|<a href="http://a">link without leading space</a>
+/ <- punctuation.section.verbatim.slim
+/ ^^^^^^^^^^^^^^^^^^^^^^^^^^^ text.html.embedded.slim
+/^^^^^^^^^^^^^^^^^^^ meta.tag.inline.a.start.html
+/                                             ^^^^ meta.tag.inline.a.end.html
+
 |< Verbatim
 / <- punctuation.section.verbatim.slim
 /^ punctuation.section.verbatim.slim
