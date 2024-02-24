@@ -41,7 +41,7 @@ and is well tested.
 ## Known Issues
 
 - [Arbitrary values](https://tailwindcss.com/docs/adding-custom-styles#using-arbitrary-values) in class shortcuts (`.top-[117px]`) are
-  [not supported](https://github.com/slim-template/slim/issues/906) by Slim nor by this extension.
+  [not supported](https://github.com/slim-template/slim/issues/906) by Slim or by this extension.
 
 - Multiline ruby expressions in HTML attribute values are not supported (this would probably require [semantic
   highlighting](https://code.visualstudio.com/api/language-extensions/semantic-highlight-guide) / LSP).
