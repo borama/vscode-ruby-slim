@@ -254,7 +254,8 @@ repository:
 
   # Class shortcut [https://github.com/slim-template/slim#id-shortcut--and-class-shortcut-]
   class-shortcut:
-    match: (\.)(([\w-]|(?::(?!\s)))+(/\d+)?)
+    # dot (.) then word OR hyphen OR TW prefix colon (:), then optional TW opacity number (/number)
+    match: (\.)((?:[\w-]|(?::(?!\s)))+(?:/\d+)?)
     captures:
       '1':
         name: punctuation.definition.attribute.class.slim

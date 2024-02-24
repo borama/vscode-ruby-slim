@@ -402,7 +402,7 @@
       ]
     },
     "class-shortcut": {
-      "match": "(\\.)(([\\w-]|(?::(?!\\s)))+(/\\d+)?)",
+      "match": "(\\.)((?:[\\w-]|(?::(?!\\s)))+(?:/\\d+)?)",
       "captures": {
         "1": {
           "name": "punctuation.definition.attribute.class.slim"

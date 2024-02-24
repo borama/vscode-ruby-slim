@@ -506,7 +506,7 @@ button#q:other
 /      ^^^^^^^ entity.other.attribute-name.id.html
 
 /! Invalid TailwindCSS class
-butoon.w-2/a
+button.w-2/a
 / <- meta.tag.slim entity.name.tag.slim
 /^^^^^^^^^^ meta.tag.slim
 /^^^^^ entity.name.tag.slim
@@ -515,7 +515,7 @@ butoon.w-2/a
 /         ^ punctuation.terminator.tag.slim
 /          ^ text.html.embedded.slim
 
-/! Tailwind classes with brackets are not supported by slim 4.1.0 with default options
+/! Tailwind arbitrary values are not supported by Slim class shortcuts https://github.com/slim-template/slim/issues/906
 bottom.top-[117px].bg-cyan-700
 / <- meta.tag.slim entity.name.tag.slim
 /^^^^^^^^^^ meta.tag.slim
