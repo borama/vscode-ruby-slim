@@ -208,6 +208,7 @@ repository:
     name: meta.braces.slim
     patterns:
       - include: '#tag-attribute'
+      - include: '#tag-boolean-attribute'
 
   # Attribute wrappers [https://github.com/slim-template/slim#attributes-wrapper]
   attribute-wrapper-brackets:
@@ -222,6 +223,7 @@ repository:
     name: meta.brackets.slim
     patterns:
       - include: '#tag-attribute'
+      - include: '#tag-boolean-attribute'
 
   # Attribute wrappers [https://github.com/slim-template/slim#attributes-wrapper]
   attribute-wrapper-parens:
@@ -236,6 +238,7 @@ repository:
     name: meta.parens.slim
     patterns:
       - include: '#tag-attribute'
+      - include: '#tag-boolean-attribute'
 
   # Boolean attribute value [https://github.com/slim-template/slim#boolean-attributes]
   boolean-attribute-value:
@@ -464,6 +467,12 @@ repository:
       - include: '#ruby-attribute-hash'
       - include: '#ruby-attribute-symbol-array'
       - include: '#ruby-attribute-value'
+
+  # Boolean tag attribute (bare word) [https://github.com/slim-template/slim#attributes]
+  tag-boolean-attribute:
+    begin: ([\w.#-]+)\s*
+    name: meta.attribute-with-value.slim entity.other.attribute-name.slim
+    end: (?=(?::?\s|\)|\]|\}))|$
 
   # Verbatim text (can include HTML tags) [https://github.com/slim-template/slim#verbatim-text-]
   verbatim-text:

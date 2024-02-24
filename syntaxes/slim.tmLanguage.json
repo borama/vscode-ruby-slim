@@ -334,6 +334,9 @@
       "patterns": [
         {
           "include": "#tag-attribute"
+        },
+        {
+          "include": "#tag-boolean-attribute"
         }
       ]
     },
@@ -354,6 +357,9 @@
       "patterns": [
         {
           "include": "#tag-attribute"
+        },
+        {
+          "include": "#tag-boolean-attribute"
         }
       ]
     },
@@ -374,6 +380,9 @@
       "patterns": [
         {
           "include": "#tag-attribute"
+        },
+        {
+          "include": "#tag-boolean-attribute"
         }
       ]
     },
@@ -703,6 +712,11 @@
           "include": "#ruby-attribute-value"
         }
       ]
+    },
+    "tag-boolean-attribute": {
+      "begin": "([\\w.#-]+)\\s*",
+      "name": "meta.attribute-with-value.slim entity.other.attribute-name.slim",
+      "end": "(?=(?::?\\s|\\)|\\]|\\}))|$"
     },
     "verbatim-text": {
       "begin": "^(\\s*)([|'](< |> |<> |>< )?)\\s*",
