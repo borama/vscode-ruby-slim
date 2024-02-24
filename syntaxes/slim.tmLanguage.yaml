@@ -169,7 +169,7 @@ patterns:
         name: punctuation.definition.tag.end.slim
     patterns:
       - include: '#xml-namespace'
-      - include: '#root-class-id-tag'
+      - include: '#class-id-shortcut'
       - include: '#attribute-wrapper'
       - include: '#splat-attribute'
       - include: '#whitespace-modifier'
@@ -246,6 +246,21 @@ repository:
     end: (?=\s)|$
     name: constant.language.slim
 
+  # Class and ID parts of tags [https://github.com/slim-template/slim#id-shortcut--and-class-shortcut-]
+  class-id-shortcut:
+    patterns:
+      - include: "#class-shortcut"
+      - include: "#id-shortcut"
+
+  # Class shortcut [https://github.com/slim-template/slim#id-shortcut--and-class-shortcut-]
+  class-shortcut:
+    match: (\.)(([\w-]|(?::(?!\s)))+(/\d+)?)
+    captures:
+      '1':
+        name: punctuation.definition.attribute.class.slim
+      '2':
+        name: entity.other.attribute-name.class.html
+
   continuation:
     captures:
       '1':
@@ -284,6 +299,15 @@ repository:
       - match: '&'
         name: invalid.illegal.bad-ampersand.html
 
+  # ID shortcut [https://github.com/slim-template/slim#id-shortcut--and-class-shortcut-]
+  id-shortcut:
+    match: (#)(([\w-]|(?::(?!\s)))+(/\d+)?)
+    captures:
+      '1':
+        name: punctuation.definition.attribute.id.slim
+      '2':
+        name: entity.other.attribute-name.id.html
+
   # Inline HTML [https://github.com/slim-template/slim#inline-html-]
   inline-html:
     begin: (?=</?[\w\d\:]+)
@@ -315,20 +339,6 @@ repository:
     name: meta.interpolation.slim meta.string.ruby source.ruby.embedded.slim
     patterns:
       - include: source.ruby
-
-  # Class and ID parts of tags [https://github.com/slim-template/slim#id-shortcut--and-class-shortcut-]
-  root-class-id-tag:
-    match: (\.)(([\w-]|(?::(?!\s)))+(/\d+)?)|(#)(([\w-]|(?::(?!\s)))+(/\d+)?)
-
-    captures:
-      '1':
-        name: punctuation.definition.attribute.class.slim
-      '2':
-        name: entity.other.attribute-name.class.html
-      '5':
-        name: punctuation.definition.attribute.id.slim
-      '6':
-        name: entity.other.attribute-name.id.html
 
   # Ruby array attribute value attribute=[a, b] [https://github.com/slim-template/slim#ruby-attributes]
   ruby-attribute-array:

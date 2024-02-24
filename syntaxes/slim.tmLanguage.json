@@ -260,7 +260,7 @@
           "include": "#xml-namespace"
         },
         {
-          "include": "#root-class-id-tag"
+          "include": "#class-id-shortcut"
         },
         {
           "include": "#attribute-wrapper"
@@ -391,6 +391,27 @@
       "end": "(?=\\s)|$",
       "name": "constant.language.slim"
     },
+    "class-id-shortcut": {
+      "patterns": [
+        {
+          "include": "#class-shortcut"
+        },
+        {
+          "include": "#id-shortcut"
+        }
+      ]
+    },
+    "class-shortcut": {
+      "match": "(\\.)(([\\w-]|(?::(?!\\s)))+(/\\d+)?)",
+      "captures": {
+        "1": {
+          "name": "punctuation.definition.attribute.class.slim"
+        },
+        "2": {
+          "name": "entity.other.attribute-name.class.html"
+        }
+      }
+    },
     "continuation": {
       "captures": {
         "1": {
@@ -444,6 +465,17 @@
         }
       ]
     },
+    "id-shortcut": {
+      "match": "(#)(([\\w-]|(?::(?!\\s)))+(/\\d+)?)",
+      "captures": {
+        "1": {
+          "name": "punctuation.definition.attribute.id.slim"
+        },
+        "2": {
+          "name": "entity.other.attribute-name.id.html"
+        }
+      }
+    },
     "inline-html": {
       "begin": "(?=</?[\\w\\d\\:]+)",
       "end": "$|\\/\\>",
@@ -489,23 +521,6 @@
           "include": "source.ruby"
         }
       ]
-    },
-    "root-class-id-tag": {
-      "match": "(\\.)(([\\w-]|(?::(?!\\s)))+(/\\d+)?)|(#)(([\\w-]|(?::(?!\\s)))+(/\\d+)?)",
-      "captures": {
-        "1": {
-          "name": "punctuation.definition.attribute.class.slim"
-        },
-        "2": {
-          "name": "entity.other.attribute-name.class.html"
-        },
-        "5": {
-          "name": "punctuation.definition.attribute.id.slim"
-        },
-        "6": {
-          "name": "entity.other.attribute-name.id.html"
-        }
-      }
     },
     "ruby-attribute-array": {
       "begin": "(?=\\[)",
