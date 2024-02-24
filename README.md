@@ -91,6 +91,8 @@ npx vscode-tmgrammar-test \
 
 ### Slim output test
 
+Useful to find out whether some syntax is supported by Slim itself.
+
 ```bash
 echo "markdown:
   <br aa=\"#{bb}\">" | slimrb -s -l '{ bb: "something" }'
