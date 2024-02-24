@@ -1,15 +1,30 @@
-# ruby-slim
+# Slim syntax highlighting for VSCode
 
-The Ruby Slim extension brings [Slim template language](https://github.com/slim-template/slim) support to VSCode. It is inspired by the original [Slim extension](https://marketplace.visualstudio.com/items?itemName=sianglim.slim)
-    but supports all modern features such as Tailwind CSS and is well tested.
+The **Ruby Slim** extension brings [Slim template language](https://github.com/slim-template/slim) support to VSCode. It is inspired by the [Slim extension](https://marketplace.visualstudio.com/items?itemName=sianglim.slim) by Siang Lim
+    but aims to support more modern features such as Tailwind CSS and is well tested.
 
 ## Features
 
 - A more complete [Tailwind CSS](https://tailwindcss.com) support, including:
-  - [breakpoint prefixes](https://tailwindcss.com/docs/responsive-design) (`sm:`, `lg:`)
+  - [breakpoint prefixes](https://tailwindcss.com/docs/responsive-design) in class shortcuts (`.sm:text-center`)
+  - [modifiers](https://tailwindcss.com/docs/responsive-design) in class shortcuts, even multiple ones (`.hover:dark:text-white`)
   - [opacity modifiers](https://tailwindcss.com/docs/text-color#changing-the-opacity) (`text-blue-600/50`)
 
-- Multiline attributes and comments support
+  <img src="img/tailwind.png">
+
+
+- Multiline attributes wrapping:
+
+  <img src="img/attribute_wrapping.png" style="max-width: 30em">
+
+- Multiline comments:
+
+  <img src="img/multiline_comments.png" style="max-width: 18em">
+
+- Embedded languages: Ruby, JavaScript, Markdown, ERB, CSS, CoffeeScript, Sass, Less:
+
+  <img src="img/markdown.png" style="max-width: 30em">
+
 
 - More precise [scopes](https://macromates.com/manual/en/language_grammars#naming_conventions) for highlighting
 
@@ -20,25 +35,26 @@ The Ruby Slim extension brings [Slim template language](https://github.com/slim-
 
 ## Known Issues
 
-- [Arbitrary values](https://tailwindcss.com/docs/adding-custom-styles#using-arbitrary-values) (`top-[117px]`) are
-  [not supported](https://github.com/slim-template/slim/issues/906) by Slim nor by this plugin.
+- [Arbitrary values](https://tailwindcss.com/docs/adding-custom-styles#using-arbitrary-values) in class shortcuts (`.top-[117px]`) are
+  [not supported](https://github.com/slim-template/slim/issues/906) by Slim nor by this extension.
 
-- Multiline ruby expressions in HTML attribute values are not supported (this would probably require semantic
-  highlighting / LSP).
+- Multiline ruby expressions in HTML attribute values are not supported (this would probably require [semantic
+  highlighting](https://code.visualstudio.com/api/language-extensions/semantic-highlight-guide) / LSP).
 
 ## Release Notes
 
-0.0.1 Initial release
+0.9 Initial release
 
 ## Development
 
 ### Helpful links
 
-- [My blog post about creating this plugin]TBD
+- [My blog post about creating this extension]TBD
 - [Syntax Highlighting Guide](https://code.visualstudio.com/api/language-extensions/syntax-highlight-guide) - official guide from the VSCode team
-- [SublimeText Slim grammar](https://github.com/SublimeText/Slim/blob/master/Syntaxes/Slim.sublime-syntax) - this plugin inspires heavily from this grammar
-- [Writing a TextMate Grammar: Some Lessons Learned](https://www.apeth.com/nonblog/stories/textmatebundle.html) - an older but still the best resource
+- [SublimeText Slim 2.0 grammar](https://github.com/SublimeText/Slim/blob/master/Syntaxes/Slim.sublime-syntax) - this extension gets a lot of inspiration from this SublimeText grammar
+- [Writing a TextMate Grammar: Some Lessons Learned](https://www.apeth.com/nonblog/stories/textmatebundle.html) - an older resource but still one of the best
 - [Rubular](https://rubular.com/) is your best friend here
+- as is a [good regexp manual](https://www.regextutorial.org)
 
 ### YAML compilation
 
