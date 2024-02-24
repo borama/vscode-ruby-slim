@@ -1,7 +1,9 @@
 # Slim syntax highlighting for VSCode
 
-The **Ruby Slim** extension brings [Slim template language](https://github.com/slim-template/slim) support to VSCode. It is inspired by the [Slim extension](https://marketplace.visualstudio.com/items?itemName=sianglim.slim) by Siang Lim
-    but aims to support more modern features such as Tailwind CSS and is well tested.
+The **Ruby Slim** extension brings [Slim template language](https://github.com/slim-template/slim) support to VSCode.
+It is inspired by the [Slim extension](https://marketplace.visualstudio.com/items?itemName=sianglim.slim) by Siang Lim
+but fixes its issues, aims to support more modern features such as [Tailwind CSS](https://tailwindcss.com)
+and is well tested.
 
 ## Features
 
@@ -28,12 +30,13 @@ The **Ruby Slim** extension brings [Slim template language](https://github.com/s
 
   <img src="img/markdown.png" width="500">
 
-
 - More precise [scopes](https://macromates.com/manual/en/language_grammars#naming_conventions) for highlighting
+
+  <img src="img/scopes.png" width="600">
 
 - Developer goodies:
   - Full tests coverage
-  - Grammar in a more human-readable format (YAML instead of JSON)
+  - Grammar in a human-friendly format (YAML instead of JSON)
 
 ## Known Issues
 
