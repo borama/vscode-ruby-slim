@@ -219,9 +219,6 @@
       "include": "#verbatim-text"
     },
     {
-      "include": "#inline-html"
-    },
-    {
       "match": "^\\s*(doctype)\\s+.*(\\n|$)",
       "captures": {
         "0": {
@@ -284,12 +281,6 @@
           "include": "#closed-tag-terminator"
         },
         {
-          "include": "#verbatim-text"
-        },
-        {
-          "include": "#inline-html"
-        },
-        {
           "include": "#inline-text"
         }
       ]
@@ -301,6 +292,9 @@
         }
       },
       "match": "^\\s*(\\\\.)"
+    },
+    {
+      "include": "#inline-text"
     }
   ],
   "repository": {
@@ -476,29 +470,19 @@
         }
       }
     },
-    "inline-html": {
-      "begin": "(?=</?[\\w\\d\\:]+)",
-      "end": "$|\\/\\>",
-      "contentName": "meta.embedded.slim text.html.embedded.slim",
-      "patterns": [
-        {
-          "include": "text.html.basic"
-        },
-        {
-          "include": "#interpolated-ruby"
-        }
-      ]
-    },
     "inline-text": {
       "begin": "(?=.)",
       "end": "(?<!\\\\\\n)$",
       "name": "meta.embedded.slim text.html.embedded.slim",
       "patterns": [
         {
+          "include": "text.html.basic"
+        },
+        {
           "include": "#interpolated-ruby"
         },
         {
-          "match": "([^#]|\\\\#)*\\n"
+          "match": "([^#<]|\\\\#|\\\\\\<)*\\n"
         }
       ]
     },
@@ -756,7 +740,7 @@
       "name": "text.html.embedded.whitespace.slim"
     },
     "whitespace-modifier": {
-      "match": "\\>|\\<|\\<\\>|\\>\\<",
+      "match": "(?<!\\s)(?:\\>|\\<|\\<\\>|\\>\\<)",
       "name": "keyword.operator.whitespace.slim"
     },
     "xml-namespace": {

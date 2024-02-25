@@ -216,13 +216,18 @@ div
 / <- text.html.embedded.slim meta.tag.structure.html.end.html
 /^^^^^^ text.html.embedded.slim meta.tag.structure.html.end.html
 
-.inline Text <normal html_underscore="value" normal="attribute" html-dash="value"><and this="this"> Text</normal>
-/            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ text.html.embedded.slim
+Text <normal html_underscore="value" html-dash="value"><and this="this"> Text</normal>
+/    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ text.html.embedded.slim
+/     ^^^^^^ entity.name.tag.html
+
+.inline Text <normal html_underscore="value" html-dash="value"><and this="this"> Text</normal>
+/            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ text.html.embedded.slim
+/             ^^^^^^ entity.name.tag.html
 
 <normal class="html-tag" underscore_attribute="value" normal-dash-attribute="value">
 / <- punctuation.definition.tag.begin.html
 /^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ text.html.embedded.slim
-
+/^^^^^^ entity.name.tag.html
 
 /[ Doctype Tests ]/////////////////////////////////////////////////////////////
 
