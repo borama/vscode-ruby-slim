@@ -72,5 +72,5 @@ See the wiki for some [development hints](https://github.com/borama/vscode-ruby-
 - [Rubular](https://rubular.com/) is your best friend here
 - as is a [good regexp manual](https://www.regextutorial.org)
 - the [Slim extension](https://marketplace.visualstudio.com/items?itemName=sianglim.slim)
-by Siang Lim that this one builds on
+by Siang Lim that this one originates from
 - the [vscode-ruby-lsp](https://github.com/Shopify/vscode-ruby-lsp) project has some nice Ruby/ERB [grammars](https://github.com/Shopify/vscode-ruby-lsp/tree/main/grammars)
