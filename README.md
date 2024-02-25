@@ -29,6 +29,10 @@ by Siang Lim it fixes its issues, aims to support more modern features such as
 
   <img src="img/multiline_comments.png" width="300">
 
+- Multiline attribute ruby expressions (this requires a Ruby syntax plugin such as [Ruby LSP](https://github.com/Shopify/vscode-ruby-lsp)):
+
+  <img src="img/multiline_ruby_expressions.png" width="400">
+
 - Embedded languages: Ruby, JavaScript, Markdown, ERB, CSS, CoffeeScript, Sass, Less:
 
   <img src="img/markdown.png" width="500">
@@ -45,9 +49,6 @@ by Siang Lim it fixes its issues, aims to support more modern features such as
 
 - [Arbitrary values](https://tailwindcss.com/docs/adding-custom-styles#using-arbitrary-values) in class shortcuts (`.top-[117px]`) are
   [not supported](https://github.com/slim-template/slim/issues/906) by Slim and this extension.
-
-- Multiline ruby expressions in HTML attribute values are not supported (this would probably require [semantic
-  highlighting](https://code.visualstudio.com/api/language-extensions/semantic-highlight-guide) / LSP).
 
 ## Release Notes
 
