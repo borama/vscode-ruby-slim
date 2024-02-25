@@ -1,5 +1,6 @@
+.gitignore
 .vscode/**
 .vscode-test/**
-.gitignore
-tests/**
 results.txt
+syntaxes/*.yaml
+tests/**
