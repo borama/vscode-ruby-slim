@@ -41,18 +41,20 @@ by Siang Lim it fixes its issues, aims to support more modern features such as
 ## Known Issues
 
 - [Arbitrary values](https://tailwindcss.com/docs/adding-custom-styles#using-arbitrary-values) in class shortcuts (`.top-[117px]`) are
-  [not supported](https://github.com/slim-template/slim/issues/906) by Slim or by this extension.
+  [not supported](https://github.com/slim-template/slim/issues/906) by Slim and this extension.
 
 - Multiline ruby expressions in HTML attribute values are not supported (this would probably require [semantic
   highlighting](https://code.visualstudio.com/api/language-extensions/semantic-highlight-guide) / LSP).
 
 ## Release Notes
 
-0.9 Initial release
+See the [Changelog](https://github.com/borama/vscode-ruby-slim/blob/main/CHANGELOG.md).
 
-## Development
+## Contributing
 
-### Helpful links
+Please file an [Issue](https://github.com/borama/vscode-ruby-slim/issues) or [Pull Request](https://github.com/borama/vscode-ruby-slim/pulls) on the [GitHub repository](https://github.com/borama/vscode-ruby-slim)
+
+## Helpful links / Acknowledgements
 
 - [My blog post about creating this extension]TBD
 - [Syntax Highlighting Guide](https://code.visualstudio.com/api/language-extensions/syntax-highlight-guide) - official guide from the VSCode team
@@ -60,47 +62,5 @@ by Siang Lim it fixes its issues, aims to support more modern features such as
 - [Writing a TextMate Grammar: Some Lessons Learned](https://www.apeth.com/nonblog/stories/textmatebundle.html) - an older resource but still one of the best
 - [Rubular](https://rubular.com/) is your best friend here
 - as is a [good regexp manual](https://www.regextutorial.org)
-
-### YAML compilation
-
-```bash
-npx js-yaml syntaxes/slim.tmLanguage.yaml > syntaxes/slim.tmLanguage.json
-npx js-yaml syntaxes/interpolated-ruby.yaml > syntaxes/interpolated-ruby.json
-```
-
-### Tests run
-
-See the [vscode-tmgrammar-test](https://github.com/PanAeon/vscode-tmgrammar-test) project.
-
-```sh
-npx vscode-tmgrammar-test \
-    -g syntaxes/slim.tmLanguage.json \
-    -g tests/support_grammars/html.tmLanguage.json \
-    -g tests/support_grammars/ruby.tmLanguage.json \
-    -g tests/support_grammars/coffeescript.tmLanguage.json \
-    -g tests/support_grammars/css.tmLanguage.json \
-    -g tests/support_grammars/less.tmLanguage.json \
-    -g tests/support_grammars/erb.tmLanguage.json \
-    -g tests/support_grammars/JavaScript.tmLanguage.json \
-    -g tests/support_grammars/markdown.tmLanguage.json \
-    -g tests/support_grammars/scss.tmLanguage.json \
-    -g tests/support_grammars/sass.tmLanguage.json \
-    -g tests/support_grammars/html-derivative.tmLanguage.json \
-    tests/syntax_test_slim.slim > results.txt
-```
-
-### Slim output test
-
-Useful to find out whether some syntax is supported by Slim itself.
-
-```bash
-echo "markdown:
-  <br aa=\"#{bb}\">" | slimrb -s -l '{ bb: "something" }'
-
-```
-
-### Pack extension
-
-```bash
-npx vsce package
-```
+- the [Slim extension](https://marketplace.visualstudio.com/items?itemName=sianglim.slim)
+by Siang Lim that this one builds on
