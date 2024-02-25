@@ -29,7 +29,7 @@ by Siang Lim it fixes its issues, aims to support more modern features such as
 
   <img src="img/multiline_comments.png" width="300">
 
-- Multiline attribute ruby expressions (this requires a Ruby syntax plugin such as [Ruby LSP](https://github.com/Shopify/vscode-ruby-lsp)):
+- Multiline attribute ruby expressions (this requires a Ruby syntax extension such as [Ruby LSP](https://github.com/Shopify/vscode-ruby-lsp)):
 
   <img src="img/multiline_ruby_expressions.png" width="400">
 
