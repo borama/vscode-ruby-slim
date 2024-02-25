@@ -67,3 +67,4 @@ Please file an [Issue](https://github.com/borama/vscode-ruby-slim/issues) or [Pu
 - as is a [good regexp manual](https://www.regextutorial.org)
 - the [Slim extension](https://marketplace.visualstudio.com/items?itemName=sianglim.slim)
 by Siang Lim that this one builds on
+- the [vscode-ruby-lsp](https://github.com/Shopify/vscode-ruby-lsp) project has some nice Ruby/ERB [grammars](https://github.com/Shopify/vscode-ruby-lsp/tree/main/grammars)

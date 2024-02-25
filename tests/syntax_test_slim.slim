@@ -738,6 +738,11 @@ a href==action_path(:start)
 / ^^^^ entity.other.attribute-name.slim
 /     ^^ punctuation.separator.key-value.slim
 
+a href=action_path("arg1",
+  "arg2")
+/ ^^^^^^^ meta.tag.slim meta.attribute-with-value.slim meta.embedded.slim source.ruby.embedded.slim
+/  ^^^^ string.quoted.double.interpolated.ruby
+
 div array=:menu,:highlight
 / <- meta.tag.slim entity.name.tag.slim
 /^^^ meta.tag.slim - meta.attribute-with-value.slim
@@ -748,9 +753,9 @@ div array=:menu,:highlight
 /                         ^ - meta.attribute-with-value.slim
 /   ^^^^^ entity.other.attribute-name.slim
 /        ^ punctuation.separator.key-value.slim
-/         ^^^^^ constant.other.symbol.ruby
+/         ^^^^^ constant.language.symbol.ruby
 /              ^ punctuation.separator.object.ruby
-/               ^^^^^^^^^^ constant.other.symbol.ruby
+/               ^^^^^^^^^^ constant.language.symbol.ruby
 
 div group=( [ 'menu', "highlight" ] )
 / <- meta.tag.slim - meta.attribute-with-value.slim
@@ -762,7 +767,7 @@ div group=( [ 'menu', "highlight" ] )
 /        ^ punctuation.separator.key-value.slim
 /         ^ punctuation.definition.group.begin.slim
 /             ^^^^^^ meta.string.ruby string.quoted.single.ruby
-/                     ^^^^^^^^^^^ meta.string.ruby string.quoted.double.ruby
+/                     ^^^^^^^^^^^ meta.string.ruby string.quoted.double.interpolated.ruby
 /                                   ^ punctuation.definition.group.end.slim
 
 div array=[ 'menu', "highlight" ]
@@ -775,7 +780,7 @@ div array=[ 'menu', "highlight" ]
 /         ^ punctuation.section.array.begin.ruby
 /           ^^^^^^ meta.string.ruby string.quoted.single.ruby
 /                 ^ punctuation.separator.object.ruby
-/                   ^^^^^^^^^^^ meta.string.ruby string.quoted.double.ruby
+/                   ^^^^^^^^^^^ meta.string.ruby string.quoted.double.interpolated.ruby
 /                               ^ punctuation.section.array.end.ruby
 
 div hashes={ 0, 'str', "str" }
@@ -786,11 +791,11 @@ div hashes={ 0, 'str', "str" }
 /   ^^^^^^ entity.other.attribute-name.slim
 /         ^ punctuation.separator.key-value.slim
 /          ^ punctuation.section.scope.begin.ruby
-/            ^ constant.numeric.integer.ruby
+/            ^ constant.numeric.ruby
 /             ^ punctuation.separator.object.ruby
 /               ^^^^^ meta.string.ruby string.quoted.single.ruby
 /                    ^ punctuation.separator.object.ruby
-/                      ^^^^^ meta.string.ruby string.quoted.double.ruby
+/                      ^^^^^ meta.string.ruby string.quoted.double.interpolated.ruby
 /                            ^ punctuation.section.scope.end.ruby
 
   / Nested data hashes are not parsed well, currently.
@@ -806,9 +811,9 @@ div array==:menu,:highlight
 /                          ^ - meta.attribute-with-value.slim
 /   ^^^^^ entity.other.attribute-name.slim
 /        ^^ punctuation.separator.key-value.slim
-/          ^^^^^ constant.other.symbol.ruby
+/          ^^^^^ constant.language.symbol.ruby
 /               ^ punctuation.separator.object.ruby
-/                ^^^^^^^^^^ constant.other.symbol.ruby
+/                ^^^^^^^^^^ constant.language.symbol.ruby
 
 div group==( [ 'menu', "highlight" ] )
 /^^^ meta.tag.slim - meta.attribute-with-value.slim
@@ -819,7 +824,7 @@ div group==( [ 'menu', "highlight" ] )
 /        ^^ punctuation.separator.key-value.slim
 /          ^ punctuation.definition.group.begin.slim
 /              ^^^^^^ meta.string.ruby string.quoted.single.ruby
-/                      ^^^^^^^^^^^ meta.string.ruby string.quoted.double.ruby
+/                      ^^^^^^^^^^^ meta.string.ruby string.quoted.double.interpolated.ruby
 /                                    ^ punctuation.definition.group.end.slim
 
 div array==[ 'menu', "highlight" ]
@@ -832,7 +837,7 @@ div array==[ 'menu', "highlight" ]
 /          ^ punctuation.section.array.begin.ruby
 /            ^^^^^^ meta.string.ruby string.quoted.single.ruby
 /                  ^ punctuation.separator.object.ruby
-/                    ^^^^^^^^^^^ meta.string.ruby string.quoted.double.ruby
+/                    ^^^^^^^^^^^ meta.string.ruby string.quoted.double.interpolated.ruby
 /                                ^ punctuation.section.array.end.ruby
 
 div hashes=={ 0, 'str', "str" }
@@ -843,11 +848,11 @@ div hashes=={ 0, 'str', "str" }
 /   ^^^^^^ entity.other.attribute-name.slim
 /         ^^ punctuation.separator.key-value.slim
 /           ^ punctuation.section.scope.begin.ruby
-/             ^ constant.numeric.integer.ruby
+/             ^ constant.numeric.ruby
 /              ^ punctuation.separator.object.ruby
 /                ^^^^^ meta.string.ruby string.quoted.single.ruby
 /                     ^ punctuation.separator.object.ruby
-/                       ^^^^^ meta.string.ruby string.quoted.double.ruby
+/                       ^^^^^ meta.string.ruby string.quoted.double.interpolated.ruby
 /                             ^ punctuation.section.scope.end.ruby
 
 div (
@@ -1476,7 +1481,7 @@ markdown:
 / ^^^^^^^^^ markup.bold.markdown
 /           ^^^^^^^ meta.filter.slim text.html.markdown.embedded.slim meta.interpolation.slim
 /           ^^ punctuation.section.interpolation.begin.slim
-/             ^^^^ source.ruby.embedded.slim constant.other.symbol.ruby
+/             ^^^^ source.ruby.embedded.slim constant.language.symbol.ruby
 /                 ^ punctuation.section.interpolation.end.slim
 
   <br class="#{:name}">
@@ -1488,7 +1493,7 @@ markdown:
 /          ^ punctuation.separator.key-value.html
 /           ^ punctuation.definition.string.begin.html
 /            ^^ punctuation.section.interpolation.begin.slim
-/              ^^^^^ source.ruby.embedded.slim constant.other.symbol.ruby
+/              ^^^^^ source.ruby.embedded.slim constant.language.symbol.ruby
 /                   ^ punctuation.section.interpolation.end.slim
 /                    ^ punctuation.definition.string.end.html
 /                     ^ punctuation.definition.tag.end.html
