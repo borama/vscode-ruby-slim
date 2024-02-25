@@ -1,6 +1,6 @@
-# Slim syntax highlighting for VSCode
+# Slim syntax highlighting for VS Code
 
-The **Ruby Slim** extension brings [Slim template language](https://github.com/slim-template/slim) support to VSCode.
+The **Ruby Slim** extension brings [Slim template language](https://github.com/slim-template/slim) support to VS Code.
 As a complete rewrite of the [Slim extension](https://marketplace.visualstudio.com/items?itemName=sianglim.slim)
 by Siang Lim it fixes its issues, aims to support more modern features such as
 [Tailwind CSS](https://tailwindcss.com) and is well tested.
@@ -61,7 +61,7 @@ Please file an [Issue](https://github.com/borama/vscode-ruby-slim/issues) or [Pu
 ## Helpful links / Acknowledgements
 
 - [My blog post about creating this extension]TBD
-- [Syntax Highlighting Guide](https://code.visualstudio.com/api/language-extensions/syntax-highlight-guide) - official guide from the VSCode team
+- [Syntax Highlighting Guide](https://code.visualstudio.com/api/language-extensions/syntax-highlight-guide) - official guide from the VS Code team
 - [SublimeText Slim 2.0 grammar](https://github.com/SublimeText/Slim/blob/master/Syntaxes/Slim.sublime-syntax) - this extension gets a lot of inspiration from this SublimeText grammar
 - [Writing a TextMate Grammar: Some Lessons Learned](https://www.apeth.com/nonblog/stories/textmatebundle.html) - an older resource but still one of the best
 - [Rubular](https://rubular.com/) is your best friend here
