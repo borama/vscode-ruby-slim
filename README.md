@@ -49,6 +49,10 @@ by Siang Lim it fixes its issues, aims to support more modern features such as
 
 - [Arbitrary values](https://tailwindcss.com/docs/adding-custom-styles#using-arbitrary-values) in class shortcuts (`.top-[117px]`) are
   [not supported](https://github.com/slim-template/slim/issues/906) by Slim and this extension.
+- [Embedded language blocks](https://github.com/slim-template/slim?tab=readme-ov-file#embedded-engines-markdown-) with inline attributes are not supported:
+
+      scss class="myClass":
+        ...
 
 ## Release Notes
 
