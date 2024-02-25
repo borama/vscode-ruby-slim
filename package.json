@@ -5,6 +5,7 @@
   "version": "0.9.0",
   "publisher": "borama",
   "license": "MIT",
+  "icon": "img/ruby-slim.png",
   "engines": {
     "vscode": "^1.83.0"
   },
