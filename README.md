@@ -17,6 +17,9 @@ by Siang Lim it fixes its issues, aims to support more modern features such as
 
   <img src="img/tailwind.png" width="600">
 
+- Multiline attribute values:
+
+  <img src="img/multiline_attribute_values.png" width="700">
 
 - Multiline attributes wrapping:
 
