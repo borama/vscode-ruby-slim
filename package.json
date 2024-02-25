@@ -2,7 +2,7 @@
   "name": "ruby-slim",
   "displayName": "Ruby Slim",
   "description": "Slim language syntax highlighting",
-  "version": "0.9",
+  "version": "0.9.0",
   "publisher": "borama",
   "license": "MIT",
   "engines": {
