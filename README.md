@@ -67,7 +67,7 @@ See the wiki for some [development hints](https://github.com/borama/vscode-ruby-
 
 - [My blog post about creating this extension]TBD
 - [Syntax Highlighting Guide](https://code.visualstudio.com/api/language-extensions/syntax-highlight-guide) - official guide from the VS Code team
-- [SublimeText Slim 2.0 grammar](https://github.com/SublimeText/Slim/blob/master/Syntaxes/Slim.sublime-syntax) - this extension gets a lot of inspiration from this SublimeText grammar
+- [SublimeText Slim 2.0 grammar](https://github.com/SublimeText/Slim/blob/master/Syntaxes/Slim.sublime-syntax) - the basis of unit tests and a lot of inspiration comes from this well-maintained SublimeText grammar
 - [Writing a TextMate Grammar: Some Lessons Learned](https://www.apeth.com/nonblog/stories/textmatebundle.html) - an older resource but still one of the best
 - [Rubular](https://rubular.com/) is your best friend here
 - as is a [good regexp manual](https://www.regextutorial.org)
