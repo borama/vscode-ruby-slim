@@ -18,12 +18,19 @@
     "Programming Languages"
   ],
   "contributes": {
-    "languages": [{
-      "id": "slim",
-      "aliases": ["Slim", "slim"],
-      "extensions": [".slim"],
-      "configuration": "./language-configuration.json"
-    }],
+    "languages": [
+      {
+        "id": "slim",
+        "aliases": [
+          "Slim",
+          "slim"
+        ],
+        "extensions": [
+          ".slim"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
     "grammars": [
       {
         "language": "slim",
@@ -42,10 +49,15 @@
         }
       },
       {
-        "injectTo": [ "source.slim" ],
+        "injectTo": [
+          "source.slim"
+        ],
         "scopeName": "injection.interpolated-ruby",
         "path": "./syntaxes/interpolated-ruby.json"
       }
     ]
+  },
+  "dependencies": {
+    "@vscode/vsce": "^2.24.0"
   }
 }
