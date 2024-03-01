@@ -6,7 +6,7 @@
 	"version": "0.2.0",
     "configurations": [
         {
-            "name": "Ruby Slim Extension",
+            "name": "Slim Language Extension",
             "type": "extensionHost",
             "request": "launch",
             "args": [

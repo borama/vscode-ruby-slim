@@ -1,6 +1,6 @@
 # Slim syntax highlighting for VS Code
 
-The **Ruby Slim** extension brings [Slim template language](https://github.com/slim-template/slim) support to VS Code.
+The **Slim Language** extension brings [Slim template language](https://github.com/slim-template/slim) support to VS Code.
 It fixes most issues in previous Slim extensions, aims to support more modern features such as
 [Tailwind CSS](https://tailwindcss.com) and is well tested.
 
