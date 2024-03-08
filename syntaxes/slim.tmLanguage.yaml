@@ -132,7 +132,7 @@ patterns:
       - include: '#rubyline'
 
   # Ruby output line [https://github.com/slim-template/slim#output-]
-  - begin: (?==+|~)
+  - begin: ^\s*(?==+|~)
     end: $
     patterns:
       - include: '#rubyline'

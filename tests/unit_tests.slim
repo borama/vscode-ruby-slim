@@ -1440,6 +1440,9 @@ div= ruby_var_with_no_space_from_tag
 /                                   ^ - meta.embedded.slim
 /  ^ punctuation.section.embedded.slim
 
+.some-class
+  = nested_ruby("bar")
+/   ^^^^^^^^^^^^^^^^^^ meta.embedded.slim source.ruby.embedded.slim
 
 /[ Embedded Engines ]//////////////////////////////////////////////////////////
 
