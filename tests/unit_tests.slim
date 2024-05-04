@@ -991,6 +991,33 @@ div {
 /   ^^^^^^^^^^^^ meta.embedded.slim
 / ^ punctuation.section.embedded.slim
 
+a[href=path]
+/ <- meta.tag.slim entity.name.tag.slim
+/^ punctuation.section.brackets.begin.slim
+/^^^^^^^^^^^ meta.tag.slim meta.brackets.slim
+/ ^^^^^^^^^ meta.attribute-with-value.slim
+/     ^ punctuation.separator.key-value.slim
+/      ^^^^ source.ruby.embedded.slim
+/          ^ punctuation.section.brackets.end.slim
+
+a(href=path)
+/ <- meta.tag.slim entity.name.tag.slim
+/^ punctuation.section.parens.begin.slim
+/^^^^^^^^^^^ meta.tag.slim meta.parens.slim
+/ ^^^^^^^^^ meta.attribute-with-value.slim
+/     ^ punctuation.separator.key-value.slim
+/      ^^^^ source.ruby.embedded.slim
+/          ^ punctuation.section.parens.end.slim
+
+a{href=path}
+/ <- meta.tag.slim entity.name.tag.slim
+/^ punctuation.section.braces.begin.slim
+/^^^^^^^^^^^ meta.tag.slim meta.braces.slim
+/ ^^^^^^^^^ meta.attribute-with-value.slim
+/     ^ punctuation.separator.key-value.slim
+/      ^^^^ source.ruby.embedded.slim
+/          ^ punctuation.section.braces.end.slim
+
 div[foo=]
 / <- meta.tag.slim entity.name.tag.slim
 /^^ meta.tag.slim entity.name.tag.slim

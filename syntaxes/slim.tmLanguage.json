@@ -528,7 +528,7 @@
     },
     "ruby-attribute-symbol-array": {
       "begin": "=?(?=:)",
-      "end": "(?=\\s)|$",
+      "end": "(?=\\s|\\)|\\]|\\})|$",
       "name": "meta.embedded.slim meta.string.ruby source.ruby.embedded.slim",
       "patterns": [
         {
@@ -543,7 +543,7 @@
           "name": "punctuation.separator.key-value.slim"
         }
       },
-      "end": "(?=\\s)|$",
+      "end": "(?=\\s|\\)|\\]|\\})|$",
       "name": "meta.embedded.slim meta.string.ruby source.ruby.embedded.slim",
       "patterns": [
         {

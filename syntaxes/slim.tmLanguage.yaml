@@ -352,7 +352,7 @@ repository:
   # Ruby symbol array attribute value attribute=:a,:b [https://github.com/slim-template/slim#attribute-merging]
   ruby-attribute-symbol-array:
     begin: =?(?=:)
-    end: (?=\s)|$
+    end: (?=\s|\)|\]|\})|$
     name: meta.embedded.slim meta.string.ruby source.ruby.embedded.slim
     patterns:
       - include: source.ruby
@@ -363,7 +363,7 @@ repository:
     beginCaptures:
       '1':
         name: punctuation.separator.key-value.slim
-    end: (?=\s)|$
+    end: (?=\s|\)|\]|\})|$
     name: meta.embedded.slim meta.string.ruby source.ruby.embedded.slim
     patterns:
       - include: source.ruby
