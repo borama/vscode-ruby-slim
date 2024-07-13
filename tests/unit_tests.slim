@@ -735,7 +735,17 @@ div const1 = false const2 = true const3 = nil
 /                                       ^ punctuation.separator.key-value.slim
 /                                         ^^^ constant.language.slim
 
-/ unescaped ruby attribute values
+div class=some_classes data-attribute = some_value
+/   ^^^^^^^^^^^^^^^^^^ meta.tag.slim meta.attribute-with-value.slim
+/         ^^^^^^^^^^^^ meta.tag.slim meta.attribute-with-value.slim meta.embedded.slim source.ruby.embedded.slim
+/   ^^^^^ entity.other.attribute-name.slim - source.ruby.embedded.slim
+/        ^ punctuation.separator.key-value.slim
+/                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.tag.slim meta.attribute-with-value.slim
+/                                       ^^^^^^^^^^ meta.tag.slim meta.attribute-with-value.slim meta.embedded.slim source.ruby.embedded.slim
+/                      ^^^^^^^^^^^^^^ entity.other.attribute-name.slim - source.ruby.embedded.slim
+/                                     ^ punctuation.separator.key-value.slim
+
+/ unescaped ruby attribute value
 a href==action_path(:start)
 / ^^^^^ meta.tag.slim meta.attribute-with-value.slim - meta.embedded.slim
 / ^^^^^ meta.tag.slim meta.attribute-with-value.slim - source.ruby
