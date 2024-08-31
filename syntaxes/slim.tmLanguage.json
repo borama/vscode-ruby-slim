@@ -674,7 +674,7 @@
       ]
     },
     "tag-attribute": {
-      "begin": "([\\w.#-]+)\\s*(==?)\\s*",
+      "begin": "([\\w-]+)\\s*(==?)\\s*",
       "name": "meta.attribute-with-value.slim",
       "captures": {
         "1": {
@@ -713,7 +713,7 @@
       ]
     },
     "tag-boolean-attribute": {
-      "begin": "([\\w.#-]+)\\s*",
+      "begin": "([\\w-]+)\\s*",
       "name": "meta.attribute-with-value.slim entity.other.attribute-name.slim",
       "end": "(?=(?::?\\s|\\)|\\]|\\}))|$"
     },
