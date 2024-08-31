@@ -1,6 +1,7 @@
 .gitignore
 .vscode/**
 .vscode-test/**
+node_modules/**
 results.txt
 syntaxes/*.yaml
 tests/**

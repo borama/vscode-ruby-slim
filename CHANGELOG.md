@@ -1,3 +1,7 @@
+## 0.9.4
+
+- Fixed matching of ruby attributes ending with braces (some more complex function calls).
+
 ## 0.9.3
 
 - Fixed matching of ruby attributes enclosed in brackets/parens/braces without whitespace.
