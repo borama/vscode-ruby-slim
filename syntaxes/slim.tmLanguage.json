@@ -327,7 +327,7 @@
       "name": "meta.braces.slim",
       "patterns": [
         {
-          "include": "#tag-attribute"
+          "include": "#tag-attribute-wrapped"
         },
         {
           "include": "#tag-boolean-attribute"
@@ -350,7 +350,7 @@
       "name": "meta.brackets.slim",
       "patterns": [
         {
-          "include": "#tag-attribute"
+          "include": "#tag-attribute-wrapped"
         },
         {
           "include": "#tag-boolean-attribute"
@@ -373,7 +373,7 @@
       "name": "meta.parens.slim",
       "patterns": [
         {
-          "include": "#tag-attribute"
+          "include": "#tag-attribute-wrapped"
         },
         {
           "include": "#tag-boolean-attribute"
@@ -543,8 +543,23 @@
           "name": "punctuation.separator.key-value.slim"
         }
       },
-      "end": "(?=\\s|\\)|\\]|\\})|$",
+      "end": "(?=\\s)|$",
       "name": "meta.embedded.slim meta.string.ruby source.ruby.embedded.slim entity.other.slim.ruby-attribute-value",
+      "patterns": [
+        {
+          "include": "source.ruby"
+        }
+      ]
+    },
+    "ruby-attribute-value-wrapped": {
+      "begin": "(?=\\b)",
+      "beginCaptures": {
+        "1": {
+          "name": "punctuation.separator.key-value.slim"
+        }
+      },
+      "end": "(?=\\)|\\]|\\})|$",
+      "name": "meta.embedded.slim meta.string.ruby source.ruby.embedded.slim entity.other.slim.ruby-attribute-value-wrapped",
       "patterns": [
         {
           "include": "source.ruby"
@@ -684,7 +699,7 @@
           "name": "punctuation.separator.key-value.slim"
         }
       },
-      "end": "(?=(?::?\\s|\\)|\\]|\\}))|$",
+      "end": "(?=(?::?\\s))|$",
       "patterns": [
         {
           "include": "#string-double-quoted"
@@ -709,6 +724,45 @@
         },
         {
           "include": "#ruby-attribute-value"
+        }
+      ]
+    },
+    "tag-attribute-wrapped": {
+      "begin": "([\\w-]+)\\s*(==?)\\s*",
+      "name": "meta.attribute-with-value.slim",
+      "captures": {
+        "1": {
+          "name": "entity.other.attribute-name.slim"
+        },
+        "2": {
+          "name": "punctuation.separator.key-value.slim"
+        }
+      },
+      "end": "(?=(?:\\)|\\]|\\}))|$",
+      "patterns": [
+        {
+          "include": "#string-double-quoted"
+        },
+        {
+          "include": "#string-single-quoted"
+        },
+        {
+          "include": "#boolean-attribute-value"
+        },
+        {
+          "include": "#delimited-ruby-group"
+        },
+        {
+          "include": "#ruby-attribute-array"
+        },
+        {
+          "include": "#ruby-attribute-hash"
+        },
+        {
+          "include": "#ruby-attribute-symbol-array"
+        },
+        {
+          "include": "#ruby-attribute-value-wrapped"
         }
       ]
     },
