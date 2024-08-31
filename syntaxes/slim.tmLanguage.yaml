@@ -282,7 +282,7 @@ repository:
     endCaptures:
       '1':
         name: punctuation.definition.group.end.slim
-    name: meta.embedded.slim meta.string.ruby source.ruby.embedded.slim
+    name: meta.embedded.slim meta.string.ruby source.ruby.embedded.slim entity.other.slim.ruby-attribute-delimited
     contentName: meta.source.ruby
     patterns:
       - include: source.ruby
@@ -313,7 +313,7 @@ repository:
   inline-text:
     begin: (?=.)
     end: (?<!\\\n)$
-    name: meta.embedded.slim text.html.embedded.slim
+    name: meta.embedded.slim text.html.embedded.slim entity.other.slim.inline-text
     patterns:
       - include: text.html.basic
       - include: '#interpolated-ruby'
@@ -337,7 +337,7 @@ repository:
   ruby-attribute-array:
     begin: (?=\[)
     end: (?<=\])
-    name: meta.embedded.slim meta.string.ruby source.ruby.embedded.slim
+    name: meta.embedded.slim meta.string.ruby source.ruby.embedded.slim entity.other.slim.ruby-attribute-array
     patterns:
       - include: source.ruby
 
@@ -345,7 +345,7 @@ repository:
   ruby-attribute-hash:
     begin: (?=\{)
     end: (?<=\})
-    name: meta.embedded.slim meta.string.ruby source.ruby.embedded.slim
+    name: meta.embedded.slim meta.string.ruby source.ruby.embedded.slim entity.other.slim.ruby-attribute-hash
     patterns:
       - include: source.ruby
 
@@ -353,7 +353,7 @@ repository:
   ruby-attribute-symbol-array:
     begin: =?(?=:)
     end: (?=\s|\)|\]|\})|$
-    name: meta.embedded.slim meta.string.ruby source.ruby.embedded.slim
+    name: meta.embedded.slim meta.string.ruby source.ruby.embedded.slim entity.other.slim.ruby-attribute-symbol-array
     patterns:
       - include: source.ruby
 
@@ -364,14 +364,14 @@ repository:
       '1':
         name: punctuation.separator.key-value.slim
     end: (?=\s|\)|\]|\})|$
-    name: meta.embedded.slim meta.string.ruby source.ruby.embedded.slim
+    name: meta.embedded.slim meta.string.ruby source.ruby.embedded.slim entity.other.slim.ruby-attribute-value
     patterns:
       - include: source.ruby
 
   # Ruby code line [https://github.com/slim-template/slim#control-code--]
   rubyline:
     begin: (==|=)(<>|><|<'|'<|<|>)?|-\s*
-    contentName: meta.embedded.slim meta.string.ruby source.ruby.embedded.slim
+    contentName: meta.embedded.slim meta.string.ruby source.ruby.embedded.slim entity.other.slim.ruby-line
     end: (do\s*\n$)|(?<!\\|,|,\n|\\\n)$
     # Hack to thwart Sublime's Ruby highlighter. It thinks do without a variable
     # continues the next line (this can be muted with a / at the end of the
@@ -402,7 +402,7 @@ repository:
   splat-attribute-direct:
     begin: \*
     end: (?=\s)|$
-    name: meta.embedded.slim source.ruby.embedded.slim
+    name: meta.embedded.slim source.ruby.embedded.slim entity.other.slim.splat-attribute
     beginCaptures:
       '0':
         name: punctuation.section.embedded.begin.ruby
@@ -413,7 +413,7 @@ repository:
   splat-attribute-hash:
     begin: \*\{
     end: \}
-    name: meta.embedded.slim source.ruby.embedded.slim
+    name: meta.embedded.slim source.ruby.embedded.slim entity.other.slim.splat-attribute
     beginCaptures:
       '0':
         name: punctuation.section.embedded.begin.ruby

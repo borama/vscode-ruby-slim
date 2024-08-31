@@ -431,7 +431,7 @@
           "name": "punctuation.definition.group.end.slim"
         }
       },
-      "name": "meta.embedded.slim meta.string.ruby source.ruby.embedded.slim",
+      "name": "meta.embedded.slim meta.string.ruby source.ruby.embedded.slim entity.other.slim.ruby-attribute-delimited",
       "contentName": "meta.source.ruby",
       "patterns": [
         {
@@ -473,7 +473,7 @@
     "inline-text": {
       "begin": "(?=.)",
       "end": "(?<!\\\\\\n)$",
-      "name": "meta.embedded.slim text.html.embedded.slim",
+      "name": "meta.embedded.slim text.html.embedded.slim entity.other.slim.inline-text",
       "patterns": [
         {
           "include": "text.html.basic"
@@ -509,7 +509,7 @@
     "ruby-attribute-array": {
       "begin": "(?=\\[)",
       "end": "(?<=\\])",
-      "name": "meta.embedded.slim meta.string.ruby source.ruby.embedded.slim",
+      "name": "meta.embedded.slim meta.string.ruby source.ruby.embedded.slim entity.other.slim.ruby-attribute-array",
       "patterns": [
         {
           "include": "source.ruby"
@@ -519,7 +519,7 @@
     "ruby-attribute-hash": {
       "begin": "(?=\\{)",
       "end": "(?<=\\})",
-      "name": "meta.embedded.slim meta.string.ruby source.ruby.embedded.slim",
+      "name": "meta.embedded.slim meta.string.ruby source.ruby.embedded.slim entity.other.slim.ruby-attribute-hash",
       "patterns": [
         {
           "include": "source.ruby"
@@ -529,7 +529,7 @@
     "ruby-attribute-symbol-array": {
       "begin": "=?(?=:)",
       "end": "(?=\\s|\\)|\\]|\\})|$",
-      "name": "meta.embedded.slim meta.string.ruby source.ruby.embedded.slim",
+      "name": "meta.embedded.slim meta.string.ruby source.ruby.embedded.slim entity.other.slim.ruby-attribute-symbol-array",
       "patterns": [
         {
           "include": "source.ruby"
@@ -544,7 +544,7 @@
         }
       },
       "end": "(?=\\s|\\)|\\]|\\})|$",
-      "name": "meta.embedded.slim meta.string.ruby source.ruby.embedded.slim",
+      "name": "meta.embedded.slim meta.string.ruby source.ruby.embedded.slim entity.other.slim.ruby-attribute-value",
       "patterns": [
         {
           "include": "source.ruby"
@@ -553,7 +553,7 @@
     },
     "rubyline": {
       "begin": "(==|=)(<>|><|<'|'<|<|>)?|-\\s*",
-      "contentName": "meta.embedded.slim meta.string.ruby source.ruby.embedded.slim",
+      "contentName": "meta.embedded.slim meta.string.ruby source.ruby.embedded.slim entity.other.slim.ruby-line",
       "end": "(do\\s*\\n$)|(?<!\\\\|,|,\\n|\\\\\\n)$",
       "beginCaptures": {
         "0": {
@@ -595,7 +595,7 @@
     "splat-attribute-direct": {
       "begin": "\\*",
       "end": "(?=\\s)|$",
-      "name": "meta.embedded.slim source.ruby.embedded.slim",
+      "name": "meta.embedded.slim source.ruby.embedded.slim entity.other.slim.splat-attribute",
       "beginCaptures": {
         "0": {
           "name": "punctuation.section.embedded.begin.ruby"
@@ -610,7 +610,7 @@
     "splat-attribute-hash": {
       "begin": "\\*\\{",
       "end": "\\}",
-      "name": "meta.embedded.slim source.ruby.embedded.slim",
+      "name": "meta.embedded.slim source.ruby.embedded.slim entity.other.slim.splat-attribute",
       "beginCaptures": {
         "0": {
           "name": "punctuation.section.embedded.begin.ruby"
