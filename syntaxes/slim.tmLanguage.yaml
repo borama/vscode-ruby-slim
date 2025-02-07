@@ -535,4 +535,4 @@ repository:
     match: (:[\w-]+)+
     name: entity.name.tag.slim
 
-scopeName: source.slim
+scopeName: text.slim

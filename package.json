@@ -2,7 +2,7 @@
   "name": "ruby-slim",
   "displayName": "Slim Language",
   "description": "Slim language syntax highlighting",
-  "version": "0.9.4",
+  "version": "0.9.5",
   "publisher": "borama",
   "license": "MIT",
   "icon": "img/ruby-slim.png",
@@ -34,7 +34,7 @@
     "grammars": [
       {
         "language": "slim",
-        "scopeName": "source.slim",
+        "scopeName": "text.slim",
         "path": "./syntaxes/slim.tmLanguage.json",
         "embeddedLanguages": {
           "source.ruby.embedded.slim": "ruby",
@@ -50,7 +50,7 @@
       },
       {
         "injectTo": [
-          "source.slim"
+          "text.slim"
         ],
         "scopeName": "injection.interpolated-ruby",
         "path": "./syntaxes/interpolated-ruby.json"
