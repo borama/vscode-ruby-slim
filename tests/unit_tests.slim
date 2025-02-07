@@ -1690,3 +1690,11 @@ html
       }
   body
 / ^^^^ meta.tag.slim entity.name.tag.slim
+
+// Slim heredoc embedded in Ruby (#3)
+ruby:
+  template = <<~SLIM
+    h1 Hello Slim
+/   ^^ meta.tag.slim entity.name.tag.slim
+/      ^^^^^^^^^^ entity.other.slim.inline-text
+SLIM
